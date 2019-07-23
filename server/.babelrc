@@ -1,0 +1,21 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "node": "10.11"
+      }
+    }]
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "@": "./server",
+        "nuxt.config": "./client/nuxt.config.js"
+      }
+    }],
+    ["@babel/proposal-decorators", { "legacy": true }],
+    "@babel/proposal-class-properties",
+    "@babel/proposal-export-namespace-from"
+  ]
+}
