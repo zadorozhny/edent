@@ -4,8 +4,12 @@
     "browser": true,
     "node": true
   },
+  "parser": "vue-eslint-parser",
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   },
   "extends": [
     "airbnb-base",
@@ -15,8 +19,7 @@
     "vue"
   ],
   "globals": {
-    "google": false,
-    "MarkerClusterer": false
+    "google": false
   },
   "rules": {
     "global-require": "off",
@@ -42,8 +45,15 @@
       "endTag": "never",
       "selfClosingTag": "never"
     }],
-    "comma-dangle": ["error", "never"],
-    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
+    "comma-dangle": ["error", {
+      "arrays": "only-multiline",
+      "exports": "never",
+      "imports": "never",
+      "functions": "never",
+      "objects": "only-multiline"
+    }],
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "no-param-reassign": ["error", { "props": false }],
     "arrow-parens": ["warn","as-needed"],
@@ -56,18 +66,12 @@
     }],
     "vue/max-attributes-per-line": ["error", {
       "singleline": 4,
-      "multiline": {
-        "max": 4,
-        "allowFirstLine": false
-      }
+      "multiline":  4
     }],
     "indent": ["error", 2, {
       "ignoredNodes": ["TemplateLiteral", "ConditionalExpression"]
     }],
-    "globals": {
-      "document": true,
-      "google": true,
-      "MarkerClusterer": false
-    }
+    "spaced-comment": ["error", "always", { "exceptions": ["#endregion"], "markers": ["#region", "#endregion"] }],
+    "newline-per-chained-call":  ["error", { "ignoreChainWithDepth": 5 }]
   }
 }

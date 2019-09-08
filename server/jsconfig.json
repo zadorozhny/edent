@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": false,
+    "experimentalDecorators": true,
+    "checkJs": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./*"],
+      "@@/*": ["../*"]
+    },
+    "sourceMap": true
+  },
+  "include": ["."],
+  "exclude": ["node_modules", ".nuxt", ".server"]
+}
