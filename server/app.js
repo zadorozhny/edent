@@ -2,8 +2,7 @@ import Express from 'express';
 import { Nuxt, Builder } from 'nuxt';
 import config from 'nuxt.config';
 
-console.log(config);
-// import api from '@/api';
+import api from '@/api';
 
 export default async (port, host) => {
   const app = new Express();
@@ -15,7 +14,7 @@ export default async (port, host) => {
     builder.build();
   }
 
-  // app.use(api);
+  app.use(api);
 
   app.use(nuxt.render);
 

@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import auth from '@/api/middlewares/auth';
+
 const router = Router();
 
-router.get('/products/', auth, async (req, res) => {
+router.get('/', auth, async (req, res, next) => {
   try {
     res.json({ reply: 'reply' });
   } catch (err) {

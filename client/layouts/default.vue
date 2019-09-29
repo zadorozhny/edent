@@ -3,16 +3,23 @@
     <nav class="navigation">
       <h1 class="navigation--logo">Logo</h1>
       <ul class="navigation--list">
-        <kit-tabs class="a" :tabs="tabs" :active.sync="tab">
-          <template #tab="{ label, link }">
-            <nuxt-link tag="li" :to="link" class="navigation--item">
-              <span>{{ label }}</span>
-            </nuxt-link>
-          </template>
-        </kit-tabs>
+        <nuxt-link tag="li" to="/" class="navigation--item">
+          <span>Главная</span>
+        </nuxt-link>
+        <nuxt-link tag="li" to="/products" class="navigation--item">
+          <span>Товары</span>
+        </nuxt-link>
+        <nuxt-link tag="li" to="/info" class="navigation--item">
+          <span>Доставка и Связь</span>
+        </nuxt-link>
       </ul>
-      <div class="navigation--avatar ripple">
-        <span class="navigation--letters">АЗ</span>
+      <div class="navigation--controls">
+        <kit-icon class="navigation--cart">
+          shopping_cart
+        </kit-icon>
+        <div class="navigation--avatar" v-ripple>
+          <span class="navigation--letters">АЗ</span>
+        </div>
       </div>
     </nav>
     <section class="container">
@@ -23,14 +30,6 @@
 
 <script>
 export default {
-  data: () => ({
-    tab: 'home',
-    tabs: [
-      { key: 'home', link: '/', label: 'Главная' },
-      { key: 'products', link: '/products', label: 'Товары' },
-      { key: 'info', link: '/info', label: 'Доставка и Связь' }
-    ]
-  })
 };
 </script>
 
@@ -64,7 +63,7 @@ export default {
     box-sizing: border-box;
     cursor: pointer;
 
-    &.active {
+    &.exact-active-link {
       &::after {
         display: block;
         position: absolute;
@@ -117,9 +116,15 @@ export default {
   &--letters {
     font-size: 16px;
   }
-}
-.a {
-  height: 100%;
+
+  &--controls {
+    display: flex;
+    align-items: center;
+  }
+
+  &--cart {
+    margin-right: 5px;
+  }
 }
 
 .container {

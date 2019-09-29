@@ -1,8 +1,15 @@
+const isDev = process.env.NUXT_ENV !== 'prod';
+const isProd = process.env.NUXT_ENV === 'prod';
+
 module.exports = {
   mode: 'universal',
-  modern: process.env.NUXT_ENV === 'prod',
-  dev: process.env.NUXT_ENV !== 'prod',
+  modern: isProd,
+  dev: isDev,
   srcDir: './client',
+  router: {
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link'
+  },
   head: {
     title: 'Node',
     meta: [
@@ -14,15 +21,12 @@ module.exports = {
       {
         src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFBrCwBNg9F6345BFfK-5faTNO5aNU8GY',
         defer: true
-      },
-      {
-        src: 'https://www.gstatic.com/charts/loader.js',
-        defer: true
       }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap&subset=cyrillic-ext' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap&subset=cyrillic-ext' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
   css: [
@@ -39,6 +43,8 @@ module.exports = {
     scss: '@/assets/css/mixins.scss',
   },
   build: {
+    cache: isDev,
+    hardSource: isDev,
     extend(config, ctx) {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({ enforce: 'pre', test: /\.(js|vue)$/, loader: 'eslint-loader', exclude: /(node_modules)/ });

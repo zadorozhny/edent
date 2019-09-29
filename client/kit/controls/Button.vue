@@ -1,5 +1,5 @@
 <template>
-  <button class="button ripple">
+  <button v-ripple class="button">
     <slot/>
   </button>
 </template>

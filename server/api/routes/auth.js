@@ -1,53 +1,63 @@
 import { Router } from 'express';
 import auth from '@/api/middlewares/auth';
+import Profile from '@/services/profile';
+
 const router = Router();
 
-router.post('/signin', async ctx => {
+router.get('/a', async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).signin(ctx.request.body);
+    res.json({ reply: 'a' });
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/signup', async ctx => {
+router.post('/signin', async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).signup(ctx.request.body);
+    res.json(await Profile.init(req.state).signin(req.body));
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/forgot-password', async ctx => {
+router.post('/signup', async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).forgotPassword(ctx.request.body);
+    res.json(await Profile.init(req.state).signup(req.request.body));
   } catch (err) {
     next(err);
   }
 });
 
-router.patch('/reset-password', async ctx => {
+router.post('/forgot-password', async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).resetPassword(ctx.request.body);
+    res.json(await Profile.init(req.state).forgotPassword(req.request.body));
   } catch (err) {
     next(err);
   }
 });
 
-router.patch('/refresh', auth.expired, async ctx => {
+router.patch('/reset-password', async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).refresh(ctx.request.body);
+    res.json(await Profile.init(req.state).resetPassword(req.request.body));
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/signout', auth, async ctx => {
+router.patch('/refresh', auth.expired, async (req, res, next) => {
   try {
-    ctx.body = await Profile.init(ctx.state).signout();
+    res.json(await Profile.init(req.state).refresh(req.request.body));
   } catch (err) {
     next(err);
   }
 });
 
-export const routes = router.routes();
+router.post('/signout', auth, async (req, res, next) => {
+  try {
+    res.json(await Profile.init(req.state).signout());
+  } catch (err) {
+    next(err);
+  }
+});
+
+export const routes = router;

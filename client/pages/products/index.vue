@@ -1,16 +1,31 @@
 <template>
   <div class="wrapper">
     <div class="filters">
-      <kit-slider v-model="value" :min="0" :max="100"/>
+      <kit-slider v-model="value" :min="0" :max="10000"/>
+      <kit-label-group>
+        <kit-choice v-model="option" value="ex" related>
+          <kit-label type="outline" size="regular" class="text_small">Дорогие</kit-label>
+        </kit-choice>
+        <kit-choice v-model="option" value="ch" related>
+          <kit-label type="outline" size="regular" class="text_small">Дешевые</kit-label>
+        </kit-choice>
+      </kit-label-group>
       <kit-button>Найти</kit-button>
-      <p>{{ value }}</p>
     </div>
     <div class="cover">
       <div class="search">
         <input class="input" placeholder="Поиск">
       </div>
       <ul class="container">
-        <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title"/>
+        <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
+          <template #controls>
+            <div class="card_controls">
+              <kit-icon class="card_controls--cart" size="small">
+                add_shopping_cart
+              </kit-icon>
+            </div>
+          </template>
+        </kit-card>
       </ul>
     </div>
   </div>
@@ -18,24 +33,23 @@
 
 <script>
 export default {
-  data: () => ({
-    value: 0,
-    v: {},
-    cards: [
-      { title: 'Товар 1', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 4', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 5', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 6', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 7', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 8', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 9', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 10', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-    ],
-  }),
-  created() {
-    console.dir(this.$store);
+  data() {
+    return {
+      option: 'ex',
+      value: 0,
+      cards: [
+        { title: 'Товар 1', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
+        { title: 'Товар 2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
+        { title: 'Товар 3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
+        { title: 'Товар 4', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
+        { title: 'Товар 5', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
+        { title: 'Товар 6', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
+        { title: 'Товар 7', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
+        { title: 'Товар 8', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
+        { title: 'Товар 9', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
+        { title: 'Товар 10', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
+      ]
+    };
   }
 };
 </script>
@@ -91,5 +105,11 @@ export default {
   &:hover {
     box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
   }
+}
+.card_controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2px 7px;
 }
 </style>

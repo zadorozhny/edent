@@ -1,11 +1,12 @@
 <template>
-  <div class="card ripple">
+  <div class="card" v-ripple>
     <div class="card--header">
       <img class="card--image" :src="image">
     </div>
-    <div class="content">
+    <div class="card--content">
       <span>{{ title }}</span>
     </div>
+    <slot name="controls"/>
   </div>
 </template>
 
@@ -21,6 +22,9 @@ export default {
 
 <style lang="scss" scoped>
 .card {
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 180px auto auto;
   margin-bottom: 20px;
   width: 220px;
   height: 260px;
@@ -35,14 +39,19 @@ export default {
   }
 
   &--header {
-    height: 200px;
     overflow: hidden;
   }
 
   &--image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &--content {
+    height: 100%;
+    padding: 7px;
+    box-sizing: border-box;
+  }
 }
 </style>

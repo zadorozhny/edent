@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import glob from 'glob';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 const router = Router();
 
@@ -8,9 +9,10 @@ router.use(bodyParser.json());
 
 glob
   .sync('./routes/**.js', { cwd: __dirname })
-  .forEach(path => {
-    const { routes } = require(path);
-    router.use('/api', routes);
+  .forEach(direction => {
+    const { routes } = require(direction);
+    const extension = path.extname(direction);
+    router.use(`/api/${path.basename(direction, extension)}`, routes);
   });
 
 export default router;
