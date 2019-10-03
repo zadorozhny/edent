@@ -1,5 +1,5 @@
 <template>
-  <div v-ripple :class="['label', type, size, shape, { inverted }]" v-on="$listeners">
+  <div :class="['label', 'ripple', type, size, shape, { inverted }]" v-on="$listeners">
     <div class="label--content">
       <slot/>
     </div>

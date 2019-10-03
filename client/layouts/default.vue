@@ -17,7 +17,7 @@
         <kit-icon class="navigation--cart">
           shopping_cart
         </kit-icon>
-        <div class="navigation--avatar" v-ripple>
+        <div class="navigation--avatar ripple">
           <span class="navigation--letters">АЗ</span>
         </div>
       </div>

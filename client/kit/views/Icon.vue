@@ -1,5 +1,5 @@
 <template>
-  <div :class="['icon', size]" v-ripple>
+  <div :class="['icon', 'ripple', size]">
     <i class="material-icons">
       <slot/>
     </i>

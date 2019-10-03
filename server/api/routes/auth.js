@@ -4,14 +4,6 @@ import Profile from '@/services/profile';
 
 const router = Router();
 
-router.get('/a', async (req, res, next) => {
-  try {
-    res.json({ reply: 'a' });
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.post('/signin', async (req, res, next) => {
   try {
     res.json(await Profile.init(req.state).signin(req.body));

@@ -9,8 +9,6 @@ import LabelGroup from '@/kit/controls/LabelGroup';
 import Card from '@/kit/views/Card';
 import Icon from '@/kit/views/Icon';
 
-import Ripple from '@/kit/directives/Ripple';
-
 export default Vue => {
   Vue.component(Slider.name, Slider);
   Vue.component(Choice.name, Choice);
@@ -22,6 +20,4 @@ export default Vue => {
 
   Vue.component(Card.name, Card);
   Vue.component(Icon.name, Icon);
-
-  Vue.directive(Ripple.name, Ripple);
 };

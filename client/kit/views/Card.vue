@@ -1,5 +1,5 @@
 <template>
-  <div class="card" v-ripple>
+  <div class="card">
     <div class="card--header">
       <img class="card--image" :src="image">
     </div>
