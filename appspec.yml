@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /var/www/node
+    destination: /var/www/edent
     overwrite: true
 hooks:
   AfterInstall:
