@@ -37,6 +37,7 @@ export default {
     return {
       option: 'ex',
       value: 0,
+      test: 0,
       cards: [
         { title: 'Товар 1', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
         { title: 'Товар 2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
