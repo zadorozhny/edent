@@ -1,2 +1,2 @@
 #!/bin/bash
-pm2 stop edent
+pm2 stop all

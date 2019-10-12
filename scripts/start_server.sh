@@ -1,2 +1,2 @@
 #!/bin/bash
-pm2 start edent
+pm2 start all
