@@ -1,3 +1,2 @@
 #!/bin/bash
-cd ~
-pm2 start apps.json edent
+pm2 start edent
