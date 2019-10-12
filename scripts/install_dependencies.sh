@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /var/www/node
+cd /var/www/edent
 npm install

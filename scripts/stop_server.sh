@@ -1,2 +1,2 @@
 #!/bin/bash
-pm2 stop node
+pm2 stop edent

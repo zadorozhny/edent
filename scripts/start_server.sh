@@ -1,2 +1,2 @@
 #!/bin/bash
-pm2 start node
+pm2 start edent
