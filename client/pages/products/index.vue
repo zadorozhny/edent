@@ -20,7 +20,7 @@
         <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
           <template #controls>
             <div class="card_controls">
-              <kit-icon class="card_controls--cart" size="small">
+              <kit-icon class="card_controls--cart" size="compact">
                 add_shopping_cart
               </kit-icon>
             </div>

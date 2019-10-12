@@ -29,7 +29,7 @@ export default {
   user-select: none;
   transition: .2s ease-out;
 
-  &.small {
+  &.compact {
     width: 32px;
     height: 32px;
 
