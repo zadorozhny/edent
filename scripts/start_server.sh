@@ -1,2 +1,4 @@
 #!/bin/bash
-pm2 start edent
+cd ~
+pm2 kill
+pm2 start apps.json all
