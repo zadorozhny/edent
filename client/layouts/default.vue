@@ -1,7 +1,10 @@
 <template>
   <div class="layout">
     <nav class="navigation">
-      <h1 class="navigation--logo">Logo</h1>
+      <nuxt-link tag="div" to="/" class="navigation--logo">
+        <img class="navigation--image" src="~assets/images/logo.svg">
+        <h1 class="navigation--title">edent</h1>
+      </nuxt-link>
       <ul class="navigation--list">
         <nuxt-link tag="li" to="/" class="navigation--item">
           <span>Главная</span>
@@ -47,6 +50,23 @@ export default {
   padding: 0 20px;
   min-height: 62px;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+
+  &--logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  &--image {
+    width: 40px;
+    height: 40px;
+  }
+
+  &--title {
+    margin-left: 7px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
 
   &--list {
     display: flex;

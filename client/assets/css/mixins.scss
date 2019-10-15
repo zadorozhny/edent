@@ -8,19 +8,16 @@
 // $dark: #263850;
 // $light: #ffffff;
 
-$main: #0d1724;
-$secondary: #36a0d9;
+$main: #45b9ea;
+$light: #ffffff;
 $warning: #f4952f;
 $success: #07c23f;
 $danger: #ff4444;
-
-$dark: #263850;
-$light: #ffffff;
-$input: #f5f8f9;
-$disabled: #d9e1e3;
-$link: #52cded;
+$text: #263850;
+$fill: #dff4ff;
 $info: #9399A7;
-$fill: #e6eaeb;
+$border: #dae2e4;
+$disabled: #d9e1e3;
 
 @mixin text-overflow() {
   display: block;

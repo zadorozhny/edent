@@ -62,7 +62,7 @@ export default {
     bottom: 0;
     left: 0;
     height: 3px;
-    background: $dark;
+    background: $main;
     transition: width .2s ease-out,
       left .2s ease-out;
   }

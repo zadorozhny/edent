@@ -18,7 +18,7 @@ export default {
   font-size: 15px;
   color: white;
   border-radius: 50px;
-  background-color: #283b56;
+  background-color: $main;
   cursor: pointer;
   transition: .25s ease-out;
   outline: none;

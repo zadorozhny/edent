@@ -55,65 +55,65 @@ export default {
   }
 
   &.highlighted {
-    background-color: $secondary;
+    background-color: $main;
     color: $light;
 
     .choice &:hover {
-      background-color: darken($secondary, 10%);
+      background-color: darken($main, 10%);
     }
 
     .choosed & {
-      background-color: $secondary;
+      background-color: $main;
       color: $light;
 
       &:hover {
-        background-color: darken($secondary, 10%);
+        background-color: darken($main, 10%);
       }
     }
   }
 
   &.primary {
-    background-color: $input;
-    color: $dark;
+    background-color: $fill;
+    color: $main;
 
     .choice &:hover {
-      background-color: darken($input, 10%);
+      background-color: darken($fill, 10%);
     }
 
     .choosed & {
-      background-color: $dark;
+      background-color: $main;
       color: $light;
 
       &:hover {
-        background-color: darken($dark, 10%);
+        background-color: darken($main, 10%);
       }
     }
   }
 
   &.outline {
-    border: 1px solid #dae2e4;
+    border: 1px solid $border;
 
     .choice &:hover {
-      background-color: $input;
+      background-color: $fill;
     }
 
     .choosed & {
-      background-color: $dark;
+      background-color: $main;
       color: $light;
-      border-color: darken($dark, 10%);
+      border-color: darken($main, 10%);
 
       &:hover {
-        background-color: darken($dark, 10%);
+        background-color: darken($main, 10%);
       }
     }
   }
 
   &.secondary {
-    background-color: $dark;
+    background-color: $main;
     color: $light;
 
     .choice &:hover {
-      background-color: darken($dark, 10%);
+      background-color: darken($main, 10%);
     }
   }
 

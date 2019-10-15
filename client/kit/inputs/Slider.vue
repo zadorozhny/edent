@@ -133,7 +133,7 @@ export default {
     height: 3px;
     margin: 10px;
     border-radius: 50px;
-    background: #bcc8ca;
+    background: $fill;
     cursor: pointer;
   }
 
@@ -144,11 +144,11 @@ export default {
     width: 0;
     height: 100%;
     border-radius: 50px;
-    background: #283b56;
+    background: $main;
     cursor: pointer;
 
     .slider.disabled & {
-      background: #bcc8ca;
+      background: $disabled;
     }
   }
 
@@ -161,17 +161,17 @@ export default {
     text-align: center;
     font-size: 10px;
     white-space: nowrap;
-    color: white;
+    color: $light;
     transform: translate(-8px, -50%);
     border-radius: 50px;
-    background: #283b56;
+    background: $main;
     font-feature-settings: "tnum";
     font-variant-numeric: tabular-nums;
     cursor: grab;
     z-index: 2;
 
     .slider.disabled & {
-      background: #bcc8ca;
+      background: $disabled;
     }
   }
 
@@ -184,7 +184,7 @@ export default {
     bottom: -30px;
     right: 50%;
     transform: translate(50%, 0);
-    color: $dark;
+    color: $text;
   }
 
   &--points {
@@ -202,17 +202,17 @@ export default {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #bcc8ca;
+    background: $fill;
 
     .slider.disabled & {
-      background: #bcc8ca;
+      background: $disabled;
     }
 
     &.active {
-      background: #283b56;
+      background: $main;
 
       .slider.disabled & {
-        background: #bcc8ca;
+        background: $disabled;
       }
     }
   }
