@@ -1,12 +1,14 @@
 <template>
-  <div class="wrapper">
-    <div class="picture">
-      <img :src="value">
+  <section class="container">
+    <div class="wrapper">
+      <div class="picture">
+        <img :src="value">
+      </div>
+      <div class="content">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
-    <div class="content">
-      <p>Lorem Ipsum</p>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>

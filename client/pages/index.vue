@@ -1,7 +1,9 @@
 <template>
-  <ul class="container">
-    <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title"/>
-  </ul>
+  <section class="container">
+    <ul class="container">
+      <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title"/>
+    </ul>
+  </section>
 </template>
 
 <script>

@@ -1,3 +1,13 @@
+.container {
+  margin: 0 auto;
+  max-width: 1250px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overflow: auto;
+}
+
 .ripple {
   position: relative;
   overflow: hidden;

@@ -1,34 +1,36 @@
 <template>
-  <div class="wrapper">
-    <div class="filters">
-      <kit-slider v-model="value" :min="0" :max="10000"/>
-      <kit-label-group>
-        <kit-choice v-model="option" value="ex" related>
-          <kit-label type="outline" size="regular" class="text_small">Дорогие</kit-label>
-        </kit-choice>
-        <kit-choice v-model="option" value="ch" related>
-          <kit-label type="outline" size="regular" class="text_small">Дешевые</kit-label>
-        </kit-choice>
-      </kit-label-group>
-      <kit-button>Найти</kit-button>
-    </div>
-    <div class="cover">
-      <div class="search">
-        <input class="input" placeholder="Поиск">
+  <section class="container">
+    <div class="wrapper">
+      <div class="filters">
+        <kit-slider v-model="value" :min="0" :max="10000"/>
+        <kit-label-group>
+          <kit-choice v-model="option" value="ex" related>
+            <kit-label type="outline" size="regular" class="text_small">Дорогие</kit-label>
+          </kit-choice>
+          <kit-choice v-model="option" value="ch" related>
+            <kit-label type="outline" size="regular" class="text_small">Дешевые</kit-label>
+          </kit-choice>
+        </kit-label-group>
+        <kit-button>Найти</kit-button>
       </div>
-      <ul class="container">
-        <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
-          <template #controls>
-            <div class="card_controls">
-              <kit-icon class="card_controls--cart" size="compact">
-                add_shopping_cart
-              </kit-icon>
-            </div>
-          </template>
-        </kit-card>
-      </ul>
+      <div class="cover">
+        <div class="search">
+          <input class="input" placeholder="Поиск">
+        </div>
+        <ul class="container">
+          <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
+            <template #controls>
+              <div class="card_controls">
+                <kit-icon class="card_controls--cart" size="compact">
+                  add_shopping_cart
+                </kit-icon>
+              </div>
+            </template>
+          </kit-card>
+        </ul>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

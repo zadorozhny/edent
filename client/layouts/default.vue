@@ -1,33 +1,36 @@
 <template>
   <div class="layout">
     <nav class="navigation">
-      <nuxt-link tag="div" to="/" class="navigation--logo">
-        <img class="navigation--image" src="~assets/images/logo.svg">
-        <h1 class="navigation--title">edent</h1>
-      </nuxt-link>
-      <ul class="navigation--list">
-        <nuxt-link tag="li" to="/" class="navigation--item">
-          <span>Главная</span>
+      <div class="navigation--wrapper">
+        <nuxt-link tag="div" to="/" class="navigation--logo">
+          <img class="navigation--image" src="~assets/images/logo.svg">
+          <h1 class="navigation--title">edent</h1>
         </nuxt-link>
-        <nuxt-link tag="li" to="/products" class="navigation--item">
-          <span>Товары</span>
-        </nuxt-link>
-        <nuxt-link tag="li" to="/info" class="navigation--item">
-          <span>Доставка и Связь</span>
-        </nuxt-link>
-      </ul>
-      <div class="navigation--controls">
-        <kit-icon class="navigation--cart">
-          shopping_cart
-        </kit-icon>
-        <div class="navigation--avatar ripple">
-          <span class="navigation--letters">АЗ</span>
+        <ul class="navigation--list">
+          <nuxt-link tag="li" to="/" class="navigation--item">
+            <span>Главная</span>
+          </nuxt-link>
+          <nuxt-link tag="li" to="/products" class="navigation--item">
+            <span>Товары</span>
+          </nuxt-link>
+          <nuxt-link tag="li" to="/shipping" class="navigation--item">
+            <span>Доставка</span>
+          </nuxt-link>
+          <nuxt-link tag="li" to="/contacts" class="navigation--item">
+            <span>Контакты</span>
+          </nuxt-link>
+        </ul>
+        <div class="navigation--controls">
+          <kit-icon class="navigation--cart">
+            shopping_cart
+          </kit-icon>
+          <div class="navigation--avatar ripple">
+            <span class="navigation--letters">АЗ</span>
+          </div>
         </div>
       </div>
     </nav>
-    <section class="container">
-      <nuxt/>
-    </section>
+    <nuxt/>
   </div>
 </template>
 
@@ -44,12 +47,20 @@ export default {
 }
 
 .navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
   min-height: 62px;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+  z-index: 10;
+
+  &--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin: 0 auto;
+    max-width: 1250px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   &--logo {
     display: flex;
