@@ -92,7 +92,7 @@ export default {
         content: '';
         width: 100%;
         height: 3px;
-        background: #283b56;
+        background: $main;
       }
     }
 
@@ -111,7 +111,7 @@ export default {
     height: 40px;
     border-radius: 50%;
     color: white;
-    background: #283b56;
+    background: $main;
     transition: .25s ease-out;
     cursor: pointer;
     box-sizing: border-box;
