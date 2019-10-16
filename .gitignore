@@ -15,5 +15,3 @@ dist
 
 # Credentials
 .ssh
-
-docker-compose.yml
