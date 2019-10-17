@@ -1,5 +1,5 @@
 {
-  "name": "node",
+  "name": "edent",
   "version": "1.0.0",
   "description": "My bedazzling Nuxt.js project",
   "author": "",
@@ -8,14 +8,13 @@
     "dev": "nodemon -r ./node_modules/dotenv/config -x babel-node -w server server",
     "build": "npm run build:server && npm run build:client",
     "start": "node -r dotenv/config .server",
-    "docker:up": "docker-compose -p 'node' up -d postgres redis",
-    "docker:down": "docker-compose -p 'node' down",
+    "docker:up": "docker-compose -p 'edent' up -d postgres redis",
+    "docker:down": "docker-compose -p 'edent' down",
     "build:client": "env $(cat .env | xargs) nuxt build --config-file client/nuxt.config.js",
     "build:server": "babel server -d .server --delete-dir-on-start --copy-files",
     "docker:clear": "docker rm $(docker ps -a -q) -f && docker rmi $(docker images -q) -f",
     "generate": "nuxt generate",
     "test": "jest",
-    "deploy": "bash deploy.sh",
     "port": "kill -9 $(lsof -t -i:3000)"
   },
   "dependencies": {

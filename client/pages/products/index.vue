@@ -5,10 +5,18 @@
         <kit-slider v-model="value" :min="0" :max="10000"/>
         <kit-label-group>
           <kit-choice v-model="option" value="ex" related>
-            <kit-label type="outline" size="regular" class="text_small">Дорогие</kit-label>
+            <kit-label type="outline" size="regular" class="text_small">от Дорогих</kit-label>
           </kit-choice>
           <kit-choice v-model="option" value="ch" related>
-            <kit-label type="outline" size="regular" class="text_small">Дешевые</kit-label>
+            <kit-label type="outline" size="regular" class="text_small">от Дешевых</kit-label>
+          </kit-choice>
+        </kit-label-group>
+        <kit-label-group>
+          <kit-choice v-model="option" value="a-z" related>
+            <kit-label type="outline" size="regular" class="text_small">от А-Я</kit-label>
+          </kit-choice>
+          <kit-choice v-model="option" value="z-a" related>
+            <kit-label type="outline" size="regular" class="text_small">от Я-А</kit-label>
           </kit-choice>
         </kit-label-group>
         <kit-button>Найти</kit-button>

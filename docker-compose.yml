@@ -7,11 +7,11 @@ services:
     ports:
       - 127.0.0.1:5432:5432
     volumes:
-      - /node/postgres:/var/lib/postgresql/data:z
+      - /edent/postgres:/var/lib/postgresql/data:z
     environment:
-      POSTGRES_USER: node
-      POSTGRES_PASSWORD: node
-      POSTGRES_DB: node
+      POSTGRES_USER: edent
+      POSTGRES_PASSWORD: edent
+      POSTGRES_DB: edent
   redis:
     container_name: redis
     image: redis:alpine
@@ -20,7 +20,7 @@ services:
     sysctls:
       net.core.somaxconn: 1024
     volumes:
-      - /node/redis:/data:z
+      - /edent/redis:/data:z
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
