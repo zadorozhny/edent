@@ -7,7 +7,7 @@ const auth = async (req, _, next) => {
     req.state.user = { ...user };
   } catch (err) {
     if (err.name === 'TokenExpiredError') {
-      err.status(418);
+      err.status(419);
       next(err);
     }
     err.status(401);

@@ -12,7 +12,7 @@ glob
   .forEach(direction => {
     const { routes } = require(direction);
     const extension = path.extname(direction);
-    router.use(`/api/${path.basename(direction, extension)}`, routes);
+    router.use(`/${path.basename(direction, extension)}`, routes);
   });
 
 export default router;

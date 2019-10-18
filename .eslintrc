@@ -64,6 +64,7 @@
       "ignoreTemplateLiterals": true,
       "ignoreRegExpLiterals": true
     }],
+    "max-classes-per-file": ["error", 2],
     "vue/max-attributes-per-line": ["error", {
       "singleline": 4,
       "multiline":  4
