@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import auth from '@/api/middlewares/auth';
-import Products from '@/services/products';
+import Users from '@/services/users';
 
 const router = Router();
 
 router.get('/', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.state).get(req.query));
+    res.json(await Users.init(req.state).get(req.query));
   } catch (err) {
     next(err);
   }
@@ -14,15 +14,7 @@ router.get('/', auth, async (req, res, next) => {
 
 router.get('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.state).getOne(req.params.id));
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/', auth, async (req, res, next) => {
-  try {
-    res.json(await Products.init(req.state).create(req.body));
+    res.json(await Users.init(req.state).getOne(req.params.id));
   } catch (err) {
     next(err);
   }
@@ -30,7 +22,7 @@ router.post('/', auth, async (req, res, next) => {
 
 router.patch('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.state).update(req.params.id, req.body));
+    res.json(await Users.init(req.state).update(req.body));
   } catch (err) {
     next(err);
   }
@@ -38,7 +30,7 @@ router.patch('/:id', auth, async (req, res, next) => {
 
 router.delete('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.state).remove(req.params.id));
+    res.json(await Users.init(req.state).remove());
   } catch (err) {
     next(err);
   }
