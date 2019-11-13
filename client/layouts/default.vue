@@ -13,9 +13,9 @@
           <nuxt-link tag="li" to="/shipping" class="navigation--item">
             <span>Доставка и Оплата</span>
           </nuxt-link>
-          <a href="https://www.thesitewizard.com/" rel="noopener noreferrer" target="_blank" class="navigation--item">
+          <nuxt-link tag="li" to="/contacts" class="navigation--item">
             <span>Контакты</span>
-          </a>
+          </nuxt-link>
         </ul>
         <div class="search">
           <input class="input" placeholder="Поиск">
@@ -138,9 +138,9 @@ export default {
     align-items: center;
     height: 100%;
 
-    // @media ($tablet) {
-    //   display: none;
-    // }
+    @media ($tablet) {
+      display: none;
+    }
   }
 
   &--item {
