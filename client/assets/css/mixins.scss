@@ -19,6 +19,16 @@ $info: #9399A7;
 $border: #dae2e4;
 $disabled: #d9e1e3;
 
+$desktop-width: 1080px;
+$tablet-width: 960px;
+$phablet-width: 620px;
+$mobile-width: 360px;
+
+$desktop: "min-width: #{$desktop-width}";
+$tablet: "max-width: #{$tablet-width - 1px}";
+$phablet: "max-width: #{$phablet-width - 1px}";
+$mobile: "max-width: #{$mobile-width - 1px}";
+
 @mixin text-overflow() {
   display: block;
   overflow: hidden;

@@ -22,9 +22,6 @@
         <kit-button>Найти</kit-button>
       </div>
       <div class="cover">
-        <div class="search">
-          <input class="input" placeholder="Поиск">
-        </div>
         <ul class="container">
           <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
             <template #controls>
@@ -90,31 +87,6 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-}
-.search {
-  position: sticky;
-  top: 0;
-  margin-bottom: 20px;
-  height: 40px;
-  width: 100%;
-  z-index: 2;
-}
-.input {
-  padding: 7px 15px;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  border: solid 1px #e6e6e6;
-  border-radius: 50px;
-  box-sizing: border-box;
-  outline: none;
-  border: solid 1px #dfe1e5;
-  transition: .25s ease-out;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
-  }
 }
 .card_controls {
   display: flex;

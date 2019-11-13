@@ -7,25 +7,25 @@
           <h1 class="navigation--title">edent</h1>
         </nuxt-link>
         <ul class="navigation--list">
-          <nuxt-link tag="li" to="/" class="navigation--item">
-            <span>Главная</span>
-          </nuxt-link>
           <nuxt-link tag="li" to="/products" class="navigation--item">
             <span>Товары</span>
           </nuxt-link>
           <nuxt-link tag="li" to="/shipping" class="navigation--item">
-            <span>Доставка</span>
+            <span>Доставка и Оплата</span>
           </nuxt-link>
-          <nuxt-link tag="li" to="/contacts" class="navigation--item">
+          <a href="https://www.thesitewizard.com/" rel="noopener noreferrer" target="_blank" class="navigation--item">
             <span>Контакты</span>
-          </nuxt-link>
+          </a>
         </ul>
+        <div class="search">
+          <input class="input" placeholder="Поиск">
+        </div>
         <div class="navigation--controls">
           <kit-icon class="navigation--cart">
             shopping_cart
           </kit-icon>
           <div class="navigation--avatar ripple">
-            <span class="navigation--letters">АЗ</span>
+            <span class="navigation--letters">А</span>
           </div>
         </div>
       </div>
@@ -41,15 +41,51 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100vh;
+  // height: 100vh;
+}
+
+.search {
+  height: 36px;
+  width: 360px;
+
+  @media ($tablet) {
+    order: 2;
+    width: 100%;
+    height: 32px;
+  }
+}
+
+.input {
+  padding: 7px 15px;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  border: solid 1px #e6e6e6;
+  border-radius: 5px;
+  box-sizing: border-box;
+  outline: none;
+  border: solid 1px #dfe1e5;
+  transition: .25s ease-out;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+  }
 }
 
 .navigation {
-  min-height: 62px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 56px;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+  background: $light;
   z-index: 10;
+
+  @media ($tablet) {
+    min-height: 86px;
+  }
 
   &--wrapper {
     display: flex;
@@ -59,7 +95,15 @@ export default {
     margin: 0 auto;
     max-width: 1250px;
     width: 100%;
+    height: 56px;
     box-sizing: border-box;
+
+    @media ($tablet) {
+      align-items: unset;
+      flex-wrap: wrap;
+      padding: 0 10px;
+      height: 86px;
+    }
   }
 
   &--logo {
@@ -69,20 +113,34 @@ export default {
   }
 
   &--image {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
+
+    @media ($tablet) {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   &--title {
     margin-left: 7px;
+    font-size: 18px;
     font-weight: 300;
     text-transform: uppercase;
+
+    @media ($tablet) {
+      font-size: 16px;
+    }
   }
 
   &--list {
     display: flex;
     align-items: center;
-    height: 62px;
+    height: 100%;
+
+    // @media ($tablet) {
+    //   display: none;
+    // }
   }
 
   &--item {
@@ -90,7 +148,7 @@ export default {
     display: flex;
     align-items: center;
     height: 100%;
-    margin-right: 10px;
+    margin-right: 15px;
     box-sizing: border-box;
     cursor: pointer;
 
@@ -118,8 +176,8 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 3px;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     color: white;
     background: $main;
@@ -127,6 +185,11 @@ export default {
     cursor: pointer;
     box-sizing: border-box;
     user-select: none;
+
+    @media ($tablet) {
+      width: 32px;
+      height: 32px;
+    }
 
     &:hover {
       &::after {
@@ -162,4 +225,6 @@ export default {
   padding: 10px 20px;
   overflow: auto;
 }
+
+
 </style>
