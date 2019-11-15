@@ -23,10 +23,16 @@
       </div>
       <div class="cover">
         <ul class="container">
-          <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title">
+          <kit-card
+            v-for="(card, index) in cards"
+            :key="index"
+            :image="card.src"
+            :title="card.title"
+            :price="card.price"
+          >
             <template #controls>
               <div class="card_controls">
-                <kit-icon class="card_controls--cart" size="compact">
+                <kit-icon class="card_controls--cart" size="regular">
                   add_shopping_cart
                 </kit-icon>
               </div>
@@ -45,16 +51,56 @@ export default {
       option: 'ex',
       value: 1,
       cards: [
-        { title: 'Товар 1', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-        { title: 'Товар 2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-        { title: 'Товар 3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-        { title: 'Товар 4', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-        { title: 'Товар 5', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-        { title: 'Товар 6', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-        { title: 'Товар 7', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-        { title: 'Товар 8', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-        { title: 'Товар 9', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-        { title: 'Товар 10', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
+        {
+          title: 'Даймондбрайт',
+          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+          price: 230
+        },
+        {
+          title: 'Матрицы контурные метал. замковые 50мкм',
+          src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
+          price: 530
+        },
+        {
+          title: 'Эндожи №1',
+          src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
+          price: 1230
+        },
+        {
+          title: 'Keramik block (инзомы)',
+          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+          price: 2230
+        },
+        {
+          title: 'VILLACRYL H PIUS (750г+400мл) V4',
+          src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
+          price: 2530
+        },
+        {
+          title: '«Мастер» пластина 200г',
+          src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
+          price: 232
+        },
+        {
+          title: 'Белэкт №10 зерн120/125-106мкм/5кг/',
+          src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
+          price: 99
+        },
+        {
+          title: 'Бура (100гр)',
+          src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
+          price: 199
+        },
+        {
+          title: 'Воск Беловакс валики прикусные (палочки 150г(10шт))',
+          src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg',
+          price: 120
+        },
+        {
+          title: 'Воск липкий',
+          src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
+          price: 1999
+        },
       ]
     };
   }
@@ -78,6 +124,7 @@ export default {
   height: 600px;
   border-radius: 3px;
   box-sizing: border-box;
+  background: $light;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
 }
 .cover {
@@ -92,6 +139,5 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 2px 7px;
 }
 </style>

@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
-  // height: 100vh;
+  background: $background;
 }
 
 .search {
@@ -67,10 +67,6 @@ export default {
   border: solid 1px #dfe1e5;
   transition: .25s ease-out;
   cursor: pointer;
-
-  &:hover {
-    box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
-  }
 }
 
 .navigation {
@@ -125,7 +121,7 @@ export default {
   &--title {
     margin-left: 7px;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 600;
     text-transform: uppercase;
 
     @media ($tablet) {
