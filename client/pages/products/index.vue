@@ -134,9 +134,21 @@ export default {
   }
 }
 .cover {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+
+  @media ($tablet) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media ($phablet) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media ($mobile) {
+    grid-template-columns: 1fr;
+  }
 }
 .card_controls {
   display: flex;

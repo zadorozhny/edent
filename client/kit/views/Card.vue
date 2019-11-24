@@ -30,7 +30,7 @@ export default {
   grid-auto-flow: row;
   grid-template-rows: 180px auto auto;
   margin-bottom: 20px;
-  width: 220px;
+  width: 100%;
   height: 276px;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
   border-radius: 3px;

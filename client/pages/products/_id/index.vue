@@ -21,6 +21,22 @@
         <p>Lorem Ipsum</p>
         <p>Lorem Ipsum</p>
         <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
+        <p>Lorem Ipsum</p>
         <div class="buttons">
           <kit-button type="success" class="button">Купить</kit-button>
           <kit-button class="button">В корзину</kit-button>
@@ -45,7 +61,7 @@ export default {
 
   @media ($phablet) {
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 44px;
   }
 }
 
