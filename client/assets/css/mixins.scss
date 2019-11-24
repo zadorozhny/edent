@@ -25,6 +25,9 @@ $tablet-width: 960px;
 $phablet-width: 620px;
 $mobile-width: 360px;
 
+$mobile-navigation: 86px;
+$desktop-navigation: 56px;
+
 $desktop: "min-width: #{$desktop-width}";
 $tablet: "max-width: #{$tablet-width - 1px}";
 $phablet: "max-width: #{$phablet-width - 1px}";

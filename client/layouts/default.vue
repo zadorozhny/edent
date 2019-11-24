@@ -2,7 +2,7 @@
   <div class="layout">
     <nav class="navigation">
       <div class="navigation--wrapper">
-        <nuxt-link tag="div" to="/" class="navigation--logo">
+        <nuxt-link tag="div" to="/products" class="navigation--logo">
           <img class="navigation--image" src="~assets/images/logo.svg">
           <h1 class="navigation--title">edent</h1>
         </nuxt-link>
@@ -41,6 +41,8 @@ export default {
 
 <style lang="scss" scoped>
 .layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
   background: $background;
 }
 
@@ -74,14 +76,9 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 56px;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
   background: $light;
   z-index: 10;
-
-  @media ($tablet) {
-    min-height: 86px;
-  }
 
   &--wrapper {
     display: flex;
@@ -91,14 +88,14 @@ export default {
     margin: 0 auto;
     max-width: 1250px;
     width: 100%;
-    height: 56px;
+    height: $desktop-navigation;
     box-sizing: border-box;
 
     @media ($tablet) {
       align-items: unset;
       flex-wrap: wrap;
       padding: 0 10px;
-      height: 86px;
+      height: $mobile-navigation;
     }
   }
 
@@ -215,11 +212,6 @@ export default {
   &--cart {
     margin-right: 5px;
   }
-}
-
-.container {
-  padding: 10px 20px;
-  overflow: auto;
 }
 
 

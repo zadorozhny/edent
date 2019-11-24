@@ -5,6 +5,7 @@ module.exports = {
   mode: 'universal',
   modern: isProd,
   dev: isDev,
+  performance: isDev,
   srcDir: './client',
   router: {
     linkActiveClass: 'active-link',
