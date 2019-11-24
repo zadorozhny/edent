@@ -42,6 +42,16 @@
         </kit-card>
       </nuxt-link>
     </div>
+    <span class="control control-left">
+      <kit-icon>
+        filter_list
+      </kit-icon>
+    </span>
+    <span class="control control-right">
+      <kit-icon>
+        keyboard_arrow_up
+      </kit-icon>
+    </span>
   </section>
 </template>
 
@@ -131,6 +141,30 @@ export default {
 
   @media ($tablet) {
     display: none;
+  }
+}
+.control {
+  position: fixed;
+  bottom: 10px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: $light;
+  box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+
+  @media ($tablet) {
+    display: flex;
+  }
+
+  &-left {
+    left: 10px;
+  }
+
+  &-right {
+    right: 10px;
   }
 }
 .cover {
