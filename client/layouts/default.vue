@@ -48,7 +48,7 @@ export default {
 
 .search {
   height: 40px;
-  width: 360px;
+  width: 340px;
 
   @media ($tablet) {
     order: 2;
@@ -106,12 +106,12 @@ export default {
   }
 
   &--image {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
 
     @media ($tablet) {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
     }
   }
 
@@ -176,8 +176,8 @@ export default {
     user-select: none;
 
     @media ($tablet) {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
     }
 
     &:hover {
@@ -197,7 +197,11 @@ export default {
   }
 
   &--letters {
-    font-size: 16px;
+    font-size: 18px;
+
+    @media ($tablet) {
+      font-size: 16px;
+    }
   }
 
   &--controls {

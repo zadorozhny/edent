@@ -88,14 +88,14 @@
 
   &-enter-active,
   &-leave-active {
-    @media ($mobile) {
+    @media ($phablet) {
       transition: transform .2s ease-out;
     }
   }
 
   &-leave-to {
     opacity: 0;
-    @media ($mobile) {
+    @media ($phablet) {
       opacity: unset;
       transform: translate(-100%);
     }
@@ -103,7 +103,7 @@
   
   &-enter {
     opacity: 0;
-    @media ($mobile) {
+    @media ($phablet) {
       opacity: unset;
       transform: translateX(100%);
     }
