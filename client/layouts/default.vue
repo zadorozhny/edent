@@ -47,13 +47,13 @@ export default {
 }
 
 .search {
-  height: 36px;
+  height: 40px;
   width: 360px;
 
   @media ($tablet) {
     order: 2;
     width: 100%;
-    height: 32px;
+    height: 34px;
   }
 }
 
@@ -120,10 +120,6 @@ export default {
     font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
-
-    @media ($tablet) {
-      font-size: 16px;
-    }
   }
 
   &--list {
@@ -169,8 +165,8 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 3px;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     color: white;
     background: $main;
@@ -180,8 +176,8 @@ export default {
     user-select: none;
 
     @media ($tablet) {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
     }
 
     &:hover {
@@ -210,7 +206,7 @@ export default {
   }
 
   &--cart {
-    margin-right: 5px;
+    margin-right: 10px;
   }
 }
 

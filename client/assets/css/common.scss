@@ -45,3 +45,67 @@
   opacity: .3;
   transition: 0s;
 }
+
+.text {
+  &_info {
+    font-size: 12px;
+    font-weight: 400;
+    color: $info;
+  }
+
+  &_title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &_large {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  &_big {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  &_medium {
+    font-size: 16px;
+  }
+
+  &_small {
+    font-size: 12px;
+  }
+}
+
+.page {
+  &-enter-active {
+    transition: opacity .2s ease-out .2s;
+  }
+
+  &-leave-active {
+    transition: opacity .2s ease-out;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    @media ($mobile) {
+      transition: transform .2s ease-out;
+    }
+  }
+
+  &-leave-to {
+    opacity: 0;
+    @media ($mobile) {
+      opacity: unset;
+      transform: translate(-100%);
+    }
+  }
+  
+  &-enter {
+    opacity: 0;
+    @media ($mobile) {
+      opacity: unset;
+      transform: translateX(100%);
+    }
+  }
+}

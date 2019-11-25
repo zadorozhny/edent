@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="page container">
     <div class="product">
       <div class="picture">
         <img :src="value">

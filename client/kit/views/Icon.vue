@@ -34,7 +34,7 @@ export default {
     height: 32px;
 
     .material-icons {
-      font-size: 20px;
+      font-size: 24px;
     }
   }
 
@@ -43,7 +43,7 @@ export default {
     height: 40px;
 
     .material-icons {
-      font-size: 24px;
+      font-size: 30px;
     }
   }
 

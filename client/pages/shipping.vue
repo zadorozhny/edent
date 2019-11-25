@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="page contact">
     <div class="contact--content"/>
     <div class="contact--picture">
       <img src="~assets/images/contact.jpg">

@@ -1,21 +1,21 @@
 <template>
-  <section class="container container-space products">
+  <section class="page container container-space products">
     <div class="filters">
       <kit-slider v-model="value" :min="0" :max="10000"/>
       <kit-label-group>
         <kit-choice v-model="option" value="ex" related>
-          <kit-label type="outline" size="regular" class="text_small">Дорогие</kit-label>
+          <kit-label type="outline" size="regular">Дорогие</kit-label>
         </kit-choice>
         <kit-choice v-model="option" value="ch" related>
-          <kit-label type="outline" size="regular" class="text_small">Дешевые</kit-label>
+          <kit-label type="outline" size="regular">Дешевые</kit-label>
         </kit-choice>
       </kit-label-group>
       <kit-label-group>
         <kit-choice v-model="option" value="a-z" related>
-          <kit-label type="outline" size="regular" class="text_small">А-Я</kit-label>
+          <kit-label type="outline" size="regular">А-Я</kit-label>
         </kit-choice>
         <kit-choice v-model="option" value="z-a" related>
-          <kit-label type="outline" size="regular" class="text_small">Я-А</kit-label>
+          <kit-label type="outline" size="regular">Я-А</kit-label>
         </kit-choice>
       </kit-label-group>
       <kit-button>Найти</kit-button>
@@ -43,12 +43,12 @@
       </nuxt-link>
     </div>
     <span class="control control-left">
-      <kit-icon>
+      <kit-icon size="large">
         filter_list
       </kit-icon>
     </span>
     <span class="control control-right">
-      <kit-icon>
+      <kit-icon size="large">
         keyboard_arrow_up
       </kit-icon>
     </span>
@@ -149,8 +149,8 @@ export default {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background-color: $light;
   box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
