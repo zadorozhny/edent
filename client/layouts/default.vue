@@ -47,7 +47,7 @@ export default {
 }
 
 .search {
-  height: 40px;
+  height: 36px;
   width: 340px;
 
   @media ($tablet) {

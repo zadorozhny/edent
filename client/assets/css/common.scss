@@ -59,7 +59,7 @@
   }
 
   &_large {
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 600;
   }
 
@@ -74,6 +74,10 @@
 
   &_small {
     font-size: 12px;
+  }
+
+  &_bold {
+    font-weight: 600;
   }
 }
 
