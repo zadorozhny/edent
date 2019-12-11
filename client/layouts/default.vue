@@ -43,7 +43,6 @@ export default {
 .layout {
   display: grid;
   grid-template-rows: auto 1fr;
-  background: $background;
 }
 
 .search {
@@ -76,7 +75,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
-  box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
   background: $light;
   z-index: 10;
 
