@@ -13,7 +13,7 @@
           <p class="text_medium">Модель: CKD000340</p>
           <p class="text_medium">Производитель: Cerkamed</p>
         </div>
-        <p class="product--price text_title">Цена: <span class="text_large">1299</span></p>
+        <p class="product--price text_title">Цена: <span class="text_large">₴1299</span></p>
         <div class="buttons">
           <kit-button type="success" class="button">Купить</kit-button>
           <kit-button class="button">В корзину</kit-button>
@@ -65,7 +65,7 @@ export default {
     margin-right: 20px;
     width: 100%;
     grid-area: picture;
-    box-shadow: 0px 1px 4px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
     border-radius: 3px;
     overflow: hidden;
 

@@ -18,6 +18,7 @@ export default {
 <style lang="scss" scoped>
 .layout {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
 }
 </style>

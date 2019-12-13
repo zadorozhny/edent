@@ -1,5 +1,6 @@
 import Slider from '@/kit/inputs/Slider';
 import Choice from '@/kit/inputs/Choice';
+import Input from '@/kit/inputs/Input';
 
 import Button from '@/kit/controls/Button';
 import Tabs from '@/kit/controls/Tabs';
@@ -12,6 +13,7 @@ import Icon from '@/kit/views/Icon';
 export default Vue => {
   Vue.component(Slider.name, Slider);
   Vue.component(Choice.name, Choice);
+  Vue.component(Input.name, Input);
 
   Vue.component(Button.name, Button);
   Vue.component(Tabs.name, Tabs);

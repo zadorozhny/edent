@@ -82,6 +82,14 @@ body {
   text-shadow: 0 0 1px rgba(0, 0, 0, .01);
 }
 
+button, input {
+  font: {
+    family: 'Montserrat', Arial, sans-serif;
+    size: 14px;
+    weight: 500;
+  }
+}
+
 html, body, #__nuxt, #__layout {
   min-height: 100%;
   height: 100%;

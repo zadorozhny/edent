@@ -8,7 +8,6 @@
       :type="related ? 'radio' : 'checkbox'"
       @change="change"
       v-on="$listeners"
-      @click="uncheck"
     >
     <slot/>
   </label>
@@ -24,11 +23,8 @@ export default {
   },
   props: {
     value: { type: [String, Number, Boolean], default: null },
-    trueValue: { type: [Boolean, Number, String], default: true },
-    falseValue: { type: [Boolean, Number, String], default: false },
     model: { type: [Array, String, Number, Boolean], default: null },
     related: { type: Boolean, default: false },
-    revocable: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false }
   },
   computed: {
@@ -36,7 +32,7 @@ export default {
       if (this.model !== null) {
         return this.related ? this.model === this.value
           : Array.isArray(this.model) ? this.model.includes(this.value)
-          : this.model === this.trueValue;
+          : this.model;
       } else {
         return this.$attrs.checked;
       }
@@ -56,12 +52,7 @@ export default {
           this.$emit('update', this.model.slice(0, index).concat(this.model.slice(index + 1)));
         }
       } else {
-        this.$emit('update', event.target.checked ? this.trueValue : this.falseValue);
-      }
-    },
-    uncheck() {
-      if (this.related && this.choosed && this.revocable) {
-        this.$emit('update', null);
+        this.$emit('update', event.target.checked);
       }
     }
   }

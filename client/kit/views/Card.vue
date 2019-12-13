@@ -28,7 +28,7 @@ export default {
 .card {
   display: grid;
   grid-auto-flow: row;
-  grid-template-rows: 180px auto auto;
+  grid-template-rows: 180px 1fr auto;
   margin-bottom: 20px;
   width: 100%;
   height: 276px;
@@ -76,7 +76,7 @@ export default {
   }
 
   &--price {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700
   }
 }
