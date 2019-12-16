@@ -1,7 +1,6 @@
 import Express from 'express';
 import { Nuxt, Builder } from 'nuxt';
 import config from 'nuxt.config';
-import { sequelize } from '@/database';
 
 import api from '@/api';
 

@@ -18,3 +18,11 @@ export const REFRESH_TOKENS = {
   TYPE: 'refresh',
   EXPIRATION: 259200000 // milliseconds in 3 days
 };
+
+export const PASSWORDS = {
+  LENGTH: 128,
+  SALT_LENGTH: 128,
+  ITERATIONS: 100000,
+  DIGEST: 'sha256',
+  ENCODING: 'base64'
+};

@@ -8,6 +8,7 @@
     "dev": "nodemon -r ./node_modules/dotenv/config -x babel-node -w server server",
     "build": "npm run build:server && npm run build:client",
     "start": "node -r dotenv/config .server",
+    "docker:pgadmin": "docker-compose -p 'edent' up -d pgadmin",
     "docker:up": "docker-compose -p 'edent' up -d postgres redis",
     "docker:down": "docker-compose -p 'edent' down",
     "build:client": "env $(cat .env | xargs) nuxt build --config-file client/nuxt.config.js",
@@ -29,6 +30,7 @@
     "nuxt": "^2.10.2",
     "pg": "^7.12.1",
     "sequelize": "^5.21.0",
+    "sqlstring": "^2.3.1",
     "vue": "^2.6.10",
     "vuex": "^3.1.1"
   },

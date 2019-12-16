@@ -2,6 +2,8 @@ import glob from 'glob';
 import Sequelize from 'sequelize';
 import config from '@/config/database';
 
+export { sql } from '@/lib/Sequelize';
+export const { Op } = Sequelize;
 export const sequelize = new Sequelize(config);
 export const { models } = sequelize;
 

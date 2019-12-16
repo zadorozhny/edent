@@ -1,0 +1,11 @@
+require('@babel/register');
+require('dotenv/config');
+const { resolve } = require('path');
+
+module.exports = {
+  'env': 'default',
+  'config': resolve('server', 'config', 'database.js'),
+  'migrations-path': resolve('server', 'database', 'migrations'),
+  'seeders-path': resolve('server', 'database', 'seeders'),
+  'models-path': resolve('server', 'database', 'models')
+}

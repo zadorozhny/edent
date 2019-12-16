@@ -2,6 +2,7 @@ import { Router } from 'express';
 import glob from 'glob';
 import bodyParser from 'body-parser';
 import path from 'path';
+import { handler, missed } from '@/api/middlewares/errors';
 
 const router = Router();
 
@@ -14,5 +15,8 @@ glob
     const extension = path.extname(direction);
     router.use(`/${path.basename(direction, extension)}`, routes);
   });
+
+router.use(missed);
+router.use(handler);
 
 export default router;

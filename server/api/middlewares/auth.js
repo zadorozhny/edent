@@ -7,13 +7,12 @@ const auth = async (req, _, next) => {
     req.state.user = { ...user };
   } catch (err) {
     if (err.name === 'TokenExpiredError') {
-      err.status(419);
+      err.status = 419;
       next(err);
     }
-    err.status(401);
+    err.status = 401;
     next(err);
   }
-  await next();
 };
 
 auth.expired = async (req, _, next) => {
@@ -25,7 +24,6 @@ auth.expired = async (req, _, next) => {
     err.status(401);
     next(err);
   }
-  await next();
 };
 
 export default auth;
