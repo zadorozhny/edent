@@ -8,7 +8,7 @@ export default class Factory {
       });
     });
   }
-  init(options) {
+  init(options = {}) {
     const { user } = options;
     const service = user && user.role ? this[user.role] : this.default;
     if (!service) {

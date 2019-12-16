@@ -1,6 +1,6 @@
 import { models } from '@/database';
 import ServiceError from '@/lib/Errors';
-import { service } from '@/lib/services/decorators';
+import { service } from '@/lib/decorators';
 import { AccessToken, RefreshToken } from '@/lib/Tokens';
 
 @service
@@ -10,9 +10,7 @@ export default class Utility {
       access: AccessToken.create({
         id: user.id,
         email: user.email,
-        role: user.role,
-        isVerified: Boolean(user.isVerified),
-        isCompleted: Boolean(user.isCompleted)
+        role: user.role
       }),
       refresh: RefreshToken.create(user.id)
     };

@@ -1,9 +1,8 @@
 import Factory from '@/lib/Factory';
-import User from '@/services/users/User';
+import Admin from '@/services/users/Admin';
 
-export { User };
+export { Admin };
 
 export default new Factory({
-  user: User,
-  default: User
+  admin: Admin
 });
