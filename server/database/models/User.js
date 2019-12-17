@@ -4,16 +4,30 @@ import Passwords from '@/lib/Passwords';
 @define()
 export default class User extends Model {
   static fields = DataTypes => ({
-    role: DataTypes.ENUM(['user', 'admin']),
-    email: { type: DataTypes.STRING, unique: true },
-    name: DataTypes.STRING,
-    phone: DataTypes.STRING(32),
+    role: {
+      type: DataTypes.ENUM(['user', 'admin']),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
+    },
+    name: {
+      type: DataTypes.STRING
+    },
+    phone: {
+      type: DataTypes.STRING(32),
+      allowNull: false
+    },
     hash: {
       type: DataTypes.STRING,
+      allowNull: false,
       get: () => undefined
     },
     salt: {
       type: DataTypes.STRING,
+      allowNull: false,
       get: () => undefined
     },
     password: {
