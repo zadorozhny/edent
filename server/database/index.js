@@ -1,6 +1,9 @@
 import glob from 'glob';
 import Sequelize from 'sequelize';
+import hierarchy from 'sequelize-hierarchy';
 import config from '@/config/database';
+
+hierarchy(Sequelize);
 
 export { sql } from '@/lib/Sequelize';
 export const { Op } = Sequelize;
