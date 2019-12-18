@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import auth from '@/api/middlewares/auth';
+import { Uploader } from '@/lib/Uploader';
+// import auth from '@/api/middlewares/auth';
 
 const router = Router();
 
-router.post('/', auth, async (req, res, next) => {
+router.get('/', async (_, res, next) => {
   try {
-    res.json({
-      status: 'ok'
-    });
+    const data = await Uploader.getUrl();
+    res.send(data);
   } catch (err) {
     next(err);
   }
