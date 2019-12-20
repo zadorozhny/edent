@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.state).get(req.query));
+    res.json(await Orders.init(req.user).get(req.query));
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ router.get('/', auth, async (req, res, next) => {
 
 router.get('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.state).getOne(req.params.id));
+    res.json(await Orders.init(req.user).getOne(req.params.id));
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ router.get('/:id', auth, async (req, res, next) => {
 
 router.patch('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.state).update(req.body));
+    res.json(await Orders.init(req.user).update(req.body));
   } catch (err) {
     next(err);
   }
@@ -30,7 +30,7 @@ router.patch('/:id', auth, async (req, res, next) => {
 
 router.delete('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.state).remove());
+    res.json(await Orders.init(req.user).remove());
   } catch (err) {
     next(err);
   }

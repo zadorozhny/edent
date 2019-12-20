@@ -1,7 +1,7 @@
-import { ServiceError } from '@/lib/Errors';
+import ServiceError from '@/lib/Errors';
 
-export const handler = async (err, req, res, next) => {
-  // console.error(err);
+export const handler = async (err, _, res, next) => {
+  console.error(err);
 
   if (err instanceof ServiceError) {
     res.status(ServiceError.statuses[err.type]).json({ reason: err.type, message: err.message, ...err.context });

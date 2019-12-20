@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).get());
+    res.json(await Profile.init(req.user).get());
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ router.get('/', auth, async (req, res, next) => {
 
 router.patch('/', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).update(req.body));
+    res.json(await Profile.init(req.user).update(req.body));
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ router.patch('/', auth, async (req, res, next) => {
 
 router.patch('/email', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).updateEmail(req.body));
+    res.json(await Profile.init(req.user).updateEmail(req.body));
   } catch (err) {
     next(err);
   }
@@ -30,7 +30,7 @@ router.patch('/email', auth, async (req, res, next) => {
 
 router.delete('/email', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).removeEmail());
+    res.json(await Profile.init(req.user).removeEmail());
   } catch (err) {
     next(err);
   }
@@ -38,7 +38,7 @@ router.delete('/email', auth, async (req, res, next) => {
 
 router.get('/unicity/email', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).isEmailUnique(req.query));
+    res.json(await Profile.init(req.user).isEmailUnique(req.query));
   } catch (err) {
     next(err);
   }
@@ -46,7 +46,7 @@ router.get('/unicity/email', auth, async (req, res, next) => {
 
 router.patch('/password', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).updatePassword(req.body));
+    res.json(await Profile.init(req.user).updatePassword(req.body));
   } catch (err) {
     next(err);
   }
@@ -54,7 +54,7 @@ router.patch('/password', auth, async (req, res, next) => {
 
 router.delete('/', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).remove());
+    res.json(await Profile.init(req.user).remove());
   } catch (err) {
     next(err);
   }

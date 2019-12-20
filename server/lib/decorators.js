@@ -1,12 +1,12 @@
 import ServiceError from '@/lib/Errors';
 
 export const service = Service => class extends Service {
-  constructor(options) {
-    super(options);
-    this.user = options.user;
+  constructor(user) {
+    super(user);
+    this.user = user;
   }
-  static init(options) {
-    return new Proxy(new this(options), {
+  static init(user) {
+    return new Proxy(new this(user), {
       get(target, key) {
         if (key in target) {
           return target[key];

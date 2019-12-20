@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/signin', async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).signin(req.body));
+    res.json(await Profile.init(req.user).signin(req.body));
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ router.post('/signin', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).signup(req.body));
+    res.json(await Profile.init(req.user).signup(req.body));
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/forgot-password', async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).forgotPassword(req.body));
+    res.json(await Profile.init(req.user).forgotPassword(req.body));
   } catch (err) {
     next(err);
   }
@@ -30,7 +30,7 @@ router.post('/forgot-password', async (req, res, next) => {
 
 router.patch('/reset-password', async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).resetPassword(req.body));
+    res.json(await Profile.init(req.user).resetPassword(req.body));
   } catch (err) {
     next(err);
   }
@@ -38,7 +38,7 @@ router.patch('/reset-password', async (req, res, next) => {
 
 router.patch('/refresh', auth.expired, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).refresh(req.body));
+    res.json(await Profile.init(req.user).refresh(req.body));
   } catch (err) {
     next(err);
   }
@@ -46,7 +46,7 @@ router.patch('/refresh', auth.expired, async (req, res, next) => {
 
 router.post('/signout', auth, async (req, res, next) => {
   try {
-    res.json(await Profile.init(req.state).signout());
+    res.json(await Profile.init(req.user).signout());
   } catch (err) {
     next(err);
   }

@@ -8,12 +8,11 @@ export default class Factory {
       });
     });
   }
-  init(options = {}) {
-    const { user } = options;
+  init(user) {
     const service = user && user.role ? this[user.role] : this.default;
     if (!service) {
       throw new Error(OK);
     }
-    return service.init(options);
+    return service.init(user);
   }
 }

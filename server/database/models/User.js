@@ -6,7 +6,8 @@ export default class User extends Model {
   static fields = DataTypes => ({
     role: {
       type: DataTypes.ENUM(['user', 'admin']),
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'user'
     },
     email: {
       type: DataTypes.STRING,

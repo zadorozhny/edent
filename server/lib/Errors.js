@@ -1,4 +1,4 @@
-export class ServiceError extends Error {
+export default class ServiceError extends Error {
   constructor(type, context, message) {
     super(message);
     Error.captureStackTrace(this, this.constructor);

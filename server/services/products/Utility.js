@@ -3,8 +3,13 @@ import { service } from '@/lib/decorators';
 
 @service
 export default class Utility {
-  async getOne(productId) {
-    const product = await models.Product.findByPk(productId);
+  async getOne(id) {
+    const product = await models.Product.findByPk(id);
     return product;
+  }
+
+  async getList() {
+    const products = await models.Product.findAll();
+    return products;
   }
 }

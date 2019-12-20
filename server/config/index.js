@@ -13,7 +13,7 @@ export const S3 = {
 
 export const ACCESS_TOKENS = {
   TYPE: 'access',
-  EXPIRATION: '5m'
+  EXPIRATION: '2h'
 };
 
 export const RESET_TOKENS = {
