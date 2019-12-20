@@ -28,14 +28,6 @@ router.patch('/email', auth, async (req, res, next) => {
   }
 });
 
-router.delete('/email', auth, async (req, res, next) => {
-  try {
-    res.json(await Profile.init(req.user).removeEmail());
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.get('/unicity/email', auth, async (req, res, next) => {
   try {
     res.json(await Profile.init(req.user).isEmailUnique(req.query));

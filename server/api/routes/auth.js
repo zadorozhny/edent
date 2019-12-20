@@ -28,14 +28,6 @@ router.post('/forgot-password', async (req, res, next) => {
   }
 });
 
-router.patch('/reset-password', async (req, res, next) => {
-  try {
-    res.json(await Profile.init(req.user).resetPassword(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.patch('/refresh', auth.expired, async (req, res, next) => {
   try {
     res.json(await Profile.init(req.user).refresh(req.body));
