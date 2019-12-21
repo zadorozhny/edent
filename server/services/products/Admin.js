@@ -1,5 +1,6 @@
 import { models } from '@/database';
 import { service } from '@/lib/decorators';
+import * as ERRORS from '@/config/errors';
 import ServiceError from '@/lib/Errors';
 import Utility from '@/services/products/Utility';
 
@@ -16,7 +17,7 @@ export default class Admin extends Utility {
       returning: true
     });
     if (!count) {
-      throw new ServiceError(401, 'ERRORS.SOMETHING_WENT_WRONG');
+      throw new ServiceError('not found', ERRORS.PRODUCT_NOT_FOUND);
     }
     return product;
   }
@@ -26,7 +27,7 @@ export default class Admin extends Utility {
       where: { id }
     });
     if (!count) {
-      throw new ServiceError(404, 'ERRORS.LINK_NOT_FOUND');
+      throw new ServiceError('not found', ERRORS.PRODUCT_NOT_FOUND);
     }
   }
 }

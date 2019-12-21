@@ -1,5 +1,6 @@
 import { models } from '@/database';
 import ServiceError from '@/lib/Errors';
+import * as ERRORS from '@/config/errors';
 import { service } from '@/lib/decorators';
 import { AccessToken, RefreshToken } from '@/lib/Tokens';
 
@@ -22,10 +23,10 @@ export default class Utility {
   async signin({ email, password }) {
     const user = await models.User.findOne({ where: { email } });
     if (!user) {
-      throw ServiceError(404, 'ERRORS.USER_NOT_FOUND');
+      throw ServiceError('not found', ERRORS.USER_NOT_FOUND);
     }
     if (!user.isCurrentPassword(password)) {
-      throw ServiceError(400, 'ERRORS.WRONG_PASSWORD');
+      throw ServiceError('wrong', ERRORS.WRONG_PASSWORD);
     }
     return user.tokens(this.constructor.createTokens(user));
   }
@@ -36,7 +37,7 @@ export default class Utility {
     if (await RefreshToken.verify(this.user.id, refreshToken)) {
       return this.constructor.createTokens(this.user);
     } else {
-      throw ServiceError(401, 'ERRORS.WRONG_REFRESH_TOKEN');
+      throw ServiceError('unauthorised', ERRORS.WRONG_REFRESH_TOKEN);
     }
   }
 }

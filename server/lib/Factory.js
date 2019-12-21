@@ -1,4 +1,5 @@
-import { OK } from '@/config';
+import ServiceError from '@/lib/Errors';
+import * as ERRORS from '@/config/errors';
 
 export default class Factory {
   constructor(services) {
@@ -11,7 +12,7 @@ export default class Factory {
   init(user) {
     const service = user && user.role ? this[user.role] : this.default;
     if (!service) {
-      throw new Error(OK);
+      throw new ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG);
     }
     return service.init(user);
   }

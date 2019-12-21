@@ -1,5 +1,6 @@
 import { models } from '@/database';
 import { service } from '@/lib/decorators';
+import * as ERRORS from '@/config/errors';
 import ServiceError from '@/lib/Errors';
 
 @service
@@ -20,7 +21,7 @@ export default class Admin {
       returning: true
     });
     if (!count) {
-      throw new ServiceError(401, 'ERRORS.SOMETHING_WENT_WRONG');
+      throw new ServiceError('not found', ERRORS.USER_NOT_FOUND);
     }
     return user;
   }
@@ -30,7 +31,7 @@ export default class Admin {
       where: { id }
     });
     if (!count) {
-      throw new ServiceError(404, 'ERRORS.LINK_NOT_FOUND');
+      throw new ServiceError('not found', ERRORS.USER_NOT_FOUND);
     }
   }
 }

@@ -1,4 +1,5 @@
 import ServiceError from '@/lib/Errors';
+import * as ERRORS from '@/config/errors';
 
 export const service = Service => class extends Service {
   constructor(user) {
@@ -11,7 +12,7 @@ export const service = Service => class extends Service {
         if (key in target) {
           return target[key];
         }
-        throw new ServiceError('forbidden');
+        throw new ServiceError('forbidden', ERRORS.FORBIDDEN);
       }
     });
   }

@@ -1,4 +1,6 @@
 import AWS from 'aws-sdk';
+import ServiceError from '@/lib/Errors';
+import * as ERRORS from '@/config/errors';
 import { S3 } from '@/config';
 
 const s3 = new AWS.S3({
@@ -18,7 +20,7 @@ export const Uploader = {
         Key: key
       }, (err, url) => {
         if (err) {
-          reject(err);
+          reject(new ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG));
         } else {
           resolve({ key, url });
         }
