@@ -16,6 +16,16 @@ export default class Utility {
       refresh: RefreshToken.create(user.id)
     };
   }
+  async update(data) {
+    const [count, [user]] = await models.User.update(data, {
+      where: { id: this.user.id },
+      returning: true
+    });
+    if (!count) {
+      throw ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG);
+    }
+    return user;
+  }
   async signup(data) {
     const user = await models.User.create(data);
     return user.tokens(this.constructor.createTokens(user));

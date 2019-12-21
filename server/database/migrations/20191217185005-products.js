@@ -22,6 +22,11 @@ export const up = async (queryInterface, Sequelize) => {
       image: {
         type: Sequelize.STRING
       },
+      isHidden: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
       manufacturerId: {
         type: Sequelize.INTEGER,
         allowNull: false,

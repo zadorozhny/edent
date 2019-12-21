@@ -17,6 +17,11 @@ export default class Product extends Model {
     },
     image: {
       type: DataTypes.STRING
+    },
+    isHidden: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     }
   })
 
