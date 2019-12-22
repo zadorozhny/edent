@@ -8,8 +8,13 @@ export default class Utility {
     return product;
   }
 
-  async getList() {
-    const products = await models.Product.findAll();
+  async getList(filters) {
+    const products = await models.Product
+      .scope(
+        { method: ['filter', filters] },
+        { method: ['pagination', filters] }
+      )
+      .findAll();
     return products;
   }
 }

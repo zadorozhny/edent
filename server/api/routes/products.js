@@ -12,17 +12,17 @@ router.get('/', auth, async (req, res, next) => {
   }
 });
 
-router.get('/:id', auth, async (req, res, next) => {
+router.post('/', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.user).getOne(req.params.id));
+    res.json(await Products.init(req.user).create(req.body));
   } catch (err) {
     next(err);
   }
 });
 
-router.post('/', auth, async (req, res, next) => {
+router.get('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Products.init(req.user).create(req.body));
+    res.json(await Products.init(req.user).getOne(req.params.id));
   } catch (err) {
     next(err);
   }
