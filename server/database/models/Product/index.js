@@ -57,7 +57,8 @@ export default class Product extends Model {
       otherKey: 'categoryId'
     });
     this.belongsTo(models.Manufacturer, {
-      foreignKey: 'manufacturerId'
+      foreignKey: 'manufacturerId',
+      as: 'manufacturer'
     });
   }
 }

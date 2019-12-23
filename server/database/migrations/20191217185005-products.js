@@ -65,6 +65,10 @@ export const up = async (queryInterface, Sequelize) => {
         },
         onDelete: 'cascade',
         onUpdate: 'cascade'
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       }
     }, { transaction });
     await transaction.commit();

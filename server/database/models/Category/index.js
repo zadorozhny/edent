@@ -1,4 +1,6 @@
+import { Op } from 'sequelize';
 import { Model, define } from '@/lib/Sequelize';
+import filters from '@/database/models/Category/filters';
 
 @define({ hierarchy: { throughKey: 'categoryId', throughTable: 'CategoryToAncestors' } })
 export default class Category extends Model {
@@ -14,4 +16,15 @@ export default class Category extends Model {
       type: DataTypes.INTEGER
     }
   })
+
+  static scopes() {
+    this.addScope('filter', (options, { context, defaults } = {}) => ({
+      where: Object.keys(options).reduce((where, key) => {
+        if (filters[key]) {
+          filters[key](where, options, context);
+        }
+        return where;
+      }, { [Op.and]: [], ...defaults })
+    }));
+  }
 }

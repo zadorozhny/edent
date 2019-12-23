@@ -8,4 +8,10 @@ export default class Manufacturer extends Model {
       allowNull: false
     }
   })
+
+  static associate(models) {
+    this.hasMany(models.Product, {
+      foreignKey: 'manufacturerId'
+    });
+  }
 }

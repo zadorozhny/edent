@@ -14,7 +14,18 @@ export default class Utility {
         { method: ['filter', filters] },
         { method: ['pagination', filters] }
       )
-      .findAll();
+      .findAll({
+        include: [
+          {
+            model: models.Manufacturer,
+            as: 'manufacturer'
+          },
+          {
+            model: models.Category,
+            as: 'categories'
+          }
+        ]
+      });
     return products;
   }
 }

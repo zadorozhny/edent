@@ -9,7 +9,7 @@ export default class Utility {
   }
 
   async getList() {
-    const manufacturers = await models.Manufacturers.findAll();
+    const manufacturers = await models.Manufacturer.findAll();
     return manufacturers;
   }
 }

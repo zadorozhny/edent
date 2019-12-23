@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/', auth, async (req, res, next) => {
   try {
-    res.json(await Manufacturers.init(req.user).get(req.query));
+    res.json(await Manufacturers.init(req.user).getList(req.query));
   } catch (err) {
     next(err);
   }
