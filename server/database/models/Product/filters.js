@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-// import { sql } from '@/lib/Sequelize';
+import { sql } from '@/lib/Sequelize';
 
 export default {
   search(where, { search }) {
@@ -11,6 +11,13 @@ export default {
     where[Op.and].push({
       manufacturerId
     });
+  },
+  categoryId(where, { categoryId }) {
+    where[Op.and].push(sql`(
+      SELECT TRUE
+      FROM "ProductToCategories"
+      WHERE "categoryId" = ${categoryId}
+    )`);
   },
   price(where, { price }) {
     const [from, to] = JSON.parse(price);
