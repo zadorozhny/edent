@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  layout: 'image',
+  layout: 'fullscreen',
   props: {
     error: { type: Object, default: () => ({}) }
   }

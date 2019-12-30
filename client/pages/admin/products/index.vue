@@ -10,6 +10,9 @@
         <template #header>
           <div class="table--header">
             <div class="table--section">
+              <span>Номер</span>
+            </div>
+            <div class="table--section">
               <span>Название</span>
             </div>
             <div class="table--section">
@@ -20,8 +23,11 @@
             </div>
           </div>
         </template>
-        <template #default="{ name, price }">
+        <template #default="{ id, name, price }">
           <div class="table--item">
+            <div class="table--section">
+              <span>{{ id }}</span>
+            </div>
             <div class="table--section">
               <span>{{ name }}</span>
             </div>
@@ -80,7 +86,7 @@ export default {
 .table {
   &--header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
+    grid-template-columns: 140px minmax(0, 1fr) 140px 140px;
   }
 
   &--section {
@@ -97,7 +103,7 @@ export default {
 
   &--item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
+    grid-template-columns: 140px minmax(0, 1fr) 140px 140px;
   }
 }
 </style>

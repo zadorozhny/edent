@@ -1,24 +1,15 @@
 <template>
   <div class="filter">
-    <kit-slider v-model="value" :min="0" :max="1000"/>
     <kit-select
       v-model="selectValue"
       :options="selectOptions"
-      placeholder="Категории"
+      placeholder="Статус"
     />
     <kit-select
       v-model="selectValue"
       :options="selectOptions"
-      placeholder="Производители"
+      placeholder="Дата"
     />
-    <kit-label-group>
-      <kit-choice v-model="option" value="ex" related>
-        <kit-label type="outline" size="regular">Дорогие</kit-label>
-      </kit-choice>
-      <kit-choice v-model="option" value="ch" related>
-        <kit-label type="outline" size="regular">Дешевые</kit-label>
-      </kit-choice>
-    </kit-label-group>
   </div>
 </template>
 
@@ -27,9 +18,7 @@ export default {
   data() {
     return {
       selectValue: null,
-      selectOptions: [1, 2, 3],
-      option: 'ex',
-      value: [1, 200]
+      selectOptions: [1, 2, 3]
     };
   }
 };

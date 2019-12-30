@@ -6,7 +6,7 @@
 import AppImageLayout from '@/components/layouts/common/Image';
 
 export default {
-  layout: 'image',
+  layout: 'fullscreen',
   components: {
     AppImageLayout
   },

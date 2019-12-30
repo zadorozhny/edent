@@ -47,6 +47,7 @@ export default {
     "picture content"
     "picture buttons"
     "description description";
+  grid-template-rows: auto 120px auto;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 
@@ -117,6 +118,7 @@ export default {
 .buttons {
   display: flex;
   grid-area: buttons;
+  align-items: flex-end;
   width: 100%;
 }
 

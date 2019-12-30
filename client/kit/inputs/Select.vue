@@ -4,7 +4,7 @@
     :options="options"
     :searchable="false"
     :show-labels="false"
-    placeholder="Катагории"
+    :placeholder="placeholder"
     @select="select"
   >
     <template slot="option" slot-scope="props">
