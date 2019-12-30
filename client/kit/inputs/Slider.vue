@@ -7,10 +7,17 @@
       @touchstart="start"
     >
       <div ref="background" class="slider--background"/>
-      <div ref="dragger-to" class="slider--dragger">
-        <slot name="dragger" :value="value">
+      <div v-if="range" ref="dragger-from" class="slider--dragger">
+        <slot name="dragger" :value="range ? value[0] : value">
           <div class="slider--dragger_container">
-            <span class="slider--value">{{ value }}</span>
+            <span class="slider--value">{{ range ? value[0] : value }}</span>
+          </div>
+        </slot>
+      </div>
+      <div ref="dragger-to" class="slider--dragger">
+        <slot name="dragger" :value="range ? value[1] : value">
+          <div class="slider--dragger_container">
+            <span class="slider--value">{{ range ? value[1] : value }}</span>
           </div>
         </slot>
       </div>
@@ -32,7 +39,7 @@
 export default {
   name: 'KitSlider',
   props: {
-    value: { type: Number, default: 0 },
+    value: { type: [Number, Array, String], default: 0 },
     min: { type: Number, default: 0 },
     max: { type: Number, default: 100 },
     disabled: { type: Boolean, default: false }
@@ -52,14 +59,25 @@ export default {
         return this.value;
       },
       set(value) {
-        const to = this.round(value);
-        if (to !== this.proxy) {
-          this.$emit('input', to);
+        if (this.range) {
+          const from = this.round(value[0]);
+          const to = this.round(value[1]);
+          if (from !== this.proxy[0] || to !== this.proxy[1]) {
+            this.$emit('input', [from, to]);
+          }
+        } else {
+          const to = this.round(value);
+          if (to !== this.proxy) {
+            this.$emit('input', to);
+          }
         }
       }
     },
     breakpoints() {
       return [this.min, this.max];
+    },
+    range() {
+      return Array.isArray(this.proxy);
     },
     gap() {
       return 100 / (this.max - this.min);
@@ -67,7 +85,9 @@ export default {
   },
   watch: {
     proxy(curr, prev) {
-      if (curr !== prev) {
+      if (this.range && (curr[0] !== prev[0] || curr[1] !== prev[1])) {
+        this.drag();
+      } else if (!this.range && curr !== prev) {
         this.drag();
       }
     }
@@ -84,18 +104,48 @@ export default {
       return this.gap * (value - this.min);
     },
     active(point) {
-      return point <= this.proxy;
+      if (this.range) {
+        const [from, to] = this.proxy;
+        return point >= from && point <= to;
+      } else {
+        return point <= this.proxy;
+      }
     },
     start(event) {
       this.offset = this.$refs.slider.getBoundingClientRect().left;
       this.width = this.$refs.slider.clientWidth;
-
+      if (this.range) {
+        this.create(event);
+      }
       this.calculate(event);
       window.addEventListener('mousemove', this.calculate);
+      window.addEventListener('touchmove', this.calculate);
 
       window.addEventListener('mouseup', () => {
         window.removeEventListener('mousemove', this.calculate);
+        window.removeEventListener('touchmove', this.calculate);
       });
+      window.addEventListener('touchend', () => {
+        window.removeEventListener('mousemove', this.calculate);
+        window.removeEventListener('touchmove', this.calculate);
+      });
+    },
+    create(event) {
+      const clientX = event.clientX ? event.clientX : event.changedTouches[0].clientX;
+      const position = 100 / this.width * (clientX - this.offset);
+      const [from, to] = this.proxy;
+      if (
+        Math.abs(this.point(from) - position) < Math.abs(this.point(to) - position)
+        || (this.point(from) === this.point(to) && this.point(from) - position > 0)
+      ) {
+        this.scope.min = 0;
+        this.scope.max = this.point(to);
+        this.direction = 'from';
+      } else {
+        this.scope.min = this.point(from);
+        this.scope.max = 100;
+        this.direction = 'to';
+      }
     },
     calculate(event) {
       const clientX = event.clientX ? event.clientX : event.changedTouches[0].clientX;
@@ -106,12 +156,27 @@ export default {
         position = this.scope.min;
       }
       if (position >= this.scope.min && position <= this.scope.max) {
-        this.proxy = (this.max - this.min) / 100 * position + this.min;
+        if (this.range) {
+          const [from, to] = this.proxy;
+          const value = (this.max - this.min) / 100 * position + this.min;
+          this.proxy = this.direction === 'from' ? [value, to] : [from, value];
+        } else {
+          this.proxy = (this.max - this.min) / 100 * position + this.min;
+        }
       }
     },
     drag() {
-      this.$refs.background.style.width = `${this.point(this.proxy)}%`;
-      this.$refs['dragger-to'].style.left = `${this.point(this.proxy)}%`;
+      if (this.range) {
+        const from = this.point(this.proxy[0]);
+        const to = this.point(this.proxy[1]);
+        this.$refs.background.style.left = `${from}%`;
+        this.$refs.background.style.width = `${to - from}%`;
+        this.$refs['dragger-from'].style.left = `${from}%`;
+        this.$refs['dragger-to'].style.left = `${to}%`;
+      } else {
+        this.$refs.background.style.width = `${this.point(this.proxy)}%`;
+        this.$refs['dragger-to'].style.left = `${this.point(this.proxy)}%`;
+      }
     }
   }
 };

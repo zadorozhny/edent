@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppHeader from '@/components/layouts/client/Header';
+import AppHeader from '@/components/layouts/admin/Header';
 
 export default {
   components: {
@@ -19,5 +19,7 @@ export default {
 .layout {
   display: grid;
   grid-template-rows: auto 1fr;
+  min-width: 960px;
+  overflow: auto;
 }
 </style>

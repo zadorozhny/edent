@@ -1,5 +1,5 @@
 <template>
-  <div class="page container container-space checkout">
+  <div class="page container checkout">
     <div class="checkout--content">
       <div class="checkout--group">
         <kit-input type="email" class="input" placeholder="Email"/>
@@ -18,70 +18,48 @@
         <kit-input type="name" class="input" placeholder="Город"/>
         <kit-input type="number" class="input" placeholder="Номер отделения" :mask="Number"/>
       </div>
-      <kit-button position="bottom">Заказать</kit-button>
+      <kit-button>Заказать</kit-button>
     </div>
-    <div class="checkout--items">
-      <div class="checkout--table items">
-        <div class="items--header">
-          <div class="items--section">
+    <kit-table class="table">
+      <template #header>
+        <div class="table--header">
+          <div class="table--section">
             <span>Название</span>
           </div>
-          <div class="items--section">
+          <div class="table--section">
             <span>Цена</span>
           </div>
-          <div class="items--section">
+          <div class="table--section">
             <span>Количество</span>
           </div>
         </div>
-        <div class="items--item">
-          <div class="items--section">
-            <span>Даймондбрайт</span>
+      </template>
+      <template #default="{ name, price, count }">
+        <div class="table--item">
+          <div class="table--section">
+            <span>{{ name }}</span>
           </div>
-          <div class="items--section">
-            <span>₴1299</span>
+          <div class="table--section">
+            <span>{{ price }}</span>
           </div>
-          <div class="items--section">
-            <span class="items--control">-</span>
-            <span>2</span>
-            <span class="items--control">+</span>
-          </div>
-        </div>
-        <div class="items--item">
-          <div class="items--section">
-            <span>Даймондбрайт</span>
-          </div>
-          <div class="items--section">
-            <span>₴1299</span>
-          </div>
-          <div class="items--section">
-            <span class="items--control">-</span>
-            <span>2</span>
-            <span class="items--control">+</span>
+          <div class="table--section">
+            <span class="table--control">-</span>
+            <span>{{ count }}</span>
+            <span class="table--control">+</span>
           </div>
         </div>
-        <div class="items--item">
-          <div class="items--section">
-            <span>Даймондбрайт</span>
-          </div>
-          <div class="items--section">
-            <span>₴1299</span>
-          </div>
-          <div class="items--section">
-            <span class="items--control">-</span>
-            <span>2</span>
-            <span class="items--control">+</span>
-          </div>
-        </div>
-        <div class="items--footer">
-          <span class="items--title">
+      </template>
+      <template #footer>
+        <div class="table--footer">
+          <span class="table--title">
             Сумма
           </span>
-          <span class="items--total">
+          <span class="table--total">
             ₴4367
           </span>
         </div>
-      </div>
-    </div>
+      </template>
+    </kit-table>
   </div>
 </template>
 
@@ -109,7 +87,6 @@ export default {
   @media ($phablet) {
     grid-template-columns: 1fr;
     column-gap: unset;
-    margin-bottom: 54px;
   }
 
   &--content {
@@ -125,25 +102,13 @@ export default {
     display: grid;
     row-gap: 15px;
   }
-
-  &--table {
-    margin: 0 auto;
-    width: 100%;
-    border-radius: 5px;
-    box-sizing: border-box;
-    background: $light;
-    box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
-    overflow: hidden;
-
-    @media ($phablet) {
-      order: 1;
-      margin-bottom: 30px;
-    }
-  }
 }
 
-.items {
-  padding: 5px;
+.table {
+  @media ($phablet) {
+    order: 1;
+    margin-bottom: 30px;
+  }
 
   @media ($mobile) {
     padding: 0;
@@ -152,10 +117,6 @@ export default {
   &--header {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1fr 140px;
-    color: #94979a;
-    font-size: 16px;
-    font-weight: 600;
-    background: #f7f9f8;
 
     @media ($tablet) {
       grid-template-columns: minmax(0, 1fr) 100px 135px;
@@ -187,9 +148,6 @@ export default {
   &--item {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1fr 140px;
-    font-size: 16px;
-    font-weight: 600;
-    border-bottom: solid 1px $border;
 
     @media ($tablet) {
       grid-template-columns: minmax(0, 1fr) 100px 135px;

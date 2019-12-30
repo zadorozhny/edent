@@ -29,7 +29,7 @@ export const REFRESH_TOKENS = {
 export const PASSWORDS = {
   LENGTH: 128,
   SALT_LENGTH: 128,
-  ITERATIONS: 100000,
+  ITERATIONS: 1000000,
   DIGEST: 'sha256',
   ENCODING: 'base64'
 };

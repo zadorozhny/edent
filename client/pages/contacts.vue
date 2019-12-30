@@ -1,16 +1,15 @@
 <template>
-  <div class="page contact">
-    <div class="contact--content"/>
-    <div class="contact--picture">
-      <img src="~assets/images/call.jpg">
-    </div>
-  </div>
+  <app-image-layout image="contact_us"/>
 </template>
 
 <script>
+import AppImageLayout from '@/components/layouts/common/Image';
 
 export default {
   layout: 'image',
+  components: {
+    AppImageLayout
+  },
   data: () => ({})
 };
 </script>
@@ -26,7 +25,7 @@ export default {
     img {
       height: 100%;
       width: 100%;
-      object-fit: cover;
+      object-fit: contain;
     }
   }
 }

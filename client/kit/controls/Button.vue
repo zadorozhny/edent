@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', 'ripple', `button-${position}`, `button-${type}`]">
+  <button :class="['button', 'ripple', `button-${type}`]">
     <slot/>
   </button>
 </template>
@@ -8,11 +8,6 @@
 export default {
   name: 'KitButton',
   props: {
-    position: {
-      type: String,
-      default: 'default',
-      validator: position => ['bottom', 'default'].includes(position)
-    },
     type: {
       type: String,
       default: 'default',
@@ -43,16 +38,6 @@ export default {
 
   &-success {
     background: $success;
-  }
-
-  @media ($phablet) {
-    &-bottom {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      border-radius: 0;
-      z-index: 10;
-    }
   }
 }
 </style>

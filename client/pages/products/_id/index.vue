@@ -1,5 +1,5 @@
 <template>
-  <section class="page container">
+  <section class="page container container-no_space">
     <div class="product">
       <div class="product--picture">
         <img :src="value">
@@ -14,10 +14,10 @@
           <p class="text_medium">Производитель: Cerkamed</p>
         </div>
         <p class="product--price text_title">Цена: <span class="text_large">₴1299</span></p>
-        <div class="buttons">
-          <kit-button type="success" class="button">Купить</kit-button>
-          <kit-button class="button">В корзину</kit-button>
-        </div>
+      </div>
+      <div class="buttons">
+        <kit-button type="success" class="button">Купить</kit-button>
+        <kit-button class="button">В корзину</kit-button>
       </div>
       <p class="product--description text_medium">
         <span class="text_bold">Описание:</span> Сайт рыбатекст поможет дизайнеру, верстальщику,
@@ -45,12 +45,12 @@ export default {
   grid-template-columns: 50% calc(50% - 20px);
   grid-template-areas:
     "picture content"
+    "picture buttons"
     "description description";
   grid-column-gap: 20px;
   grid-row-gap: 20px;
 
   @media ($phablet) {
-    margin-bottom: 54px;
     grid-template-columns: 100%;
     grid-template-rows: auto 200px auto;
     grid-column-gap: unset;
@@ -58,7 +58,8 @@ export default {
     grid-template-areas:
       "picture picture"
       "content content"
-      "description description";
+      "description description"
+      "buttons buttons";
   }
 
   &--picture {
@@ -115,14 +116,8 @@ export default {
 
 .buttons {
   display: flex;
+  grid-area: buttons;
   width: 100%;
-
-  @media ($phablet) {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    z-index: 10;
-  }
 }
 
 .button {

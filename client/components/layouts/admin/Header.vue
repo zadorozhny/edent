@@ -6,25 +6,23 @@
         <h1 class="navigation--title">edent</h1>
       </nuxt-link>
       <ul class="navigation--list">
-        <nuxt-link tag="li" to="/products" class="navigation--item">
+        <nuxt-link tag="li" to="/admin/products" class="navigation--item">
           <span>Товары</span>
         </nuxt-link>
-        <nuxt-link tag="li" to="/shipping" class="navigation--item">
-          <span>Доставка и Оплата</span>
+        <nuxt-link tag="li" to="/admin/users" class="navigation--item">
+          <span>Пользователи</span>
         </nuxt-link>
-        <nuxt-link tag="li" to="/contacts" class="navigation--item">
-          <span>Контакты</span>
+        <nuxt-link tag="li" to="/admin/orders" class="navigation--item">
+          <span>Заказы</span>
+        </nuxt-link>
+        <nuxt-link tag="li" to="/admin/categories" class="navigation--item">
+          <span>Категории</span>
+        </nuxt-link>
+        <nuxt-link tag="li" to="/admin/manufacturers" class="navigation--item">
+          <span>Производители</span>
         </nuxt-link>
       </ul>
-      <div class="search">
-        <input class="input" placeholder="Поиск" type="search">
-      </div>
       <div class="navigation--controls">
-        <nuxt-link to="/checkout" class="navigation--cart">
-          <kit-icon>
-            shopping_cart
-          </kit-icon>
-        </nuxt-link>
         <div class="navigation--avatar ripple">
           <span class="navigation--letters">А</span>
         </div>
@@ -39,31 +37,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search {
-  height: 36px;
-  width: 340px;
-
-  @media ($tablet) {
-    order: 2;
-    width: 100%;
-    height: 34px;
-  }
-}
-
-.input {
-  padding: 7px 15px;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  border: solid 1px #e6e6e6;
-  border-radius: 5px;
-  box-sizing: border-box;
-  outline: none;
-  border: solid 1px #dfe1e5;
-  transition: .25s ease-out;
-  cursor: pointer;
-}
-
 .navigation {
   position: sticky;
   top: 0;
@@ -83,13 +56,6 @@ export default {
     width: 100%;
     height: $desktop-navigation;
     box-sizing: border-box;
-
-    @media ($tablet) {
-      align-items: unset;
-      flex-wrap: wrap;
-      padding: 0 10px;
-      height: $mobile-navigation;
-    }
   }
 
   &--logo {
@@ -101,11 +67,6 @@ export default {
   &--image {
     width: 40px;
     height: 40px;
-
-    @media ($tablet) {
-      width: 36px;
-      height: 36px;
-    }
   }
 
   &--title {
@@ -119,10 +80,6 @@ export default {
     display: flex;
     align-items: center;
     height: 100%;
-
-    @media ($tablet) {
-      display: none;
-    }
   }
 
   &--item {
@@ -168,11 +125,6 @@ export default {
     box-sizing: border-box;
     user-select: none;
 
-    @media ($tablet) {
-      width: 36px;
-      height: 36px;
-    }
-
     &:hover {
       &::after {
         display: block;
@@ -191,21 +143,6 @@ export default {
 
   &--letters {
     font-size: 18px;
-
-    @media ($tablet) {
-      font-size: 16px;
-    }
-  }
-
-  &--controls {
-    display: flex;
-    align-items: center;
-  }
-
-  &--cart {
-    margin-right: 10px;
   }
 }
-
-
 </style>

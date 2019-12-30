@@ -1,25 +1,6 @@
 <template>
-  <section class="page container container-space products">
-    <div class="filters">
-      <kit-slider v-model="value" :min="0" :max="10000"/>
-      <kit-label-group>
-        <kit-choice v-model="option" value="ex" related>
-          <kit-label type="outline" size="regular">Дорогие</kit-label>
-        </kit-choice>
-        <kit-choice v-model="option" value="ch" related>
-          <kit-label type="outline" size="regular">Дешевые</kit-label>
-        </kit-choice>
-      </kit-label-group>
-      <kit-label-group>
-        <kit-choice v-model="option" value="a-z" related>
-          <kit-label type="outline" size="regular">А-Я</kit-label>
-        </kit-choice>
-        <kit-choice v-model="option" value="z-a" related>
-          <kit-label type="outline" size="regular">Я-А</kit-label>
-        </kit-choice>
-      </kit-label-group>
-      <kit-button>Найти</kit-button>
-    </div>
+  <section class="page container products">
+    <app-filter class="filter"/>
     <div class="cover">
       <nuxt-link
         v-for="(card, index) in cards"
@@ -56,11 +37,16 @@
 </template>
 
 <script>
+import AppFilter from '@/components/products/Filter';
+
 export default {
+  components: {
+    AppFilter
+  },
   data() {
     return {
       option: 'ex',
-      value: 1,
+      value: [1, 200],
       cards: [
         {
           title: 'Даймондбрайт',
@@ -123,26 +109,15 @@ export default {
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
-.filters {
-  position: sticky;
-  top: 66px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-  margin-right: 30px;
-  min-width: 270px;
-  height: 600px;
-  border-radius: 3px;
-  box-sizing: border-box;
-  background: $light;
-  box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
 
+.filter {
   @media ($tablet) {
     display: none;
   }
 }
+
 .control {
   position: fixed;
   bottom: 10px;
@@ -167,6 +142,7 @@ export default {
     right: 10px;
   }
 }
+
 .cover {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -184,6 +160,7 @@ export default {
     grid-template-columns: 1fr;
   }
 }
+
 .card_controls {
   display: flex;
   align-items: center;

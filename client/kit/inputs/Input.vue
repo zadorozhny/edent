@@ -5,7 +5,7 @@
     :value="value"
     :disabled="disabled"
     :type="$attrs.type"
-    class="input"
+    :class="['input', size]"
     @input="input($event.target.value)"
     v-on="$listeners"
   >
@@ -22,6 +22,11 @@ export default {
   },
   props: {
     value: { type: String, default: '' },
+    size: {
+      type: String,
+      default: 'regular',
+      validator: size => ['compact', 'regular', 'large'].includes(size)
+    },
     disabled: { type: Boolean, default: false },
     mask: { type: [String, Function], default: null }
   },
@@ -59,5 +64,9 @@ export default {
   font-size: 14px;
   box-sizing: border-box;
   outline: none;
+
+  &.compact {
+    padding: 10px 10px;
+  }
 }
 </style>
