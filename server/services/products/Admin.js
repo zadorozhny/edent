@@ -1,4 +1,4 @@
-import { models, sequelize, Op } from '@/database';
+import { models, sequelize } from '@/database';
 import { service } from '@/lib/decorators';
 import * as ERRORS from '@/config/errors';
 import ServiceError from '@/lib/Errors';
@@ -8,6 +8,7 @@ import Utility from '@/services/products/Utility';
 export default class Admin extends Utility {
   async create(data) {
     const transaction = await sequelize.transaction();
+    const { categoryId } = data;
     try {
       const product = await models.Product.create(data, {
         include: [{
@@ -16,12 +17,9 @@ export default class Admin extends Utility {
         }],
         transaction
       });
-      const categories = await models.Category
-        .scope(
-          { method: ['filter', data] }
-        )
-        .findAll({ transaction });
-      await product.setCategories(categories.map(category => category.id), {
+      const category = await models.Category.findByPk(categoryId);
+      const categories = await category.getAncestors();
+      await product.setCategories([categoryId, ...categories.map(({ id }) => id)], {
         transaction
       });
       await transaction.commit();

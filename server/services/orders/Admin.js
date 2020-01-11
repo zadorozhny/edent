@@ -6,11 +6,6 @@ import Utility from '@/services/orders/Utility';
 
 @service
 export default class Admin extends Utility {
-  async create(data) {
-    const order = await models.Order.create(data);
-    return order;
-  }
-
   async update(id, data) {
     const [count, [order]] = await models.Order.update(data, {
       where: { id },

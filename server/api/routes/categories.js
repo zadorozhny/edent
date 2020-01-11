@@ -4,7 +4,7 @@ import Categories from '@/services/categories';
 
 const router = Router();
 
-router.get('/', auth, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.json(await Categories.init(req.user).getList(req.query));
   } catch (err) {
@@ -12,7 +12,7 @@ router.get('/', auth, async (req, res, next) => {
   }
 });
 
-router.get('/:id', auth, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     res.json(await Categories.init(req.user).getOne(req.params.id));
   } catch (err) {

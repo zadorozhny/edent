@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export default ({ app, store }, inject) => {
+export default ({ store }, inject) => {
   const axios = Axios.create({
     baseURL: `${process.env.BASE_URL}/api`
   });
@@ -56,7 +56,7 @@ export default ({ app, store }, inject) => {
       remove: ({ productId }) => axios.delete(`/products/${productId}`)
     },
     upload: {
-      image: data => axios.post('/upload/images', app.$utils.form(data))
+      image: () => axios.get('/upload')
     },
     categories: {
       get: ({ categoryId }) => axios.get(`/categories/${categoryId}`),

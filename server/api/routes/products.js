@@ -4,7 +4,7 @@ import Products from '@/services/products';
 
 const router = Router();
 
-router.get('/', auth, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     res.json(await Products.init(req.user).getList(req.query));
   } catch (err) {
@@ -20,7 +20,7 @@ router.post('/', auth, async (req, res, next) => {
   }
 });
 
-router.get('/:id', auth, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     res.json(await Products.init(req.user).getOne(req.params.id));
   } catch (err) {

@@ -1,5 +1,5 @@
 <template>
-  <div :class="['icon', 'ripple', size]">
+  <div :class="['icon', { ripple }, size, color]">
     <i class="material-icons">
       <slot/>
     </i>
@@ -11,6 +11,15 @@
 export default {
   name: 'KitIcon',
   props: {
+    ripple: {
+      type: Boolean,
+      default: true
+    },
+    color: {
+      type: String,
+      default: 'dark',
+      validator: size => ['light', 'dark'].includes(size)
+    },
     size: {
       type: String,
       default: 'regular',
@@ -28,6 +37,10 @@ export default {
   border-radius: 50%;
   user-select: none;
   transition: .2s ease-out;
+
+  &.light {
+    color: $light;
+  }
 
   &.compact {
     width: 32px;
@@ -52,11 +65,11 @@ export default {
     height: 50px;
 
     .material-icons {
-      font-size: 30px;
+      font-size: 36px;
     }
   }
 
-  &:hover {
+  &.ripple:hover {
     background: $fill;
   }
 }

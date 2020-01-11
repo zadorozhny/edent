@@ -34,7 +34,7 @@
 <script>
 export default {
   data: () => ({
-    value: 'https://cdn.vuetifyjs.com/images/cards/house.jpg'
+    value: 'https://bit.ly/2QDBhSA'
   })
 };
 </script>
@@ -49,7 +49,7 @@ export default {
     "description description";
   grid-template-rows: auto 120px auto;
   grid-column-gap: 20px;
-  grid-row-gap: 20px;
+  grid-row-gap: 30px;
 
   @media ($phablet) {
     grid-template-columns: 100%;
@@ -66,6 +66,8 @@ export default {
   &--picture {
     margin-right: 20px;
     width: 100%;
+    height: 100%;
+    max-height: 360px;
     grid-area: picture;
     box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
     border-radius: 3px;
@@ -79,7 +81,8 @@ export default {
     img {
       display: block;
       width: 100%;
-      object-fit: cover;
+      height: 100%;
+      object-fit: contain;
     }
   }
 

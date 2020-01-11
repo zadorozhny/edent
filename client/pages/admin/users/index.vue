@@ -3,7 +3,6 @@
     <div class="cover">
       <div class="users--header">
         <kit-input placeholder="Поиск" type="search"/>
-        <kit-button>Создать</kit-button>
       </div>
       <kit-table class="table">
         <template #header>
@@ -53,9 +52,7 @@ export default {
 .users {
   &--header {
     display: grid;
-    grid-template-columns: 360px 200px;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: 360px;
     margin-bottom: 30px;
   }
 }

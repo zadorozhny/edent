@@ -6,6 +6,9 @@ module.exports = {
   modern: isProd,
   dev: isDev,
   performance: isDev,
+  env: {
+    BASE_URL: process.env.BASE_URL
+  },
   srcDir: './client',
   router: {
     linkActiveClass: 'active-link',
@@ -36,7 +39,9 @@ module.exports = {
   ],
   loading: { color: '#283b56', height: '3px' },
   plugins: [
-    '@/plugins/common'
+    '@/plugins/common',
+    '@/plugins/api',
+    '@/plugins/utils'
   ],
   modules: [
     '@nuxtjs/style-resources',

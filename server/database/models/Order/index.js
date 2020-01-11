@@ -26,6 +26,13 @@ export default class Order extends Model {
       type: DataTypes.STRING,
       allowNull: false
     },
+    discount: {
+      type: DataTypes.INTEGER
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   })
 
   static associate(models) {

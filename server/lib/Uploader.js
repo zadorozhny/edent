@@ -22,7 +22,7 @@ export const Uploader = {
         if (err) {
           reject(new ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG));
         } else {
-          resolve({ key, url });
+          resolve({ key, url, bucket: S3.URL });
         }
       });
     });

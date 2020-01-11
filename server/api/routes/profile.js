@@ -28,7 +28,7 @@ router.patch('/email', auth, async (req, res, next) => {
   }
 });
 
-router.get('/unicity/email', auth, async (req, res, next) => {
+router.get('/unicity/email', async (req, res, next) => {
   try {
     res.json(await Profile.init(req.user).isEmailUnique(req.query));
   } catch (err) {

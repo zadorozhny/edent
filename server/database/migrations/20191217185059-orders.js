@@ -33,6 +33,13 @@ export const up = async (queryInterface, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false
       },
+      discount: {
+        type: Sequelize.INTEGER
+      },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       userId: {
         type: Sequelize.INTEGER,
         references: {
@@ -49,9 +56,13 @@ export const up = async (queryInterface, Sequelize) => {
       }
     }, { transaction });
     await queryInterface.createTable('OrderToProducts', {
-      orderId: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
+        autoIncrement: true
+      },
+      orderId: {
+        type: Sequelize.INTEGER,
         references: {
           model: 'Orders',
           key: 'id'
@@ -61,7 +72,6 @@ export const up = async (queryInterface, Sequelize) => {
       },
       productId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         references: {
           model: 'Products',
           key: 'id'

@@ -22,7 +22,7 @@ export default class Utility {
       returning: true
     });
     if (!count) {
-      throw ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG);
+      throw new ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG);
     }
     return user;
   }
@@ -33,10 +33,10 @@ export default class Utility {
   async signin({ email, password }) {
     const user = await models.User.findOne({ where: { email } });
     if (!user) {
-      throw ServiceError('not found', ERRORS.USER_NOT_FOUND);
+      throw new ServiceError('not found', ERRORS.USER_NOT_FOUND);
     }
     if (!user.isCurrentPassword(password)) {
-      throw ServiceError('wrong', ERRORS.WRONG_PASSWORD);
+      throw new ServiceError('wrong', ERRORS.WRONG_PASSWORD);
     }
     return user.tokens(this.constructor.createTokens(user));
   }
@@ -47,7 +47,7 @@ export default class Utility {
     if (await RefreshToken.verify(this.user.id, refreshToken)) {
       return this.constructor.createTokens(this.user);
     } else {
-      throw ServiceError('unauthorised', ERRORS.WRONG_REFRESH_TOKEN);
+      throw new ServiceError('unauthorised', ERRORS.WRONG_REFRESH_TOKEN);
     }
   }
 }

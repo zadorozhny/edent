@@ -82,7 +82,13 @@ body {
   text-shadow: 0 0 1px rgba(0, 0, 0, .01);
 }
 
-button, input {
+input, textarea {
+  &::placeholder {
+    color: $info;
+  }
+}
+
+button, input, textarea {
   font: {
     family: 'Montserrat', Arial, sans-serif;
     size: 14px;

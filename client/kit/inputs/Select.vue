@@ -22,6 +22,11 @@ export default {
   props: {
     value: { type: [String, Number], default: null },
     options: { type: Array, default: () => [] },
+    size: {
+      type: String,
+      default: 'regular',
+      validator: size => ['compact', 'regular', 'large'].includes(size)
+    },
     placeholder: { type: String, default: '' },
   },
   methods: {
@@ -35,16 +40,47 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss">
-.multiselect, .multiselect__input, .multiselect__single {
+.multiselect {
+  height: 48px;
   font-size: 14px;
-}
 
-.multiselect__option--selected.multiselect__option--highlight {
-  background: $main;
-  color: $light;
-}
-.multiselect__option--highlight {
-  background: $main;
-  color: $light;
+  &__input {
+    font-size: 14px;
+  }
+
+  &__single {
+    font-size: 14px;
+  }
+
+  &__select {
+    height: 48px;
+
+    &:before {
+      top: 58%;
+    }
+  }
+
+  &__tags {
+    height: 48px;
+    padding-top: 13px;
+  }
+
+  &__placeholder {
+    color: $info;
+  }
+
+  &__option {
+    &--highlight {
+      background: $main;
+      color: $light;
+    }
+
+    &--selected {
+      &.multiselect__option--highlight {
+        background: $main;
+        color: $light;
+      }
+    }
+  }
 }
 </style>

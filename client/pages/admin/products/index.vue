@@ -4,7 +4,9 @@
     <div class="cover">
       <div class="products--header">
         <kit-input placeholder="Поиск" type="search"/>
-        <kit-button>Создать</kit-button>
+        <nuxt-link tag="a" to="/admin/products/create">
+          <kit-button>Создать</kit-button>
+        </nuxt-link>
       </div>
       <kit-table class="table">
         <template #header>
@@ -42,6 +44,9 @@
           </div>
         </template>
       </kit-table>
+      <div class="products--footer">
+        <kit-pagination/>
+      </div>
     </div>
   </section>
 </template>
@@ -76,6 +81,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
+  }
+
+  &--footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
   }
 }
 

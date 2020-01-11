@@ -7,6 +7,5 @@ export { Admin, User, Utility };
 
 export default new Factory({
   admin: Admin,
-  user: User,
-  default: Utility
+  user: User
 });
