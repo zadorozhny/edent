@@ -36,10 +36,6 @@ export const up = async (queryInterface, Sequelize) => {
       discount: {
         type: Sequelize.INTEGER
       },
-      price: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
       userId: {
         type: Sequelize.INTEGER,
         references: {
@@ -70,6 +66,10 @@ export const up = async (queryInterface, Sequelize) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       productId: {
         type: Sequelize.INTEGER,
         references: {
@@ -78,6 +78,13 @@ export const up = async (queryInterface, Sequelize) => {
         },
         onDelete: 'cascade',
         onUpdate: 'cascade'
+      },
+      updatedAt: {
+        type: Sequelize.DATE
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW
       }
     }, { transaction });
     await transaction.commit();

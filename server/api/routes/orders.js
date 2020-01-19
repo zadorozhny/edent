@@ -6,7 +6,15 @@ const router = Router();
 
 router.get('/', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.user).get(req.query));
+    res.json(await Orders.init(req.user).getList(req.query));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post('/', auth, async (req, res, next) => {
+  try {
+    res.json(await Orders.init(req.user).create(req.body));
   } catch (err) {
     next(err);
   }

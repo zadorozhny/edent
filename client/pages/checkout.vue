@@ -6,7 +6,7 @@
         <kit-input v-model="phone" type="phone" class="input" mask="+{380} (00) 000-0000"/>
         <kit-input type="text" class="input" placeholder="Имя"/>
       </div>
-      <kit-label-group>
+      <kit-label-group class="checkout--shipping_option">
         <kit-choice v-model="option" value="ex" related>
           <kit-label type="outline" size="regular">Новая Почта</kit-label>
         </kit-choice>
@@ -101,6 +101,10 @@ export default {
   &--group {
     display: grid;
     row-gap: 15px;
+  }
+
+  &--shipping_option {
+    align-items: center;
   }
 }
 

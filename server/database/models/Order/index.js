@@ -5,6 +5,7 @@ export default class Order extends Model {
   static fields = DataTypes => ({
     status: {
       type: DataTypes.ENUM(['pending', 'finished', 'closed']),
+      defaultValue: 'pending',
       allowNull: false
     },
     email: {
@@ -28,23 +29,22 @@ export default class Order extends Model {
     },
     discount: {
       type: DataTypes.INTEGER
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
   })
 
   static associate(models) {
     this.belongsToMany(models.Product, {
       through: 'OrderToProducts',
-      as: 'products',
       updatedAt: false,
       foreignKey: 'orderId',
       otherKey: 'productId'
     });
     this.belongsTo(models.User, {
       foreignKey: 'userId'
+    });
+    this.hasMany(models.OrderToProducts, {
+      foreignKey: 'orderId',
+      as: 'products'
     });
   }
 }
