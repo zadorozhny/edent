@@ -36,8 +36,7 @@ module.exports = {
   plugins: [
     '@/plugins/common',
     '@/plugins/api',
-    '@/plugins/utils',
-    '@/plugins/vuetify'
+    '@/plugins/utils'
   ],
   modules: [
     '@nuxtjs/style-resources'

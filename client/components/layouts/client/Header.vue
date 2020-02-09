@@ -25,21 +25,9 @@
             shopping_cart
           </kit-icon>
         </nuxt-link>
-        <v-menu offset-y>
-          <template v-slot:activator="{ on }">
-            <div class="navigation--avatar ripple" v-on="on">
-              <span class="navigation--letters">А</span>
-            </div>
-          </template>
-          <v-list>
-            <v-list-item
-              v-for="(item, index) in items"
-              :key="index"
-            >
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+        <div class="navigation--avatar ripple">
+          <span class="navigation--letters">А</span>
+        </div>
       </div>
     </div>
   </nav>
@@ -47,14 +35,7 @@
 
 <script>
 export default {
-  data: () => ({
-    items: [
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me 2' },
-    ]
-  })
+  data: () => ({})
 };
 </script>
 
