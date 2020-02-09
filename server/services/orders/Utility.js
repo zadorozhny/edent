@@ -22,21 +22,26 @@ export default class Utility {
     return order;
   }
 
-  async getList() {
-    const orders = await models.Order.findAll({
-      include: [
-        {
-          model: models.OrderToProducts,
-          as: 'products',
-          attributes: ['price'],
-          include: [{
-            model: models.Product,
-            as: 'product',
-            attributes: ['id', 'name'],
-          }]
-        }
-      ]
-    });
+  async getList(filters) {
+    const orders = await models.Order
+      .scope(
+        { method: ['filter', filters] },
+        { method: ['pagination', filters] }
+      )
+      .findAll({
+        include: [
+          {
+            model: models.OrderToProducts,
+            as: 'products',
+            attributes: ['price', 'count'],
+            include: [{
+              model: models.Product,
+              as: 'product',
+              attributes: ['id', 'name'],
+            }]
+          }
+        ]
+      });
     return orders;
   }
 }

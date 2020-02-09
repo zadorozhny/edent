@@ -1,26 +1,36 @@
 <template>
   <section class="container">
-    <ul class="container">
-      <kit-card v-for="(card, index) in cards" :key="index" :image="card.src" :title="card.title"/>
-    </ul>
+    <v-menu offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Dropdown
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in items"
+          :key="index"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </section>
 </template>
 
 <script>
 export default {
   data: () => ({
-    cards: [
-      { title: 'Товар 1', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 2', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 3', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 4', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 5', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 6', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 7', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-      { title: 'Товар 8', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-      { title: 'Товар 9', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-      { title: 'Товар 10', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-    ],
+    items: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' },
+    ]
   })
 };
 </script>

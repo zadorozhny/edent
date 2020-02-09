@@ -22,12 +22,7 @@ module.exports = {
       { name: 'theme-color', content: '#283b56' },
       { name: 'mobile-web-app-capable', content: 'yes' }
     ],
-    script: [
-      {
-        src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAFBrCwBNg9F6345BFfK-5faTNO5aNU8GY',
-        defer: true
-      }
-    ],
+    script: [],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900&display=swap' },
@@ -41,10 +36,11 @@ module.exports = {
   plugins: [
     '@/plugins/common',
     '@/plugins/api',
-    '@/plugins/utils'
+    '@/plugins/utils',
+    '@/plugins/vuetify'
   ],
   modules: [
-    '@nuxtjs/style-resources',
+    '@nuxtjs/style-resources'
   ],
   styleResources: {
     scss: '@/assets/css/mixins.scss',

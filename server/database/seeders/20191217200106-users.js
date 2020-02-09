@@ -4,6 +4,7 @@ const { hash, salt } = Passwords.hash('123456');
 
 const users = [
   {
+    id: 1,
     role: 'admin',
     name: 'Artem',
     email: 'napster.pro.ua@gmail.com',

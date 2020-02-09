@@ -30,7 +30,7 @@ router.get('/:id', auth, async (req, res, next) => {
 
 router.patch('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.user).update(req.body));
+    res.json(await Orders.init(req.user).update(req.params.id, req.body));
   } catch (err) {
     next(err);
   }

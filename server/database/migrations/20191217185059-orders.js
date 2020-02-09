@@ -12,7 +12,8 @@ export const up = async (queryInterface, Sequelize) => {
       },
       status: {
         type: Sequelize.ENUM(status),
-        allowNull: false
+        allowNull: false,
+        defaultValue: status[0]
       },
       email: {
         type: Sequelize.STRING,
@@ -52,15 +53,21 @@ export const up = async (queryInterface, Sequelize) => {
       }
     }, { transaction });
     await queryInterface.createTable('OrderToProducts', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
       orderId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
         references: {
           model: 'Orders',
+          key: 'id'
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      },
+      productId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        references: {
+          model: 'Products',
           key: 'id'
         },
         onDelete: 'cascade',
@@ -70,14 +77,9 @@ export const up = async (queryInterface, Sequelize) => {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      productId: {
+      count: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Products',
-          key: 'id'
-        },
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
+        allowNull: false
       },
       updatedAt: {
         type: Sequelize.DATE

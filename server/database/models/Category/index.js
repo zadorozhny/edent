@@ -1,4 +1,4 @@
-import { Op } from 'sequelize';
+import Sequelize, { Op } from 'sequelize';
 import { Model, define } from '@/lib/Sequelize';
 import filters from '@/database/models/Category/filters';
 
@@ -25,6 +25,16 @@ export default class Category extends Model {
         }
         return where;
       }, { [Op.and]: [], ...defaults })
+    }));
+    this.addScope('order', ({ order }) => ({
+      order: order.split(';').map(expression => {
+        const [column, direction] = expression.split(',');
+        return [Sequelize.col(column), direction];
+      })
+    }));
+    this.addScope('pagination', ({ offset, limit }) => ({
+      offset,
+      limit
     }));
   }
 }

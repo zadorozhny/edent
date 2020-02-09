@@ -6,6 +6,10 @@ export default class OrderToProducts extends Model {
     price: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    count: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   })
 
