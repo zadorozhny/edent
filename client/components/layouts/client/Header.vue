@@ -26,7 +26,7 @@
           </kit-icon>
         </nuxt-link>
         <div class="navigation--avatar ripple">
-          <span class="navigation--letters">А</span>
+          <span class="navigation--letters">{{ name }}</span>
         </div>
       </div>
     </div>
@@ -35,7 +35,12 @@
 
 <script>
 export default {
-  data: () => ({})
+  data: () => ({}),
+  computed: {
+    name() {
+      return this.$store.state.auth.profile.name.charAt(0);
+    }
+  }
 };
 </script>
 

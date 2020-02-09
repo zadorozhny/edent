@@ -9,8 +9,8 @@
         tag="a"
       >
         <kit-card
-          :image="card.src"
-          :title="card.title"
+          :image="card.image"
+          :title="card.name"
           :price="card.price"
         >
           <template #controls>
@@ -47,58 +47,13 @@ export default {
     return {
       option: 'ex',
       value: [1, 200],
-      cards: [
-        {
-          title: 'Даймондбрайт',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 230
-        },
-        {
-          title: 'Матрицы контурные метал. замковые 50мкм',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 530
-        },
-        {
-          title: 'Эндожи №1',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 1230
-        },
-        {
-          title: 'Keramik block (инзомы)',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 2230
-        },
-        {
-          title: 'VILLACRYL H PIUS (750г+400мл) V4',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 2530
-        },
-        {
-          title: '«Мастер» пластина 200г',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 232
-        },
-        {
-          title: 'Белэкт №10 зерн120/125-106мкм/5кг/',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 99
-        },
-        {
-          title: 'Бура (100гр)',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 199
-        },
-        {
-          title: 'Воск Беловакс валики прикусные (палочки 150г(10шт))',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 120
-        },
-        {
-          title: 'Воск липкий',
-          src: 'https://bit.ly/2QDBhSA',
-          price: 1999
-        },
-      ]
+      cards: []
+    };
+  },
+  async asyncData({ app }) {
+    const cards = await app.$api.products.getList();
+    return {
+      cards
     };
   }
 };

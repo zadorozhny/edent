@@ -19,6 +19,10 @@ export const up = async (queryInterface, Sequelize) => {
         type: Sequelize.FLOAT,
         allowNull: false
       },
+      model: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       image: {
         type: Sequelize.STRING
       },

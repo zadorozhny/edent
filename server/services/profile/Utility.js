@@ -16,6 +16,10 @@ export default class Utility {
       refresh: RefreshToken.create(user.id)
     };
   }
+  async get() {
+    const user = await models.User.findByPk(this.user.id);
+    return user;
+  }
   async update(data) {
     const [count, [user]] = await models.User.update(data, {
       where: { id: this.user.id },

@@ -2,9 +2,9 @@
   <app-image-layout image="signin">
     <div class="signin">
       <div class="signin--content">
-        <kit-input placeholder="Email"/>
-        <kit-input placeholder="Пароль"/>
-        <kit-button>
+        <kit-input v-model="credentials.email" placeholder="Email"/>
+        <kit-input v-model="credentials.password" placeholder="Пароль" type="password"/>
+        <kit-button @click="signin">
           Войти
         </kit-button>
       </div>
@@ -20,7 +20,17 @@ export default {
   components: {
     AppImageLayout
   },
-  data: () => ({})
+  data: () => ({
+    credentials: {
+      email: '',
+      password: ''
+    }
+  }),
+  methods: {
+    async signin() {
+      await this.$store.dispatch('auth/signin', this.credentials);
+    }
+  }
 };
 </script>
 

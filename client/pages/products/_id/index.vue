@@ -2,30 +2,25 @@
   <section class="page container container-no_space">
     <div class="product">
       <div class="product--picture">
-        <img :src="value">
+        <img :src="product.image">
       </div>
       <div class="product--content">
         <div class="product--head">
-          <h2 class="text_large">Даймондбрайт</h2>
-          <span class="text_medium">#132</span>
+          <h2 class="text_large">{{ product.name }}</h2>
+          <span class="text_medium">#{{ product.id }}</span>
         </div>
         <div class="product--info">
-          <p class="text_medium">Модель: CKD000340</p>
-          <p class="text_medium">Производитель: Cerkamed</p>
+          <p class="text_medium">Модель: {{ product.model || '-' }}</p>
+          <p class="text_medium">Производитель: {{ product.manufacturer.name }}</p>
         </div>
-        <p class="product--price text_title">Цена: <span class="text_large">₴1299</span></p>
+        <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
       </div>
       <div class="buttons">
         <kit-button type="success" class="button">Купить</kit-button>
         <kit-button class="button">В корзину</kit-button>
       </div>
       <p class="product--description text_medium">
-        <span class="text_bold">Описание:</span> Сайт рыбатекст поможет дизайнеру, верстальщику,
-        вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке,
-        а начинающему оратору отточить навык публичных выступлений в домашних условиях.
-        При создании генератора мы использовали небезизвестный универсальный код речей.
-        Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце,
-        что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия.
+        <span class="text_bold">Описание:</span> {{ product.description }}
       </p>
     </div>
   </section>
@@ -34,8 +29,14 @@
 <script>
 export default {
   data: () => ({
-    value: 'https://bit.ly/2QDBhSA'
-  })
+    product: {}
+  }),
+  async asyncData({ app, params }) {
+    const product = await app.$api.products.get({ productId: params.id });
+    return {
+      product
+    };
+  }
 };
 </script>
 

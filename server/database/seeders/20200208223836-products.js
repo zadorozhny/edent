@@ -3,6 +3,7 @@ const products = [
     id: 1,
     name: 'Product',
     description: 'Lorem',
+    model: 'AX123',
     price: 100,
     image: 'https://bit.ly/2QDBhSA',
     isHidden: false,

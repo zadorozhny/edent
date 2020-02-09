@@ -36,7 +36,9 @@ module.exports = {
   plugins: [
     '@/plugins/common',
     '@/plugins/api',
-    '@/plugins/utils'
+    '@/plugins/utils',
+    '@/plugins/cookies',
+    '@/plugins/initializer'
   ],
   modules: [
     '@nuxtjs/style-resources'
