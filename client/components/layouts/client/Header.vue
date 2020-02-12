@@ -26,7 +26,7 @@
           </kit-icon>
         </nuxt-link>
         <div class="navigation--avatar ripple">
-          <span class="navigation--letters">{{ name }}</span>
+          <span class="navigation--letters">{{ name || '-' }}</span>
         </div>
       </div>
     </div>
