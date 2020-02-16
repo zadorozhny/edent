@@ -1,26 +1,26 @@
 <template>
   <section class="page container product">
     <div class="product--image">
-      <kit-image-uploader v-model="image"/>
+      <kit-image-uploader v-model="product.image"/>
     </div>
     <div class="product--content">
-      <kit-input placeholder="Название"/>
+      <kit-input v-model="product.name" placeholder="Название"/>
       <kit-select
-        v-model="selectValue"
-        :options="selectOptions"
+        v-model="product.categoryId"
+        :options="categories"
         placeholder="Категория"
       />
       <kit-select
-        v-model="selectValue"
-        :options="selectOptions"
+        v-model="product.manufacturerId"
+        :options="manufacturers"
         placeholder="Производитель"
       />
-      <kit-input placeholder="Цена"/>
+      <kit-input v-model="product.price" :type="'number'" placeholder="Цена"/>
     </div>
     <div class="product--description">
-      <textarea class="textarea" placeholder="Описание"/>
+      <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
     </div>
-    <div class="product--controls">
+    <div class="product--controls" @click="create">
       <kit-button>
         Создать
       </kit-button>
@@ -33,10 +33,32 @@ export default {
   layout: 'admin',
   data() {
     return {
-      image: null,
-      selectValue: null,
-      selectOptions: [1, 2, 3]
+      product: {
+        image: 'https://bit.ly/2QDBhSA',
+        name: '',
+        price: null,
+        categoryId: null,
+        manufacturerId: null,
+        description: ''
+      },
+      manufacturers: [],
+      categories: []
     };
+  },
+  async asyncData({ app }) {
+    const [manufacturers, categories] = await Promise.all([
+      app.$api.manufacturers.getList(),
+      app.$api.categories.getList()
+    ]);
+    return {
+      manufacturers,
+      categories
+    };
+  },
+  methods: {
+    create() {
+      this.$api.products.create(this.product);
+    }
   }
 };
 </script>

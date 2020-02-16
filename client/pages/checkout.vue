@@ -2,25 +2,34 @@
   <div class="page container checkout">
     <div class="checkout--content">
       <div class="checkout--group">
-        <kit-input type="email" class="input" placeholder="Email"/>
-        <kit-input v-model="phone" type="phone" class="input" mask="+{380} (00) 000-0000"/>
-        <kit-input type="text" class="input" placeholder="Имя"/>
+        <kit-input v-model="order.email" type="email" class="input" placeholder="Email"/>
+        <kit-input
+          v-model="order.phone"
+          type="phone"
+          class="input"
+          placeholder="Phone"
+          mask="+{380} (00) 000-0000"
+        />
+        <kit-input v-model="order.name" type="text" class="input" placeholder="Имя"/>
       </div>
       <kit-label-group class="checkout--shipping_option">
-        <kit-choice v-model="option" value="ex" related>
+        <kit-choice v-model="order.shipping" value="post" related>
           <kit-label type="outline" size="regular">Новая Почта</kit-label>
         </kit-choice>
-        <kit-choice v-model="option" value="ch" related>
+        <kit-choice v-model="order.shipping" value="courier" related>
           <kit-label type="outline" size="regular">Курьер</kit-label>
         </kit-choice>
       </kit-label-group>
       <div class="checkout--group">
-        <kit-input type="name" class="input" placeholder="Город"/>
-        <kit-input type="number" class="input" placeholder="Номер отделения" :mask="Number"/>
+        <kit-input v-model="order.city" type="name" class="input" placeholder="Город"/>
+        <kit-input
+          v-model="order.post" type="number" class="input" placeholder="Номер отделения"
+          :mask="Number"
+        />
       </div>
-      <kit-button>Заказать</kit-button>
+      <kit-button @click="create">Заказать</kit-button>
     </div>
-    <kit-table class="table">
+    <kit-table class="table" :items="products">
       <template #header>
         <div class="table--header">
           <div class="table--section">
@@ -34,18 +43,18 @@
           </div>
         </div>
       </template>
-      <template #default="{ name, price, count }">
+      <template #default="{ id, name, price, count }">
         <div class="table--item">
           <div class="table--section">
             <span>{{ name }}</span>
           </div>
           <div class="table--section">
-            <span>{{ price }}</span>
+            <span>{{ price * count }}</span>
           </div>
           <div class="table--section">
-            <span class="table--control">-</span>
+            <span class="table--control" @click="change(id, -1)">-</span>
             <span>{{ count }}</span>
-            <span class="table--control">+</span>
+            <span class="table--control" @click="change(id, 1)">+</span>
           </div>
         </div>
       </template>
@@ -55,7 +64,7 @@
             Сумма
           </span>
           <span class="table--total">
-            ₴4367
+            ₴{{ total }}
           </span>
         </div>
       </template>
@@ -64,12 +73,46 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
-    option: null,
-    phone: ''
-  })
+    order: {
+      email: '',
+      phone: '',
+      name: '',
+      shipping: '',
+      city: '',
+      post: ''
+    }
+  }),
+  computed: {
+    products() {
+      return this.$storage ? Object.values(this.$storage.products) : [];
+    },
+    total() {
+      return this.products.length ? this.products.reduce((sum, { count, price }) => sum + (price * count), 0) : 0;
+    }
+  },
+  methods: {
+    change(key, value) {
+      const products = { ...this.$storage.products };
+      if (products[key].count === 1 && value === -1) {
+        delete products[key];
+      } else {
+        products[key] = { ...products[key], count: products[key].count + value };
+      }
+      this.$storage.products = products;
+    },
+    create() {
+      this.$api.orders.create({
+        email: this.order.email,
+        phone: this.order.phone,
+        name: this.order.name,
+        shipping: this.order.shipping,
+        address: `${this.order.city} ${this.order.post}`,
+        products: this.products
+      });
+    }
+  }
 };
 </script>
 

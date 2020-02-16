@@ -38,7 +38,8 @@ module.exports = {
     '@/plugins/api',
     '@/plugins/utils',
     '@/plugins/cookies',
-    '@/plugins/initializer'
+    '@/plugins/initializer',
+    { src: '@/plugins/storage', mode: 'client' }
   ],
   modules: [
     '@nuxtjs/style-resources'

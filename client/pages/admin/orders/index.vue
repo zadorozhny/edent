@@ -4,11 +4,11 @@
     <div class="cover">
       <div class="orders--header">
         <kit-input placeholder="Поиск" type="search"/>
-        <nuxt-link tag="a" to="/admin/products/create">
+        <nuxt-link tag="a" to="/admin/orders/create">
           <kit-button>Создать</kit-button>
         </nuxt-link>
       </div>
-      <kit-table class="table">
+      <kit-table class="table" :items="items">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -28,7 +28,7 @@
             </div>
           </div>
         </template>
-        <template #default="{ id, phone, address, status, date }">
+        <template #default="{ id, phone, address, status, createdAt }">
           <div class="table--item">
             <div class="table--section">
               <span>{{ id }}</span>
@@ -40,10 +40,10 @@
               <span>{{ address }}</span>
             </div>
             <div class="table--section">
-              <span>Завершен</span>
+              <span>{{ status }}</span>
             </div>
             <div class="table--section">
-              <span>12/11/20</span>
+              <span>{{ createdAt }}</span>
             </div>
           </div>
         </template>
@@ -62,8 +62,13 @@ export default {
   },
   data() {
     return {
-      option: 'ex',
-      value: [1, 200]
+      items: []
+    };
+  },
+  async asyncData({ app }) {
+    const items = await app.$api.orders.getList();
+    return {
+      items
     };
   }
 };

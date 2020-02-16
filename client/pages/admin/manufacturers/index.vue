@@ -5,7 +5,7 @@
         <kit-input placeholder="Поиск" type="search"/>
         <kit-button>Создать</kit-button>
       </div>
-      <kit-table class="table">
+      <kit-table class="table" :items="items">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -29,7 +29,15 @@
 export default {
   layout: 'admin',
   data() {
-    return {};
+    return {
+      items: []
+    };
+  },
+  async asyncData({ app }) {
+    const items = await app.$api.manufacturers.getList();
+    return {
+      items
+    };
   }
 };
 </script>

@@ -6,7 +6,7 @@ export default ({ store }, inject) => {
   });
   axios.interceptors.request.use(
     config => {
-      config.headers.authorization = store.state.auth.tokens.access;
+      config.headers.authorization = store.state.auth.tokens.access || '';
       return config;
     }
   );
@@ -81,6 +81,7 @@ export default ({ store }, inject) => {
     orders: {
       get: ({ orderId }) => axios.get(`/orders/${orderId}`),
       getList: params => axios.get('/orders', { params }),
+      create: data => axios.post('/orders', data),
       update: ({ orderId, ...data }) => axios.patch(`/orders/${orderId}`, data),
       remove: ({ orderId }) => axios.delete(`/orders/${orderId}`)
     }

@@ -9,7 +9,7 @@ export default class Utility {
   }
 
   async getList() {
-    const categories = await models.Category.findAll({ hierarchy: true });
+    const categories = await models.Category.findAll();
     return categories;
   }
 }

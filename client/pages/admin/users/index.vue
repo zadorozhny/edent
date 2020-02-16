@@ -4,7 +4,7 @@
       <div class="users--header">
         <kit-input placeholder="Поиск" type="search"/>
       </div>
-      <kit-table class="table">
+      <kit-table class="table" :items="items">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -41,8 +41,13 @@ export default {
   layout: 'admin',
   data() {
     return {
-      option: 'ex',
-      value: [1, 200]
+      items: []
+    };
+  },
+  async asyncData({ app }) {
+    const items = await app.$api.users.getList();
+    return {
+      items
     };
   }
 };
@@ -64,7 +69,7 @@ export default {
 .table {
   &--header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
+    grid-template-columns: minmax(0, 1fr) 1fr 160px;
   }
 
   &--section {
@@ -81,7 +86,7 @@ export default {
 
   &--item {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
+    grid-template-columns: minmax(0, 1fr) 1fr 160px;
   }
 }
 </style>

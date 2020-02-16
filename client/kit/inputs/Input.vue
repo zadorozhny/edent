@@ -6,7 +6,7 @@
     :disabled="disabled"
     :type="$attrs.type"
     :class="['input', size]"
-    @input="input($event.target.value)"
+    @input="input($event.target)"
     v-on="$listeners"
   >
 </template>
@@ -36,19 +36,18 @@ export default {
   mounted() {
     if (this.mask) {
       this.imask = new IMask(this.$refs.input, {
-        mask: this.mask,
-        lazy: false
+        mask: this.mask
       });
       this.imask.on('accept', () => this.$emit('update', this.imask.value));
       this.$watch('value', value => this.imask.updateValue(value));
     }
   },
   methods: {
-    input(value) {
+    input(target) {
       if (this.imask) {
-        this.imask.value = value;
+        this.imask.value = target.value;
       } else {
-        this.$emit('update', value);
+        this.$emit('update', target.value);
       }
     }
   }

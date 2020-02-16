@@ -1,16 +1,13 @@
 <template>
   <multiselect
     :value="value"
-    :options="options"
+    :options="options.map(option => option.id)"
+    :custom-label="value => options.find(item => item.id == value).name"
     :searchable="false"
     :show-labels="false"
     :placeholder="placeholder"
     @select="select"
-  >
-    <template slot="option" slot-scope="props">
-      <span>{{ props.option }}</span>
-    </template>
-  </multiselect>
+  />
 </template>
 
 <script>
@@ -20,7 +17,7 @@ export default {
   name: 'KitSelect',
   components: { Multiselect },
   props: {
-    value: { type: [String, Number], default: null },
+    value: { type: [String, Number, Object], default: null },
     options: { type: Array, default: () => [] },
     size: {
       type: String,

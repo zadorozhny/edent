@@ -12,7 +12,7 @@ router.get('/', auth, async (req, res, next) => {
   }
 });
 
-router.post('/', auth, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     res.json(await Orders.init(req.user).create(req.body));
   } catch (err) {

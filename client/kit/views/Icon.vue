@@ -1,5 +1,5 @@
 <template>
-  <div :class="['icon', { ripple }, size, color]">
+  <div :class="['icon', { ripple }, size, color]" v-on="$listeners">
     <i class="material-icons">
       <slot/>
     </i>
@@ -10,6 +10,7 @@
 
 export default {
   name: 'KitIcon',
+  inheritAttrs: false,
   props: {
     ripple: {
       type: Boolean,

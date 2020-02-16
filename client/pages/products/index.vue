@@ -5,7 +5,7 @@
       <nuxt-link
         v-for="(card, index) in cards"
         :key="index"
-        :to="'/products/1'"
+        :to="`/products/${card.id}`"
         tag="a"
       >
         <kit-card
@@ -15,7 +15,7 @@
         >
           <template #controls>
             <div class="card_controls">
-              <kit-icon class="card_controls--cart" size="regular">
+              <kit-icon class="card_controls--cart" size="regular" @click.prevent="add(card)">
                 add_shopping_cart
               </kit-icon>
             </div>
@@ -55,6 +55,17 @@ export default {
     return {
       cards
     };
+  },
+  methods: {
+    add(product) {
+      const products = { ...this.$storage.products };
+      if (products[product.id]) {
+        products[product.id].count += 1;
+      } else {
+        products[product.id] = { ...product, count: 1 };
+      }
+      this.$storage.products = products;
+    }
   }
 };
 </script>

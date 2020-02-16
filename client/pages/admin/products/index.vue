@@ -8,7 +8,7 @@
           <kit-button>Создать</kit-button>
         </nuxt-link>
       </div>
-      <kit-table class="table">
+      <kit-table class="table" :items="items">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -61,8 +61,13 @@ export default {
   },
   data() {
     return {
-      option: 'ex',
-      value: [1, 200]
+      items: []
+    };
+  },
+  async asyncData({ app }) {
+    const items = await app.$api.products.getList();
+    return {
+      items
     };
   }
 };

@@ -8,7 +8,11 @@ export default class Utility {
     try {
       const { products, ...rest } = data;
       const order = await models.Order.create(rest, { transaction });
-      await models.OrderToProducts.bulkCreate(products.map(data => ({ ...data, orderId: order.id })), { transaction });
+      await models.OrderToProducts.bulkCreate(products.map(data => ({
+        ...data,
+        productId: data.id,
+        orderId: order.id
+      })), { transaction });
       await transaction.commit();
       return order;
     } catch (err) {
