@@ -27,12 +27,12 @@ export default class Utility {
   }
 
   async getList(filters) {
-    const orders = await models.Order
+    const { rows, count } = await models.Order
       .scope(
         { method: ['filter', filters] },
         { method: ['pagination', filters] }
       )
-      .findAll({
+      .findAndCountAll({
         include: [
           {
             model: models.OrderToProducts,
@@ -46,6 +46,6 @@ export default class Utility {
           }
         ]
       });
-    return orders;
+    return { rows, count };
   }
 }

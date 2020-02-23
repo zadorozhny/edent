@@ -12,10 +12,10 @@
       placeholder="Производители"
     />
     <kit-label-group>
-      <kit-choice v-model="option" value="ex" related>
+      <kit-choice v-model="proxy.order" value="DESC" related>
         <kit-label type="outline" size="regular">Дорогие</kit-label>
       </kit-choice>
-      <kit-choice v-model="option" value="ch" related>
+      <kit-choice v-model="proxy.order" value="ASC" related>
         <kit-label type="outline" size="regular">Дешевые</kit-label>
       </kit-choice>
     </kit-label-group>
@@ -30,11 +30,6 @@ export default {
       type: Object,
       default: () => ({ min: 0, max: 0 })
     }
-  },
-  data() {
-    return {
-      option: 'ex',
-    };
   },
   computed: {
     proxy: {

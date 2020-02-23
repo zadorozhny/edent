@@ -1,25 +1,45 @@
 <template>
   <div class="filter">
     <kit-select
-      v-model="selectValue"
-      :options="selectOptions"
+      v-model="proxy.status"
+      :options="statuses"
       placeholder="Статус"
     />
     <kit-select
-      v-model="selectValue"
-      :options="selectOptions"
-      placeholder="Дата"
+      v-model="proxy.shipping"
+      :options="shipping"
+      placeholder="Доставка"
     />
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    value: { type: Object, default: () => ({}) }
+  },
   data() {
     return {
-      selectValue: null,
-      selectOptions: [1, 2, 3]
+      statuses: [
+        { id: 'pending', name: 'В работе' },
+        { id: 'finished', name: 'Завершен' },
+        { id: 'closed', name: 'Отменен' }
+      ],
+      shipping: [
+        { id: 'post', name: 'Почта' },
+        { id: 'courier', name: 'Курьер' },
+      ]
     };
+  },
+  computed: {
+    proxy: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit('input', value);
+      }
+    }
   }
 };
 </script>

@@ -12,10 +12,12 @@ export default class Utility {
   }
 
   async getList(filters) {
+    console.log(filters);
     const [{ count, rows }, { min, max }] = await Promise.all([
       models.Product
         .scope(
           { method: ['filter', filters] },
+          { method: ['order', filters] },
           { method: ['pagination', filters] }
         )
         .findAndCountAll({
@@ -32,8 +34,7 @@ export default class Utility {
         }),
       models.Product
         .scope(
-          { method: ['filter', filters] },
-          { method: ['pagination', filters] }
+          { method: ['filter', filters] }
         )
         .findOne({
           attributes: [

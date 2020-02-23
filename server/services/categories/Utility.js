@@ -8,8 +8,12 @@ export default class Utility {
     return category;
   }
 
-  async getList() {
-    const categories = await models.Category.findAll();
+  async getList(filters) {
+    const categories = await models.Category
+      .scope(
+        { method: ['filter', filters] }
+      )
+      .findAll();
     return categories;
   }
 }

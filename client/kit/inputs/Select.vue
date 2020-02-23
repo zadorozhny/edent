@@ -2,7 +2,7 @@
   <multiselect
     :value="value"
     :options="options.map(option => option.id)"
-    :custom-label="value => options.find(item => item.id == value).name"
+    :custom-label="value => options.find(item => item.id === value).name"
     :searchable="false"
     :show-labels="false"
     :placeholder="placeholder"

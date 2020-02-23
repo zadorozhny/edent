@@ -1,11 +1,11 @@
 <template>
   <section class="page container orders">
-    <app-filter class="filter"/>
+    <app-filter v-model="filter" class="filter"/>
     <div class="cover">
       <div class="orders--header">
-        <kit-input placeholder="Поиск" type="search"/>
+        <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
       </div>
-      <kit-table class="table" :items="items">
+      <kit-table class="table" :items="rows">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -31,7 +31,7 @@
               <span>{{ id }}</span>
             </div>
             <div class="table--section">
-              <span>380982784979</span>
+              <span>{{ phone }}</span>
             </div>
             <div class="table--section">
               <span>{{ address }}</span>
@@ -45,12 +45,16 @@
           </div>
         </template>
       </kit-table>
+      <div class="orders--footer">
+        <kit-pagination/>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import AppFilter from '@/components/orders/Filter';
+import utils from '@/utils';
 
 export default {
   layout: 'admin',
@@ -59,14 +63,42 @@ export default {
   },
   data() {
     return {
-      items: []
+      rows: [],
+      filter: {
+        search: '',
+        status: '',
+        shipping: ''
+      }
     };
   },
+  watch: {
+    filter: {
+      deep: true,
+      handler() {
+        this.getList();
+      }
+    }
+  },
   async asyncData({ app }) {
-    const items = await app.$api.orders.getList();
+    const { rows } = await app.$api.orders.getList();
     return {
-      items
+      rows,
+      filter: {
+        search: '',
+        status: '',
+        shipping: ''
+      }
     };
+  },
+  methods: {
+    getList: utils.debounce(async function () {
+      const { rows } = await this.$api.orders.getList({
+        search: this.filter.search || undefined,
+        status: this.filter.status || undefined,
+        shipping: this.filter.shipping || undefined,
+      });
+      this.rows = rows;
+    }, 500)
   }
 };
 </script>
@@ -84,6 +116,12 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
+  }
+
+  &--footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
   }
 }
 

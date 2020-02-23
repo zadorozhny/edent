@@ -53,9 +53,11 @@ export default {
         max: 0
       },
       filter: {
+        search: '',
         price: [0, 0],
         manufacturerId: null,
-        categoryId: null
+        categoryId: null,
+        order: 'DESC'
       }
     };
   },
@@ -68,7 +70,9 @@ export default {
     }
   },
   async asyncData({ app }) {
-    const { rows, min, max } = await app.$api.products.getList();
+    const { rows, min, max } = await app.$api.products.getList({
+      order: 'price,DESC'
+    });
     return {
       rows,
       interval: {
@@ -76,11 +80,21 @@ export default {
         max
       },
       filter: {
+        search: '',
         price: [min, max],
         manufacturerId: null,
-        categoryId: null
+        categoryId: null,
+        order: 'DESC'
       }
     };
+  },
+  mounted() {
+    this.$event.$on('search', value => {
+      this.filter = {
+        ...this.filter,
+        search: value
+      };
+    });
   },
   methods: {
     add(product) {
@@ -94,8 +108,10 @@ export default {
     },
     getList: utils.debounce(async function () {
       const { rows } = await this.$api.products.getList({
+        search: this.filter.search || undefined,
         manufacturerId: this.filter.manufacturerId || undefined,
         categoryId: this.filter.categoryId || undefined,
+        order: this.filter.order ? `price,${this.filter.order}` : undefined,
         price: JSON.stringify(this.filter.price)
       });
       this.rows = rows;

@@ -2,10 +2,10 @@
   <section class="page container manufacturers">
     <div class="cover">
       <div class="manufacturers--header">
-        <kit-input placeholder="Поиск" type="search"/>
+        <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
         <kit-button>Создать</kit-button>
       </div>
-      <kit-table class="table" :items="items">
+      <kit-table class="table" :items="rows">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -26,18 +26,38 @@
 </template>
 
 <script>
+import utils from '@/utils';
+
 export default {
   layout: 'admin',
   data() {
     return {
-      items: []
+      rows: [],
+      filter: {
+        search: ''
+      }
     };
   },
+  watch: {
+    filter: {
+      deep: true,
+      handler() {
+        this.getList();
+      }
+    }
+  },
   async asyncData({ app }) {
-    const items = await app.$api.manufacturers.getList();
+    const rows = await app.$api.manufacturers.getList();
     return {
-      items
+      rows
     };
+  },
+  methods: {
+    getList: utils.debounce(async function () {
+      this.rows = await this.$api.manufacturers.getList({
+        search: this.filter.search || undefined
+      });
+    }, 500)
   }
 };
 </script>

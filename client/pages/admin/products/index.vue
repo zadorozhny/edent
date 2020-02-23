@@ -1,9 +1,9 @@
 <template>
   <section class="page container products">
-    <app-filter class="filter" :interval="interval"/>
+    <app-filter v-model="filter" class="filter" :interval="interval"/>
     <div class="cover">
       <div class="products--header">
-        <kit-input placeholder="Поиск" type="search"/>
+        <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
         <nuxt-link tag="a" to="/admin/products/create">
           <kit-button>Создать</kit-button>
         </nuxt-link>
@@ -53,6 +53,7 @@
 
 <script>
 import AppFilter from '@/components/products/Filter';
+import utils from '@/utils';
 
 export default {
   layout: 'admin',
@@ -65,18 +66,54 @@ export default {
       interval: {
         min: 0,
         max: 0
+      },
+      filter: {
+        search: '',
+        price: [0, 0],
+        manufacturerId: null,
+        categoryId: null,
+        order: 'DESC'
       }
     };
   },
+  watch: {
+    filter: {
+      deep: true,
+      handler() {
+        this.getList();
+      }
+    }
+  },
   async asyncData({ app }) {
-    const { rows, min, max } = await app.$api.products.getList();
+    const { rows, min, max } = await app.$api.products.getList({
+      order: 'price,DESC'
+    });
     return {
       rows,
       interval: {
         min,
         max
+      },
+      filter: {
+        search: '',
+        price: [min, max],
+        manufacturerId: null,
+        categoryId: null,
+        order: 'DESC'
       }
     };
+  },
+  methods: {
+    getList: utils.debounce(async function () {
+      const { rows } = await this.$api.products.getList({
+        search: this.filter.search || undefined,
+        manufacturerId: this.filter.manufacturerId || undefined,
+        categoryId: this.filter.categoryId || undefined,
+        order: this.filter.order ? `price,${this.filter.order}` : undefined,
+        price: JSON.stringify(this.filter.price)
+      });
+      this.rows = rows;
+    }, 500)
   }
 };
 </script>

@@ -39,6 +39,7 @@ module.exports = {
     '@/plugins/utils',
     '@/plugins/cookies',
     '@/plugins/initializer',
+    '@/plugins/event',
     { src: '@/plugins/storage', mode: 'client' }
   ],
   modules: [
