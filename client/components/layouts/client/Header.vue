@@ -17,7 +17,13 @@
         </nuxt-link>
       </ul>
       <div class="search">
-        <kit-input type="search" size="compact" placeholder="Поиск" @input="search"/>
+        <kit-input
+          v-if="showSearch"
+          type="search"
+          size="compact"
+          placeholder="Поиск"
+          @input="search"
+        />
       </div>
       <div class="navigation--controls">
         <nuxt-link to="/checkout" class="navigation--cart">
@@ -32,6 +38,11 @@
 
 <script>
 export default {
+  computed: {
+    showSearch() {
+      return this.$router.currentRoute.name === 'products';
+    }
+  },
   methods: {
     search(e) {
       this.$event.$emit('search', e.target.value);
