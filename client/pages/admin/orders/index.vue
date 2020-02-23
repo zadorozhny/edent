@@ -37,7 +37,7 @@
               <span>{{ address }}</span>
             </div>
             <div class="table--section">
-              <span>{{ status }}</span>
+              <span>{{ statuses[status] }}</span>
             </div>
             <div class="table--section">
               <span>{{ createdAt }}</span>
@@ -54,6 +54,7 @@
 
 <script>
 import AppFilter from '@/components/orders/Filter';
+import { statuses } from '@/config';
 import utils from '@/utils';
 
 export default {
@@ -63,6 +64,7 @@ export default {
   },
   data() {
     return {
+      statuses,
       rows: [],
       filter: {
         search: '',
