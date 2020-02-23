@@ -25,9 +25,6 @@
             shopping_cart
           </kit-icon>
         </nuxt-link>
-        <div class="navigation--avatar ripple">
-          <span class="navigation--letters">{{ name || '-' }}</span>
-        </div>
       </div>
     </div>
   </nav>
@@ -35,12 +32,6 @@
 
 <script>
 export default {
-  data: () => ({}),
-  computed: {
-    name() {
-      return this.$store.state.auth.profile.name.charAt(0);
-    }
-  }
 };
 </script>
 
@@ -163,6 +154,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-left: 10px;
     padding: 3px;
     width: 40px;
     height: 40px;
@@ -206,10 +198,6 @@ export default {
   &--controls {
     display: flex;
     align-items: center;
-  }
-
-  &--cart {
-    margin-right: 10px;
   }
 }
 

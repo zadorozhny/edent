@@ -19,7 +19,11 @@ export const actions = {
   },
   async nuxtServerInit({ dispatch }) {
     try {
-      await dispatch('auth/init', this.$cookie.tokens);
+      await Promise.all([
+        dispatch('auth/init', this.$cookie.tokens),
+        dispatch('common/manufacturers'),
+        dispatch('common/categories')
+      ]);
     } catch (err) {
       console.error(err);
     }

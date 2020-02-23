@@ -16,7 +16,7 @@ export default {
     where[Op.and].push(sql`(
       SELECT TRUE
       FROM "ProductToCategories"
-      WHERE "categoryId" = ${categoryId}
+      WHERE "categoryId" = ${categoryId} AND "productId" = "Product"."id"
     )`);
   },
   price(where, { price }) {

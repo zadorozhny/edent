@@ -9,9 +9,6 @@
         <nuxt-link tag="li" to="/admin/products" class="navigation--item">
           <span>Товары</span>
         </nuxt-link>
-        <nuxt-link tag="li" to="/admin/users" class="navigation--item">
-          <span>Пользователи</span>
-        </nuxt-link>
         <nuxt-link tag="li" to="/admin/orders" class="navigation--item">
           <span>Заказы</span>
         </nuxt-link>
@@ -24,7 +21,7 @@
       </ul>
       <div class="navigation--controls">
         <div class="navigation--avatar ripple">
-          <span class="navigation--letters">А</span>
+          <span class="navigation--letters">{{ name || '-' }}</span>
         </div>
       </div>
     </div>
@@ -33,6 +30,11 @@
 
 <script>
 export default {
+  computed: {
+    name() {
+      return this.$store.state.auth.profile.name.charAt(0);
+    }
+  }
 };
 </script>
 

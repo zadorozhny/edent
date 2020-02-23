@@ -4,9 +4,6 @@
     <div class="cover">
       <div class="orders--header">
         <kit-input placeholder="Поиск" type="search"/>
-        <nuxt-link tag="a" to="/admin/orders/create">
-          <kit-button>Создать</kit-button>
-        </nuxt-link>
       </div>
       <kit-table class="table" :items="items">
         <template #header>

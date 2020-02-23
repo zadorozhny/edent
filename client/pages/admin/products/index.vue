@@ -1,6 +1,6 @@
 <template>
   <section class="page container products">
-    <app-filter class="filter"/>
+    <app-filter class="filter" :interval="interval"/>
     <div class="cover">
       <div class="products--header">
         <kit-input placeholder="Поиск" type="search"/>
@@ -8,7 +8,7 @@
           <kit-button>Создать</kit-button>
         </nuxt-link>
       </div>
-      <kit-table class="table" :items="items">
+      <kit-table class="table" :items="rows">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -61,13 +61,21 @@ export default {
   },
   data() {
     return {
-      items: []
+      rows: [],
+      interval: {
+        min: 0,
+        max: 0
+      }
     };
   },
   async asyncData({ app }) {
-    const items = await app.$api.products.getList();
+    const { rows, min, max } = await app.$api.products.getList();
     return {
-      items
+      rows,
+      interval: {
+        min,
+        max
+      }
     };
   }
 };

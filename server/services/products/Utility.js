@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import { models } from '@/database';
 import { service } from '@/lib/decorators';
 
@@ -11,23 +12,37 @@ export default class Utility {
   }
 
   async getList(filters) {
-    const products = await models.Product
-      .scope(
-        { method: ['filter', filters] },
-        { method: ['pagination', filters] }
-      )
-      .findAll({
-        include: [
-          {
-            model: models.Manufacturer,
-            as: 'manufacturer'
-          },
-          {
-            model: models.Category,
-            as: 'categories'
-          }
-        ]
-      });
-    return products;
+    const [{ count, rows }, { min, max }] = await Promise.all([
+      models.Product
+        .scope(
+          { method: ['filter', filters] },
+          { method: ['pagination', filters] }
+        )
+        .findAndCountAll({
+          include: [
+            {
+              model: models.Manufacturer,
+              as: 'manufacturer'
+            },
+            {
+              model: models.Category,
+              as: 'categories'
+            }
+          ]
+        }),
+      models.Product
+        .scope(
+          { method: ['filter', filters] },
+          { method: ['pagination', filters] }
+        )
+        .findOne({
+          attributes: [
+            [Sequelize.fn('max', Sequelize.col('price')), 'max'],
+            [Sequelize.fn('min', Sequelize.col('price')), 'min']
+          ],
+          raw: true
+        })
+    ]);
+    return { count, rows, min, max };
   }
 }

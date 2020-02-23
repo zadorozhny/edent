@@ -10,7 +10,6 @@
           <span class="text_medium">#{{ product.id }}</span>
         </div>
         <div class="product--info">
-          <p class="text_medium">Модель: {{ product.model || '-' }}</p>
           <p class="text_medium">Производитель: {{ product.manufacturer.name }}</p>
         </div>
         <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
@@ -43,13 +42,13 @@ export default {
 <style lang="scss" scoped>
 .product {
   display: grid;
-  grid-template-columns: 50% calc(50% - 20px);
+  grid-template-columns: 50% calc(50% - 40px);
   grid-template-areas:
     "picture content"
     "picture buttons"
     "description description";
   grid-template-rows: auto 120px auto;
-  grid-column-gap: 20px;
+  grid-column-gap: 40px;
   grid-row-gap: 30px;
 
   @media ($phablet) {

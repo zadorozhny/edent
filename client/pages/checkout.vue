@@ -7,7 +7,7 @@
           v-model="order.phone"
           type="phone"
           class="input"
-          placeholder="Phone"
+          placeholder="Телефон"
           mask="+{380} (00) 000-0000"
         />
         <kit-input v-model="order.name" type="text" class="input" placeholder="Имя"/>
@@ -120,6 +120,7 @@ export default {
 .checkout {
   display: grid;
   grid-template-columns: max(360px) 1fr;
+  align-items: flex-start;
   column-gap: 60px;
 
   @media ($tablet) {

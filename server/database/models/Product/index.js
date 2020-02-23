@@ -13,10 +13,6 @@ export default class Product extends Model {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    model: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
     price: {
       type: DataTypes.FLOAT,
       allowNull: false

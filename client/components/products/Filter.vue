@@ -1,14 +1,14 @@
 <template>
   <div class="filter">
-    <kit-slider v-model="value" :min="0" :max="1000"/>
+    <kit-slider v-if="interval.max" v-model="proxy.price" :min="interval.min" :max="interval.max"/>
     <kit-select
-      v-model="selectValue"
-      :options="selectOptions"
+      v-model="proxy.categoryId"
+      :options="categories"
       placeholder="Категории"
     />
     <kit-select
-      v-model="selectValue"
-      :options="selectOptions"
+      v-model="proxy.manufacturerId"
+      :options="manufacturers"
       placeholder="Производители"
     />
     <kit-label-group>
@@ -24,13 +24,33 @@
 
 <script>
 export default {
+  props: {
+    value: { type: Object, default: () => ({}) },
+    interval: {
+      type: Object,
+      default: () => ({ min: 0, max: 0 })
+    }
+  },
   data() {
     return {
-      selectValue: null,
-      selectOptions: [1, 2, 3],
       option: 'ex',
-      value: [1, 200]
     };
+  },
+  computed: {
+    proxy: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit('input', value);
+      }
+    },
+    manufacturers() {
+      return this.$store.state.common.manufacturers;
+    },
+    categories() {
+      return this.$store.state.common.categories;
+    }
   }
 };
 </script>

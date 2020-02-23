@@ -1,21 +1,21 @@
 <template>
   <section class="page container products">
-    <app-filter class="filter"/>
+    <app-filter v-model="filter" :interval="interval" class="filter"/>
     <div class="cover">
       <nuxt-link
-        v-for="(card, index) in cards"
+        v-for="(row, index) in rows"
         :key="index"
-        :to="`/products/${card.id}`"
+        :to="`/products/${row.id}`"
         tag="a"
       >
         <kit-card
-          :image="card.image"
-          :title="card.name"
-          :price="card.price"
+          :image="row.image"
+          :title="row.name"
+          :price="row.price"
         >
           <template #controls>
             <div class="card_controls">
-              <kit-icon class="card_controls--cart" size="regular" @click.prevent="add(card)">
+              <kit-icon class="card_controls--cart" size="regular" @click.prevent="add(row)">
                 add_shopping_cart
               </kit-icon>
             </div>
@@ -38,6 +38,7 @@
 
 <script>
 import AppFilter from '@/components/products/Filter';
+import utils from '@/utils';
 
 export default {
   components: {
@@ -46,14 +47,39 @@ export default {
   data() {
     return {
       option: 'ex',
-      value: [1, 200],
-      cards: []
+      rows: [],
+      interval: {
+        min: 0,
+        max: 0
+      },
+      filter: {
+        price: [0, 0],
+        manufacturerId: null,
+        categoryId: null
+      }
     };
   },
+  watch: {
+    filter: {
+      deep: true,
+      handler() {
+        this.getList();
+      }
+    }
+  },
   async asyncData({ app }) {
-    const cards = await app.$api.products.getList();
+    const { rows, min, max } = await app.$api.products.getList();
     return {
-      cards
+      rows,
+      interval: {
+        min,
+        max
+      },
+      filter: {
+        price: [min, max],
+        manufacturerId: null,
+        categoryId: null
+      }
     };
   },
   methods: {
@@ -65,7 +91,15 @@ export default {
         products[product.id] = { ...product, count: 1 };
       }
       this.$storage.products = products;
-    }
+    },
+    getList: utils.debounce(async function () {
+      const { rows } = await this.$api.products.getList({
+        manufacturerId: this.filter.manufacturerId || undefined,
+        categoryId: this.filter.categoryId || undefined,
+        price: JSON.stringify(this.filter.price)
+      });
+      this.rows = rows;
+    }, 500)
   }
 };
 </script>
