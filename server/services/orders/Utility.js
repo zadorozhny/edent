@@ -44,7 +44,8 @@ export default class Utility {
               attributes: ['id', 'name'],
             }]
           }
-        ]
+        ],
+        distinct: true
       });
     return { rows, count };
   }

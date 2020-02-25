@@ -12,7 +12,6 @@ export default class Utility {
   }
 
   async getList(filters) {
-    console.log(filters);
     const [{ count, rows }, { min, max }] = await Promise.all([
       models.Product
         .scope(
@@ -30,7 +29,8 @@ export default class Utility {
               model: models.Category,
               as: 'categories'
             }
-          ]
+          ],
+          distinct: true
         }),
       models.Product
         .scope(

@@ -38,7 +38,10 @@
 
 <script>
 import AppFilter from '@/components/products/Filter';
-import utils from '@/utils';
+// import utils from '@/utils';
+
+const LIMIT = 2;
+const TOLERANCE = 50;
 
 export default {
   components: {
@@ -48,6 +51,7 @@ export default {
     return {
       option: 'ex',
       rows: [],
+      count: 0,
       interval: {
         min: 0,
         max: 0
@@ -58,23 +62,56 @@ export default {
         manufacturerId: null,
         categoryId: null,
         order: 'DESC'
+      },
+      pagination: {
+        offset: 0,
+        limit: LIMIT
       }
     };
+  },
+  computed: {
+    debounce() {
+      return this.$utils.debounce(this.getList, 200);
+    },
+    throttle() {
+      return this.$utils.throttle(this.getList, 300);
+    }
   },
   watch: {
     filter: {
       deep: true,
       handler() {
-        this.getList();
+        if (this.pagination.offset) {
+          this.pagination.offset = 0;
+        }
+        this.debounce();
+      }
+    },
+    rows: {
+      immediate: true,
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
+          if (
+            document.body.scrollHeight === window.innerHeight
+            && this.rows.length < this.count
+            && this.rows.length
+          ) {
+            this.getList();
+          }
+        });
       }
     }
   },
   async asyncData({ app }) {
-    const { rows, min, max } = await app.$api.products.getList({
-      order: 'price,DESC'
+    const { rows, count, min, max } = await app.$api.products.getList({
+      order: 'price,DESC',
+      offset: 0,
+      limit: LIMIT
     });
     return {
       rows,
+      count,
       interval: {
         min,
         max
@@ -85,10 +122,26 @@ export default {
         manufacturerId: null,
         categoryId: null,
         order: 'DESC'
+      },
+      pagination: {
+        offset: rows.length,
+        limit: LIMIT
       }
     };
   },
   mounted() {
+    let disabled = false;
+    document.addEventListener('scroll', () => {
+      if (!disabled && window.pageYOffset + TOLERANCE > document.body.scrollHeight - window.innerHeight) {
+        disabled = true;
+        if (this.count > this.pagination.offset) {
+          this.throttle();
+          this.$nextTick(() => {
+            disabled = false;
+          });
+        }
+      }
+    });
     this.$event.$on('search', value => {
       this.filter = {
         ...this.filter,
@@ -106,16 +159,24 @@ export default {
       }
       this.$storage.products = products;
     },
-    getList: utils.debounce(async function () {
-      const { rows } = await this.$api.products.getList({
+    async getList() {
+      const { rows, count } = await this.$api.products.getList({
         search: this.filter.search || undefined,
         manufacturerId: this.filter.manufacturerId || undefined,
         categoryId: this.filter.categoryId || undefined,
         order: this.filter.order ? `price,${this.filter.order}` : undefined,
-        price: JSON.stringify(this.filter.price)
+        price: JSON.stringify(this.filter.price),
+        limit: this.pagination.limit,
+        offset: this.pagination.offset
       });
-      this.rows = rows;
-    }, 500)
+      if (this.pagination.offset) {
+        this.rows.push(...rows);
+      } else {
+        this.rows = rows;
+      }
+      this.count = count;
+      this.pagination.offset = Math.min(this.count, this.pagination.offset + rows.length);
+    }
   }
 };
 </script>
