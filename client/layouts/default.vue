@@ -2,6 +2,7 @@
   <div class="layout">
     <app-header/>
     <nuxt/>
+    <kit-modal-target/>
   </div>
 </template>
 

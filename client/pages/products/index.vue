@@ -1,6 +1,6 @@
 <template>
   <section class="page container products">
-    <app-filter v-model="filter" :interval="interval" class="filter"/>
+    <app-filter v-model="filter" :interval="interval" class="products--filter"/>
     <div class="cover">
       <nuxt-link
         v-for="(row, index) in rows"
@@ -23,22 +23,18 @@
         </kit-card>
       </nuxt-link>
     </div>
-    <span class="control control-left">
-      <kit-icon size="large">
-        filter_list
-      </kit-icon>
-    </span>
-    <span class="control control-right">
-      <kit-icon size="large">
-        keyboard_arrow_up
-      </kit-icon>
-    </span>
+    <kit-modal
+      v-if="modals.filter && $mq !== 'desktop'"
+      name="notifications"
+      @close="modals.filter = false"
+    >
+      <app-filter v-model="filter" :interval="interval"/>
+    </kit-modal>
   </section>
 </template>
 
 <script>
 import AppFilter from '@/components/products/Filter';
-// import utils from '@/utils';
 
 const LIMIT = 2;
 const TOLERANCE = 50;
@@ -49,6 +45,9 @@ export default {
   },
   data() {
     return {
+      modals: {
+        filter: false
+      },
       option: 'ex',
       rows: [],
       count: 0,
@@ -130,8 +129,27 @@ export default {
     };
   },
   mounted() {
-    let disabled = false;
-    document.addEventListener('scroll', () => {
+    document.addEventListener('scroll', this.scroll.bind(this));
+    this.$event.$on('search', value => {
+      this.filter = {
+        ...this.filter,
+        search: value
+      };
+    });
+    this.$event.$on('show_filter', () => {
+      this.modals = {
+        filter: !this.modals.filter
+      };
+    });
+  },
+  destroyed() {
+    document.removeEventListener('scroll', this.scroll.bind(this));
+    this.$event.$off('search');
+    this.$event.$off('show_filter');
+  },
+  methods: {
+    scroll() {
+      let disabled = false;
       if (!disabled && window.pageYOffset + TOLERANCE > document.body.scrollHeight - window.innerHeight) {
         disabled = true;
         if (this.count > this.pagination.offset) {
@@ -141,15 +159,7 @@ export default {
           });
         }
       }
-    });
-    this.$event.$on('search', value => {
-      this.filter = {
-        ...this.filter,
-        search: value
-      };
-    });
-  },
-  methods: {
+    },
     add(product) {
       const products = { ...this.$storage.products };
       if (products[product.id]) {
@@ -160,22 +170,30 @@ export default {
       this.$storage.products = products;
     },
     async getList() {
-      const { rows, count } = await this.$api.products.getList({
-        search: this.filter.search || undefined,
-        manufacturerId: this.filter.manufacturerId || undefined,
-        categoryId: this.filter.categoryId || undefined,
-        order: this.filter.order ? `price,${this.filter.order}` : undefined,
-        price: JSON.stringify(this.filter.price),
-        limit: this.pagination.limit,
-        offset: this.pagination.offset
-      });
-      if (this.pagination.offset) {
-        this.rows.push(...rows);
-      } else {
-        this.rows = rows;
+      try {
+        this.$nuxt.$loading.start();
+        const { rows, count } = await this.$api.products.getList({
+          search: this.filter.search || undefined,
+          manufacturerId: this.filter.manufacturerId || undefined,
+          categoryId: this.filter.categoryId || undefined,
+          order: this.filter.order ? `price,${this.filter.order}` : undefined,
+          price: JSON.stringify(this.filter.price),
+          limit: this.pagination.limit,
+          offset: this.pagination.offset
+        });
+        if (this.pagination.offset) {
+          this.rows.push(...rows);
+        } else {
+          this.rows = rows;
+        }
+        this.count = count;
+        this.pagination.offset = Math.min(this.count, this.pagination.offset + rows.length);
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        console.error(err);
+      } finally {
+        this.$nuxt.$loading.finish();
       }
-      this.count = count;
-      this.pagination.offset = Math.min(this.count, this.pagination.offset + rows.length);
     }
   }
 };
@@ -187,11 +205,14 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-}
 
-.filter {
-  @media ($tablet) {
-    display: none;
+  &--filter {
+    position: sticky;
+    top: 71px;
+
+    @media ($tablet) {
+      display: none;
+    }
   }
 }
 

@@ -64,10 +64,9 @@ export default {
 
 <style lang="scss" scoped>
 .filter {
-  position: sticky;
-  top: 71px;
   display: grid;
   grid-row-gap: 40px;
+  align-items: flex-start;
   padding: 10px;
   margin-right: 30px;
   min-width: 270px;
@@ -75,5 +74,16 @@ export default {
   box-sizing: border-box;
   background: $light;
   box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
+
+  @media ($tablet) {
+    position: relative;
+    margin-right: 0;
+    padding: 25px 10px;
+    top: 45px;
+    width: 100%;
+    height: calc(100% - 90px);
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 </style>

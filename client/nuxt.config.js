@@ -40,6 +40,7 @@ module.exports = {
     '@/plugins/cookies',
     '@/plugins/initializer',
     '@/plugins/event',
+    { src: '@/plugins/mq', mode: 'client' },
     { src: '@/plugins/storage', mode: 'client' }
   ],
   modules: [

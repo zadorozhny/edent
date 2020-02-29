@@ -16,6 +16,11 @@ import Icon from '@/kit/views/Icon';
 import Table from '@/kit/views/Table';
 import Spinner from '@/kit/views/Spinner';
 
+import Modal from '@/kit/portals/Modal';
+import ModalsTarget from '@/kit/portals/ModalsTarget';
+
+import TransitionModal from '@/kit/transitions/Modal';
+
 export default Vue => {
   Vue.component(Slider.name, Slider);
   Vue.component(Select.name, Select);
@@ -34,4 +39,9 @@ export default Vue => {
   Vue.component(Icon.name, Icon);
   Vue.component(Table.name, Table);
   Vue.component(Spinner.name, Spinner);
+
+  Vue.component(Modal.name, Modal);
+  Vue.component(ModalsTarget.name, ModalsTarget);
+
+  Vue.component(TransitionModal.name, TransitionModal);
 };

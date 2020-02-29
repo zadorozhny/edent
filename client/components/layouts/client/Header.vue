@@ -1,29 +1,35 @@
 <template>
   <nav class="navigation">
     <div class="navigation--wrapper">
-      <nuxt-link tag="div" to="/products" class="navigation--logo">
-        <img class="navigation--image" src="~assets/images/logo.svg">
-        <h1 class="navigation--title">edent</h1>
-      </nuxt-link>
-      <ul class="navigation--list">
-        <nuxt-link tag="li" to="/products" class="navigation--item">
-          <span>Товары</span>
+      <div class="navigation--links">
+        <nuxt-link tag="div" to="/products" class="navigation--logo">
+          <img class="navigation--image" src="~assets/images/logo.svg">
+          <h1 class="navigation--title">edent</h1>
         </nuxt-link>
-        <nuxt-link tag="li" to="/shipping" class="navigation--item">
-          <span>Доставка и Оплата</span>
-        </nuxt-link>
-        <nuxt-link tag="li" to="/contacts" class="navigation--item">
-          <span>Контакты</span>
-        </nuxt-link>
-      </ul>
-      <div class="search">
+        <ul class="navigation--list">
+          <nuxt-link tag="li" to="/products" class="navigation--item">
+            <span>Товары</span>
+          </nuxt-link>
+          <nuxt-link tag="li" to="/shipping" class="navigation--item">
+            <span>Доставка и Оплата</span>
+          </nuxt-link>
+          <nuxt-link tag="li" to="/contacts" class="navigation--item">
+            <span>Контакты</span>
+          </nuxt-link>
+        </ul>
+      </div>
+      <div v-if="products" class="filters">
         <kit-input
-          v-if="showSearch"
           type="search"
           size="compact"
           placeholder="Поиск"
           @input="search"
         />
+        <div class="filters--icon" @click="showFilter">
+          <kit-icon>
+            filter_list
+          </kit-icon>
+        </div>
       </div>
       <div class="navigation--controls">
         <nuxt-link to="/checkout" class="navigation--cart">
@@ -39,27 +45,40 @@
 <script>
 export default {
   computed: {
-    showSearch() {
+    products() {
       return this.$router.currentRoute.name === 'products';
     }
   },
   methods: {
     search(e) {
       this.$event.$emit('search', e.target.value);
+    },
+    showFilter() {
+      this.$event.$emit('show_filter');
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.search {
+.filters {
+  display: flex;
   height: 36px;
   width: 340px;
+
+  &--icon {
+    display: none;
+  }
 
   @media ($tablet) {
     order: 2;
     width: 100%;
-    height: 34px;
+    height: 40px;
+
+    &--icon {
+      display: block;
+      margin-left: 10px;
+    }
   }
 }
 
@@ -105,6 +124,15 @@ export default {
     }
   }
 
+  &--links {
+    display: flex;
+    height: 100%;
+
+    @media ($tablet) {
+      height: auto;
+    }
+  }
+
   &--logo {
     display: flex;
     align-items: center;
@@ -131,6 +159,7 @@ export default {
   &--list {
     display: flex;
     align-items: center;
+    margin-left: 80px;
     height: 100%;
 
     @media ($tablet) {
