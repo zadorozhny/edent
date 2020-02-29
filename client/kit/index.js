@@ -18,8 +18,13 @@ import Spinner from '@/kit/views/Spinner';
 
 import Modal from '@/kit/portals/Modal';
 import ModalsTarget from '@/kit/portals/ModalsTarget';
+import Alert, { AlertWormhole } from '@/kit/portals/Alert';
+import AlertTarget from '@/kit/portals/AlertTarget';
 
 import TransitionModal from '@/kit/transitions/Modal';
+import TransitionAlert from '@/kit/transitions/Alert';
+
+export { AlertWormhole };
 
 export default Vue => {
   Vue.component(Slider.name, Slider);
@@ -42,6 +47,9 @@ export default Vue => {
 
   Vue.component(Modal.name, Modal);
   Vue.component(ModalsTarget.name, ModalsTarget);
+  Vue.component(Alert.name, Alert);
+  Vue.component(AlertTarget.name, AlertTarget);
 
   Vue.component(TransitionModal.name, TransitionModal);
+  Vue.component(TransitionAlert.name, TransitionAlert);
 };

@@ -102,15 +102,24 @@ export default {
       }
       this.$storage.products = products;
     },
-    create() {
-      this.$api.orders.create({
-        email: this.order.email,
-        phone: this.order.phone,
-        name: this.order.name,
-        shipping: this.order.shipping,
-        address: `${this.order.city} ${this.order.post}`,
-        products: this.products
-      });
+    async create() {
+      try {
+        this.$nuxt.$loading.start();
+        await this.$api.orders.create({
+          email: this.order.email,
+          phone: this.order.phone,
+          name: this.order.name,
+          shipping: this.order.shipping,
+          address: `${this.order.city} ${this.order.post}`,
+          products: this.products
+        });
+        this.$alert.success('Заказ создан');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };

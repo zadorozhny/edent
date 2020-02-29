@@ -3,6 +3,7 @@
     <app-header/>
     <nuxt/>
     <kit-modal-target/>
+    <kit-alert-target/>
   </div>
 </template>
 

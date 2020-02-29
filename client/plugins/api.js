@@ -21,8 +21,9 @@ export default ({ store }, inject) => {
           return store.dispatch('auth/refresh')
             .then(() => axios.request(error.config));
         }
+        throw new Error(error.message || 'Ошибка сервера');
       } else {
-        throw new Error(error.message || 'error.network');
+        throw new Error(error.message || 'Ошибка сервера');
       }
     }
   );

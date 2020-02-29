@@ -47,3 +47,17 @@ $mobile: "max-width: #{$mobile-width - 1px}";
      @media (min-width: 420px)  { @content ; }
   }
 }
+
+@mixin clamp($rows: 1) {
+  @if $rows == 1 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-inline-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $rows;
+    overflow: hidden;
+  }
+}

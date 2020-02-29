@@ -190,7 +190,7 @@ export default {
         this.pagination.offset = Math.min(this.count, this.pagination.offset + rows.length);
       } catch (err) {
         this.$nuxt.$loading.finish();
-        console.error(err);
+        this.$alert.error(err.message);
       } finally {
         this.$nuxt.$loading.finish();
       }
