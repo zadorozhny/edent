@@ -7,7 +7,11 @@
     :show-labels="false"
     :placeholder="placeholder"
     @select="select"
-  />
+  >
+    <template slot="option" slot-scope="props">
+      {{ label(props.option) }}
+    </template>
+  </multiselect>
 </template>
 
 <script>
@@ -27,6 +31,9 @@ export default {
     placeholder: { type: String, default: '' },
   },
   methods: {
+    label(value) {
+      return this.options.find(item => item.id === value).name;
+    },
     select(value) {
       this.$emit('input', value);
     }
@@ -46,6 +53,7 @@ export default {
   }
 
   &__single {
+    padding: 0;
     font-size: 14px;
   }
 

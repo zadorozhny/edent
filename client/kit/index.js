@@ -3,6 +3,7 @@ import Select from '@/kit/inputs/Select';
 import Choice from '@/kit/inputs/Choice';
 import Input from '@/kit/inputs/Input';
 import ImageUploader from '@/kit/inputs/ImageUploader';
+import TreeSelect from '@/kit/inputs/TreeSelect';
 
 import Button from '@/kit/controls/Button';
 import Tabs from '@/kit/controls/Tabs';
@@ -21,6 +22,7 @@ export default Vue => {
   Vue.component(Choice.name, Choice);
   Vue.component(Input.name, Input);
   Vue.component(ImageUploader.name, ImageUploader);
+  Vue.component(TreeSelect.name, TreeSelect);
 
   Vue.component(Button.name, Button);
   Vue.component(Tabs.name, Tabs);

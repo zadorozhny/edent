@@ -1,7 +1,7 @@
 <template>
   <div class="filter">
     <kit-slider v-if="interval.max" v-model="proxy.price" :min="interval.min" :max="interval.max"/>
-    <kit-select
+    <kit-tree-select
       v-model="proxy.categoryId"
       :options="categories"
       placeholder="Категории"
@@ -41,10 +41,22 @@ export default {
       }
     },
     manufacturers() {
-      return this.$store.state.common.manufacturers;
+      return [
+        {
+          id: 0,
+          name: 'Все'
+        },
+        ...this.$store.state.common.manufacturers
+      ];
     },
     categories() {
-      return this.$store.state.common.categories;
+      return [
+        {
+          id: 0,
+          name: 'Все'
+        },
+        ...this.$store.state.common.categories
+      ];
     }
   }
 };

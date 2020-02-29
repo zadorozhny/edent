@@ -13,7 +13,9 @@ export default class Utility {
       .scope(
         { method: ['filter', filters] }
       )
-      .findAll();
+      .findAll({
+        hierarchy: true
+      });
     return categories;
   }
 }
