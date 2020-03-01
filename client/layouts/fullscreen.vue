@@ -1,17 +1,34 @@
 <template>
   <div class="layout">
-    <app-header/>
+    <app-header @navigation="modals.navigation = true"/>
     <nuxt/>
+    <template v-if="$mq !== 'desktop'">
+      <kit-menu v-if="modals.navigation" direction="left" name="menu" @close="modals.navigation = false">
+        <navbar class="layout--navbar" @close="modals.navigation = false"/>
+      </kit-menu>
+    </template>
+    <kit-menu-target/>
+    <kit-modal-target/>
+    <kit-alert-target/>
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/layouts/client/Header';
+import Navbar from '@/components/layouts/client/Navbar';
 
 export default {
   components: {
-    AppHeader
+    AppHeader,
+    Navbar
   },
+  data() {
+    return {
+      modals: {
+        navigation: false
+      }
+    };
+  }
 };
 </script>
 

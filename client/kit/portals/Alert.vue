@@ -35,9 +35,9 @@ export default {
       case 'error':
         return 'error_outline';
       case 'success':
-        return 'done';
+        return 'done_all';
       default:
-        return 'done';
+        return 'done_all';
       }
     }
   }

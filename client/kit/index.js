@@ -20,9 +20,12 @@ import Modal from '@/kit/portals/Modal';
 import ModalsTarget from '@/kit/portals/ModalsTarget';
 import Alert, { AlertWormhole } from '@/kit/portals/Alert';
 import AlertTarget from '@/kit/portals/AlertTarget';
+import Menu from '@/kit/portals/Menu';
+import MenuTarget from '@/kit/portals/MenuTarget';
 
 import TransitionModal from '@/kit/transitions/Modal';
 import TransitionAlert from '@/kit/transitions/Alert';
+import TransitionMenu from '@/kit/transitions/Menu';
 
 export { AlertWormhole };
 
@@ -49,7 +52,10 @@ export default Vue => {
   Vue.component(ModalsTarget.name, ModalsTarget);
   Vue.component(Alert.name, Alert);
   Vue.component(AlertTarget.name, AlertTarget);
+  Vue.component(Menu.name, Menu);
+  Vue.component(MenuTarget.name, MenuTarget);
 
   Vue.component(TransitionModal.name, TransitionModal);
   Vue.component(TransitionAlert.name, TransitionAlert);
+  Vue.component(TransitionMenu.name, TransitionMenu);
 };

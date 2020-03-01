@@ -2,10 +2,18 @@
   <nav class="navigation">
     <div class="navigation--wrapper">
       <div class="navigation--links">
-        <nuxt-link tag="div" to="/products" class="navigation--logo">
-          <img class="navigation--image" src="~assets/images/logo.svg">
-          <h1 class="navigation--title">edent</h1>
-        </nuxt-link>
+        <div class="navigation--main">
+          <kit-icon
+            v-if="$mq !== 'desktop'"
+            @click="$emit('navigation')"
+          >
+            menu
+          </kit-icon>
+          <nuxt-link tag="div" to="/products" class="navigation--logo">
+            <img v-if="$mq === 'desktop'" class="navigation--image" src="~assets/images/logo.svg">
+            <h1 class="navigation--title">edent</h1>
+          </nuxt-link>
+        </div>
         <ul class="navigation--list">
           <nuxt-link tag="li" to="/products" class="navigation--item">
             <span>Товары</span>
@@ -124,6 +132,11 @@ export default {
     }
   }
 
+  &--main {
+    display: flex;
+    align-items: center;
+  }
+
   &--links {
     display: flex;
     height: 100%;
@@ -153,6 +166,7 @@ export default {
     margin-left: 7px;
     font-size: 18px;
     font-weight: 600;
+    line-height: 0.8;
     text-transform: uppercase;
   }
 
