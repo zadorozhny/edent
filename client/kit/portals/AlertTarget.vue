@@ -24,7 +24,7 @@ export default {
 
 <style lang="scss" scoped>
 .alert_target {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   display: flex;

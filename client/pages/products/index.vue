@@ -36,7 +36,7 @@
 <script>
 import AppFilter from '@/components/products/Filter';
 
-const LIMIT = 2;
+const LIMIT = 20;
 const TOLERANCE = 50;
 
 export default {
@@ -168,6 +168,7 @@ export default {
         products[product.id] = { ...product, count: 1 };
       }
       this.$storage.products = products;
+      this.$alert.success('Товар добавлен');
     },
     async getList() {
       try {

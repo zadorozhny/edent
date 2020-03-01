@@ -1,6 +1,6 @@
 <template>
   <nav class="navigation">
-    <div class="navigation--wrapper">
+    <div :class="['navigation--wrapper', { 'navigation--wrapper-large': products }]">
       <div class="navigation--links">
         <div class="navigation--main">
           <kit-icon
@@ -52,9 +52,16 @@
 
 <script>
 export default {
-  computed: {
-    products() {
-      return this.$router.currentRoute.name === 'products';
+  data() {
+    return {
+      products: this.$router.currentRoute.name === 'products'
+    };
+  },
+  watch: {
+    '$route.path': {
+      handler() {
+        this.products = this.$router.currentRoute.name === 'products';
+      }
     }
   },
   methods: {
@@ -129,6 +136,15 @@ export default {
       flex-wrap: wrap;
       padding: 0 10px;
       height: $mobile-navigation;
+    }
+
+    &-large {
+      @media ($tablet) {
+        align-items: unset;
+        flex-wrap: wrap;
+        padding: 0 10px;
+        height: $mobile-navigation-large;
+      }
     }
   }
 

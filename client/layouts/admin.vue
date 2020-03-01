@@ -2,6 +2,7 @@
   <div class="layout">
     <app-header/>
     <nuxt/>
+    <kit-alert-target/>
   </div>
 </template>
 

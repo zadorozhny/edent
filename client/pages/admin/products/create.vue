@@ -5,7 +5,7 @@
     </div>
     <div class="product--content">
       <kit-input v-model="product.name" placeholder="Название"/>
-      <kit-select
+      <kit-tree-select
         v-model="product.categoryId"
         :options="categories"
         placeholder="Категория"
@@ -57,7 +57,17 @@ export default {
   },
   methods: {
     create() {
-      this.$api.products.create(this.product);
+      try {
+        this.$nuxt.$loading.start();
+        this.$api.products.create(this.product);
+        this.$alert.success('Товар создан');
+        this.$router.push('admin/products');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };

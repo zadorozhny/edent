@@ -15,8 +15,8 @@
         <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
       </div>
       <div class="buttons">
-        <kit-button type="success" class="button">Купить</kit-button>
-        <kit-button class="button">В корзину</kit-button>
+        <kit-button type="success" class="button" @click="buy">Купить</kit-button>
+        <kit-button class="button" @click="add">В корзину</kit-button>
       </div>
       <p class="product--description text_medium">
         <span class="text_bold">Описание:</span> {{ product.description }}
@@ -35,6 +35,25 @@ export default {
     return {
       product
     };
+  },
+  methods: {
+    save() {
+      const products = { ...this.$storage.products };
+      if (products[this.product.id]) {
+        products[this.product.id].count += 1;
+      } else {
+        products[this.product.id] = { ...this.product, count: 1 };
+      }
+      this.$storage.products = products;
+    },
+    add() {
+      this.save();
+      this.$alert.success('Товар добавлен');
+    },
+    buy() {
+      this.save();
+      this.$router.push('/checkout');
+    }
   }
 };
 </script>

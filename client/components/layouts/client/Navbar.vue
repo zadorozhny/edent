@@ -51,6 +51,7 @@ export default {
   background-color: $dark;
   color: $light;
   box-sizing: border-box;
+  overflow: auto;
 
   &--header {
     position: relative;

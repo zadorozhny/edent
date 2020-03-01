@@ -80,7 +80,7 @@ export default {
   width: 100%;
   height: 100%;
   border-radius: 5px;
-  background-color: $fill;
+  background-color: $light;
   cursor: pointer;
   overflow: hidden;
 
@@ -105,7 +105,7 @@ export default {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: filter .3s ease-out;
 
       .loading & {

@@ -27,13 +27,21 @@ export default {
         this.$emit('close');
       }
     }
+  },
+  mounted() {
+    const [element] = document.getElementsByTagName('body');
+    element.classList.add('stop_scrolling');
+  },
+  destroyed() {
+    const [element] = document.getElementsByTagName('body');
+    element.classList.remove('stop_scrolling');
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;

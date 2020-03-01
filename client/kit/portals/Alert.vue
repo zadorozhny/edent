@@ -102,7 +102,7 @@ export const AlertWormhole = {
   grid-template-columns: auto minmax(0, 1fr) auto;
   grid-gap: 10px;
   align-items: center;
-  min-width: 320px;
+  min-width: 300px;
   max-width: 100%;
   height: 48px;
   padding: 8px 10px;
@@ -110,6 +110,7 @@ export const AlertWormhole = {
   border-radius: 4px;
   background-color: $light;
   box-shadow: 1px 1px 5px rgba(#4A4A4A, .2);
+  box-sizing: border-box;
   pointer-events: auto;
 
   @media ($mobile) {
