@@ -21,7 +21,7 @@ export default {
     event: 'update'
   },
   props: {
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     size: {
       type: String,
       default: 'regular',

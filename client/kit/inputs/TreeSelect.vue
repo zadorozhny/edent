@@ -65,7 +65,7 @@ export default {
     width: auto;
     height: 48px;
     padding: 0 8px;
-    border-color: #e8e8e8 !important;
+    border-color: #cfdbdf !important;
     box-shadow: none !important;
   }
 

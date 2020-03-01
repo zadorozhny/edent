@@ -22,7 +22,20 @@ export default class Utility {
   }
 
   async getOne(id) {
-    const order = await models.Order.findByPk(id);
+    const order = await models.Order.findByPk(id, {
+      include: [
+        {
+          model: models.OrderToProducts,
+          as: 'products',
+          attributes: ['price', 'count'],
+          include: [{
+            model: models.Product,
+            as: 'product',
+            attributes: ['id', 'name'],
+          }]
+        }
+      ]
+    });
     return order;
   }
 

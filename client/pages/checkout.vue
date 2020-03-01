@@ -23,7 +23,7 @@
       <div class="checkout--group">
         <kit-input v-model="order.city" type="name" class="input" placeholder="Город"/>
         <kit-input
-          v-model="order.post" type="number" class="input" placeholder="Номер отделения"
+          v-model="order.address" type="number" class="input" placeholder="Номер отделения"
           :mask="Number"
         />
       </div>
@@ -81,7 +81,7 @@ export default {
       name: '',
       shipping: '',
       city: '',
-      post: ''
+      address: ''
     }
   }),
   computed: {
@@ -110,7 +110,8 @@ export default {
           phone: this.order.phone,
           name: this.order.name,
           shipping: this.order.shipping,
-          address: `${this.order.city} ${this.order.post}`,
+          city: this.order.city,
+          address: this.order.address,
           products: this.products
         });
         this.$alert.success('Заказ создан');

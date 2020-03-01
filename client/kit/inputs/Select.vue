@@ -68,6 +68,7 @@ export default {
   &__tags {
     height: 48px;
     padding-top: 13px;
+    border-color: #cfdbdf;
   }
 
   &__placeholder {

@@ -30,6 +30,10 @@ export const up = async (queryInterface, Sequelize) => {
         type: Sequelize.ENUM(shipping),
         allowNull: false
       },
+      city: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       address: {
         type: Sequelize.STRING,
         allowNull: false

@@ -26,7 +26,7 @@
           </div>
         </template>
         <template #default="{ id, phone, address, status, createdAt }">
-          <div class="table--item">
+          <nuxt-link class="table--item" :to="`orders/${id}`">
             <div class="table--section">
               <span>{{ id }}</span>
             </div>
@@ -42,7 +42,7 @@
             <div class="table--section">
               <span>{{ createdAt }}</span>
             </div>
-          </div>
+          </nuxt-link>
         </template>
       </kit-table>
       <div class="orders--footer">

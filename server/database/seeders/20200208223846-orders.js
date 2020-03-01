@@ -6,7 +6,8 @@ const orders = [
     phone: '+380982784979',
     name: 'Artem',
     shipping: 'post',
-    address: 'Karkiv 40',
+    city: 'Karkiv',
+    address: '40',
     discount: null,
     userId: null
   }

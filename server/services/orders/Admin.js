@@ -19,9 +19,29 @@ export default class Admin extends Utility {
         throw new ServiceError('not found', ERRORS.ORDER_NOT_FOUND);
       }
       await models.OrderToProducts.bulkCreate(
-        products.map(data => ({ ...data, orderId: order.id })),
+        products.reduce((acc, item) => {
+          if (!item.deleted) {
+            acc.push({ ...item, productId: item.product.id, orderId: order.id });
+          }
+          return acc;
+        }, []),
         { updateOnDuplicate: ['count', 'price'], transaction }
       );
+      const ids = products.reduce((ids, item) => {
+        if (item.deleted) {
+          ids.push(item.product.id);
+        }
+        return ids;
+      }, []);
+      if (ids.length) {
+        await models.OrderToProducts.destroy({
+          transaction,
+          where: {
+            productId: ids,
+            orderId: order.id
+          }
+        });
+      }
       await transaction.commit();
       return order;
     } catch (err) {

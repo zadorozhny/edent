@@ -4,7 +4,7 @@
       <slot name="header"/>
     </div>
     <div v-for="(item, index) in items" :key="index" class="table--item">
-      <slot v-bind="item"/>
+      <slot v-bind="{ ...item, index }"/>
     </div>
     <slot name="footer"/>
   </div>

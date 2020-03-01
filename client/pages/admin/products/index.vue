@@ -25,8 +25,8 @@
             </div>
           </div>
         </template>
-        <template #default="{ id, name, price }">
-          <div class="table--item">
+        <template #default="{ id, name, price, isHidden }">
+          <nuxt-link class="table--item" :to="`products/${id}`">
             <div class="table--section">
               <span>{{ id }}</span>
             </div>
@@ -37,11 +37,11 @@
               <span>{{ price }}</span>
             </div>
             <div class="table--section">
-              <kit-icon>
+              <kit-icon :class="{ 'icon-hidden': isHidden }" @click.prevent="hide(id)">
                 remove_red_eye
               </kit-icon>
             </div>
-          </div>
+          </nuxt-link>
         </template>
       </kit-table>
       <div class="products--footer">
@@ -113,7 +113,20 @@ export default {
         price: JSON.stringify(this.filter.price)
       });
       this.rows = rows;
-    }, 500)
+    }, 500),
+    hide(id) {
+      const product = this.rows.find(product => product.id === id);
+      product.isHidden = !product.isHidden;
+      try {
+        this.$api.products.update({
+          productId: id,
+          isHidden: product.isHidden
+        });
+      } catch (err) {
+        product.isHidden = !product.isHidden;
+        this.$alert.error(err.message);
+      }
+    }
   }
 };
 </script>
@@ -166,5 +179,9 @@ export default {
     display: grid;
     grid-template-columns: 140px minmax(0, 1fr) 140px 140px;
   }
+}
+
+.icon-hidden {
+  opacity: 0.4
 }
 </style>

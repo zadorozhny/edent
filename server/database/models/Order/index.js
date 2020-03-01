@@ -25,6 +25,10 @@ export default class Order extends Model {
       type: DataTypes.ENUM(['post', 'courier']),
       allowNull: false
     },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     address: {
       type: DataTypes.STRING,
       allowNull: false
