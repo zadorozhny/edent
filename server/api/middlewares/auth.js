@@ -24,6 +24,7 @@ auth.expired = async (req, _, next) => {
     const { authorization } = req.headers;
     const user = AccessToken.verify(authorization, { ignoreExpiration: true });
     req.user = { ...user };
+    next();
   } catch (err) {
     err.status = 401;
     err.message = ERRORS.WRONG_ACCESS_TOKEN;

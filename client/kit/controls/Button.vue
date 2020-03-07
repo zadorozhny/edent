@@ -33,7 +33,7 @@ export default {
   outline: none;
 
   &:hover {
-    box-shadow: 0 0 8px 3px rgba(0, 0, 255, 0.2);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
   }
 
   &-success {

@@ -11,6 +11,7 @@
         </div>
         <div class="product--info">
           <p class="text_medium">Производитель: {{ product.manufacturer.name }}</p>
+          <p class="text_medium">Категория: {{ product.category.name }}</p>
         </div>
         <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
       </div>
@@ -33,7 +34,10 @@ export default {
   async asyncData({ app, params }) {
     const product = await app.$api.products.get({ productId: params.id });
     return {
-      product
+      product: {
+        ...product,
+        category: product.categories.pop()
+      }
     };
   },
   methods: {
@@ -88,7 +92,7 @@ export default {
     height: 100%;
     max-height: 360px;
     grid-area: picture;
-    box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
     border-radius: 3px;
     overflow: hidden;
 

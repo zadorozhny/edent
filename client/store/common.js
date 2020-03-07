@@ -17,7 +17,9 @@ export const mutations = {
 
 export const actions = {
   async categories({ commit }) {
-    const categories = await this.$api.categories.getList();
+    const categories = await this.$api.categories.getList({
+      hierarchy: true
+    });
     commit('categories', categories);
   },
   async manufacturers({ commit }) {

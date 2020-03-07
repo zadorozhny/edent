@@ -3,7 +3,9 @@
     <div class="cover">
       <div class="categories--header">
         <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
-        <kit-button>Создать</kit-button>
+        <nuxt-link tag="a" to="/admin/categories/create">
+          <kit-button>Создать</kit-button>
+        </nuxt-link>
       </div>
       <kit-table class="table" :items="rows">
         <template #header>
@@ -13,12 +15,12 @@
             </div>
           </div>
         </template>
-        <template #default="{ name }">
-          <div class="table--item">
+        <template #default="{ id, name }">
+          <nuxt-link class="table--item" :to="`categories/${id}`">
             <div class="table--section">
               <span>{{ name }}</span>
             </div>
-          </div>
+          </nuxt-link>
         </template>
       </kit-table>
     </div>

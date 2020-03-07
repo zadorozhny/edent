@@ -1,12 +1,18 @@
 const categories = [
   {
     id: 1,
-    name: 'A'
+    name: 'A',
+    hierarchyLevel: 1,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
     id: 2,
     name: 'B',
-    parentId: 1
+    parentId: 1,
+    hierarchyLevel: 2,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 

@@ -12,6 +12,7 @@ export default class Admin extends Utility {
   }
 
   async update(id, data) {
+    console.log(data);
     const [count, [category]] = await models.Category.update(data, {
       where: { id },
       returning: true

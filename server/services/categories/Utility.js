@@ -14,7 +14,7 @@ export default class Utility {
         { method: ['filter', filters] }
       )
       .findAll({
-        hierarchy: true
+        hierarchy: filters.hierarchy
       });
     return categories;
   }

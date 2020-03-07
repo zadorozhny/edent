@@ -32,7 +32,7 @@ export default {
   margin-bottom: 20px;
   width: 100%;
   height: 296px;
-  box-shadow: 0 0 4px 3px rgba(0, 0, 255, 0.1);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
   border-radius: 3px;
   overflow: hidden;
   transition: .25s ease-out;
@@ -40,7 +40,7 @@ export default {
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 0 8px 3px rgba(0, 0, 255, 0.2);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
   }
 
   &--header {

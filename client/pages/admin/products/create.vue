@@ -48,7 +48,9 @@ export default {
   async asyncData({ app }) {
     const [manufacturers, categories] = await Promise.all([
       app.$api.manufacturers.getList(),
-      app.$api.categories.getList()
+      app.$api.categories.getList({
+        hierarchy: true
+      })
     ]);
     return {
       manufacturers,

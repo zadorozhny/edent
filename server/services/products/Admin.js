@@ -31,14 +31,30 @@ export default class Admin extends Utility {
   }
 
   async update(id, data) {
-    const [count, [product]] = await models.Product.update(data, {
-      where: { id },
-      returning: true
-    });
-    if (!count) {
-      throw new ServiceError('not found', ERRORS.PRODUCT_NOT_FOUND);
+    const transaction = await sequelize.transaction();
+    const { categoryId } = data;
+    try {
+      const [count, [product]] = await models.Product.update(data, {
+        where: { id },
+        returning: true,
+        transaction
+      });
+      if (!count) {
+        throw new ServiceError('not found', ERRORS.PRODUCT_NOT_FOUND);
+      }
+      if (categoryId) {
+        const category = await models.Category.findByPk(categoryId);
+        const categories = await category.getAncestors();
+        await product.setCategories([categoryId, ...categories.map(({ id }) => id)], {
+          transaction
+        });
+      }
+      await transaction.commit();
+      return product;
+    } catch (err) {
+      await transaction.rollback();
+      throw err;
     }
-    return product;
   }
 
   async remove(id) {

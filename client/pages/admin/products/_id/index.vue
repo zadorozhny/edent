@@ -20,9 +20,9 @@
     <div class="product--description">
       <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
     </div>
-    <div class="product--controls" @click="create">
+    <div class="product--controls" @click="update">
       <kit-button>
-        Создать
+        Изменить
       </kit-button>
     </div>
   </section>
@@ -50,16 +50,21 @@ export default {
     const [product, manufacturers, categories] = await Promise.all([
       app.$api.products.get({ productId: params.id }),
       app.$api.manufacturers.getList(),
-      app.$api.categories.getList()
+      app.$api.categories.getList({
+        hierarchy: true
+      })
     ]);
     return {
-      product,
+      product: {
+        ...product,
+        categoryId: product.categories.pop().id
+      },
       manufacturers,
       categories
     };
   },
   methods: {
-    create() {
+    update() {
       try {
         this.$nuxt.$loading.start();
         this.$api.products.update({
@@ -67,7 +72,7 @@ export default {
           ...this.product
         });
         this.$alert.success('Товар обновлен');
-        this.$router.push('admin/products');
+        this.$router.push('/admin/products');
       } catch (err) {
         this.$nuxt.$loading.finish();
         this.$alert.error(err.message);

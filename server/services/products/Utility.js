@@ -6,7 +6,13 @@ import { service } from '@/lib/decorators';
 export default class Utility {
   async getOne(id) {
     const product = await models.Product.findByPk(id, {
-      include: ['manufacturer']
+      include: [
+        'manufacturer',
+        'categories'
+      ],
+      order: [
+        [{ model: models.Category, as: 'categories' }, 'hierarchyLevel', 'ASC']
+      ]
     });
     return product;
   }
