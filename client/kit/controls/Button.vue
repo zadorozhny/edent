@@ -39,5 +39,9 @@ export default {
   &-success {
     background: $success;
   }
+
+  &-warning {
+    background: $warning;
+  }
 }
 </style>

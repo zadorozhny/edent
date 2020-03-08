@@ -50,8 +50,20 @@ module.exports = {
     scss: '@/assets/css/mixins.scss',
   },
   build: {
-    cache: isDev,
+    cache: false,
     hardSource: isDev,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: { name: 'styles', test: /\.(css|vue)$/, chunks: 'all', enforce: true }
+        }
+      }
+    },
+    loaders: {
+      vue: {
+        compilerOptions: { preserveWhitespace: false }
+      }
+    },
     extend(config, ctx) {
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({ enforce: 'pre', test: /\.(js|vue)$/, loader: 'eslint-loader', exclude: /(node_modules)/ });

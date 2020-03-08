@@ -51,11 +51,6 @@ export default {
   overflow: hidden;
   z-index: 5;
 
-  @media ($tablet) {
-    background-color: unset;
-    backdrop-filter: unset;
-  }
-
   &--content {
     display: flex;
     align-items: center;
@@ -66,7 +61,18 @@ export default {
     margin: 0 auto;
     box-sizing: border-box;
     cursor: pointer;
+  }
+}
 
+.modal {
+  &:not(.admin) {
+    @media ($tablet) {
+      background-color: unset;
+      backdrop-filter: unset;
+    }
+  }
+
+  &:not(.admin) &--content {
     @media ($tablet) {
       padding: 0;
     }

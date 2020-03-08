@@ -1,7 +1,8 @@
 <template>
   <div class="layout">
     <app-header/>
-    <nuxt/>
+    <nuxt class="admin"/>
+    <kit-modal-target/>
     <kit-alert-target/>
   </div>
 </template>

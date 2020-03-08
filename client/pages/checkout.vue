@@ -115,6 +115,8 @@ export default {
           products: this.products
         });
         this.$alert.success('Заказ создан');
+        this.$storage.products = {};
+        this.$router.push('/products');
       } catch (err) {
         this.$nuxt.$loading.finish();
         this.$alert.error(err.message);

@@ -15,7 +15,7 @@
         :options="manufacturers"
         placeholder="Производитель"
       />
-      <kit-input v-model="product.price" :type="'number'" placeholder="Цена"/>
+      <kit-input v-model.number="product.price" :type="'number'" placeholder="Цена"/>
     </div>
     <div class="product--description">
       <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
@@ -58,12 +58,12 @@ export default {
     };
   },
   methods: {
-    create() {
+    async create() {
       try {
         this.$nuxt.$loading.start();
-        this.$api.products.create(this.product);
+        await this.$api.products.create(this.product);
         this.$alert.success('Товар создан');
-        this.$router.push('admin/products');
+        this.$router.push('/admin/products');
       } catch (err) {
         this.$nuxt.$loading.finish();
         this.$alert.error(err.message);

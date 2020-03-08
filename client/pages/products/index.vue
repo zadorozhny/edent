@@ -246,6 +246,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 20px;
+  width: 100%;
 
   @media ($tablet) {
     grid-template-columns: 1fr 1fr 1fr;

@@ -1,6 +1,6 @@
 <template>
   <section class="page container products">
-    <app-filter v-model="filter" class="filter" :interval="interval"/>
+    <app-filter v-model="filter" class="filter admin" :interval="interval"/>
     <div class="cover">
       <div class="products--header">
         <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>

@@ -8,19 +8,37 @@
         placeholder="Категория"
       />
     </div>
-    <div class="category--controls" @click="update">
-      <kit-button>
+    <div class="category--controls">
+      <kit-button @click="update">
         Изменить
       </kit-button>
+      <kit-button type="warning" @click="modals.sure = true">
+        Удалить
+      </kit-button>
     </div>
+    <kit-modal
+      v-if="modals.sure"
+      name="sure"
+      @close="modals.sure = false"
+    >
+      <app-sure :title="'Вы уверены, что хотетите удалить категорию?'" @submit="remove"/>
+    </kit-modal>
   </section>
 </template>
 
 <script>
+import AppSure from '@/components/common/Sure';
+
 export default {
   layout: 'admin',
+  components: {
+    AppSure
+  },
   data() {
     return {
+      modals: {
+        sure: false
+      },
       category: {
         id: null,
         name: '',
@@ -57,6 +75,19 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
       }
+    },
+    async remove() {
+      try {
+        this.$nuxt.$loading.start();
+        await this.$api.categories.remove({ categoryId: this.category.id });
+        this.$alert.success('Категория удалена');
+        this.$router.push('/admin/categories');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };
@@ -76,7 +107,8 @@ export default {
 
   &--controls {
     display: grid;
-    grid-template-columns: 300px;
+    grid-template-columns: 200px 200px;
+    grid-column-gap: 30px;
     justify-content: center;
     grid-area: controls;
   }

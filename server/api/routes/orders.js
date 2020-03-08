@@ -38,7 +38,7 @@ router.patch('/:id', auth, async (req, res, next) => {
 
 router.delete('/:id', auth, async (req, res, next) => {
   try {
-    res.json(await Orders.init(req.user).remove());
+    res.json(await Orders.init(req.user).remove(req.params.id));
   } catch (err) {
     next(err);
   }

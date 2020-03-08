@@ -32,7 +32,12 @@
           :mask="Number"
         />
       </div>
-      <kit-button @click="update">Изменить</kit-button>
+      <div class="order--controls">
+        <kit-button @click="update">Изменить</kit-button>
+        <kit-button type="warning" @click="modals.sure = true">
+          Удалить
+        </kit-button>
+      </div>
     </div>
     <kit-table class="table" :items="order.products">
       <template #header>
@@ -75,14 +80,29 @@
         </div>
       </template>
     </kit-table>
+    <kit-modal
+      v-if="modals.sure"
+      name="sure"
+      @close="modals.sure = false"
+    >
+      <app-sure :title="'Вы уверены, что хотетите удалить заказ?'" @submit="remove"/>
+    </kit-modal>
   </section>
 </template>
 
 <script>
+import AppSure from '@/components/common/Sure';
+
 export default {
   layout: 'admin',
+  components: {
+    AppSure
+  },
   data() {
     return {
+      modals: {
+        sure: false
+      },
       statuses: [
         { id: 'pending', name: 'В работе' },
         { id: 'finished', name: 'Завершен' },
@@ -144,6 +164,19 @@ export default {
       } finally {
         this.$nuxt.$loading.finish();
       }
+    },
+    async remove() {
+      try {
+        this.$nuxt.$loading.start();
+        await this.$api.orders.remove({ orderId: this.order.id });
+        this.$alert.success('Заказ удален');
+        this.$router.push('/admin/orders');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };
@@ -173,6 +206,15 @@ export default {
   &--product_price {
     margin-right: 20px;
     width: 70px;
+  }
+
+  &--controls {
+    display: flex;
+    justify-content: space-between;
+
+    & > * {
+      width: 170px;
+    }
   }
 }
 

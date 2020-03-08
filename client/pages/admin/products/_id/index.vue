@@ -15,24 +15,42 @@
         :options="manufacturers"
         placeholder="Производитель"
       />
-      <kit-input v-model="product.price" :type="'number'" placeholder="Цена"/>
+      <kit-input v-model.number="product.price" :type="'number'" placeholder="Цена"/>
     </div>
     <div class="product--description">
       <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
     </div>
-    <div class="product--controls" @click="update">
-      <kit-button>
+    <div class="product--controls">
+      <kit-button @click="update">
         Изменить
       </kit-button>
+      <kit-button type="warning" @click="modals.sure = true">
+        Удалить
+      </kit-button>
     </div>
+    <kit-modal
+      v-if="modals.sure"
+      name="sure"
+      @close="modals.sure = false"
+    >
+      <app-sure :title="'Вы уверены, что хотетите удалить продукт?'" @submit="remove"/>
+    </kit-modal>
   </section>
 </template>
 
 <script>
+import AppSure from '@/components/common/Sure';
+
 export default {
   layout: 'admin',
+  components: {
+    AppSure
+  },
   data() {
     return {
+      modals: {
+        sure: false
+      },
       product: {
         id: null,
         image: 'https://bit.ly/2QDBhSA',
@@ -64,14 +82,27 @@ export default {
     };
   },
   methods: {
-    update() {
+    async update() {
       try {
         this.$nuxt.$loading.start();
-        this.$api.products.update({
+        await this.$api.products.update({
           productId: this.product.id,
           ...this.product
         });
         this.$alert.success('Товар обновлен');
+        this.$router.push('/admin/products');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
+    },
+    async remove() {
+      try {
+        this.$nuxt.$loading.start();
+        await this.$api.products.remove({ productId: this.product.id });
+        this.$alert.success('Товар удален');
         this.$router.push('/admin/products');
       } catch (err) {
         this.$nuxt.$loading.finish();
@@ -114,7 +145,8 @@ export default {
 
   &--controls {
     display: grid;
-    grid-template-columns: 300px;
+    grid-template-columns: 200px 200px;
+    grid-column-gap: 30px;
     justify-content: center;
     grid-area: controls;
   }
