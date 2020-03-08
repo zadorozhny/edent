@@ -1,13 +1,21 @@
 <template>
   <div class="pagination">
     <span class="pagination--control">
-      <kit-icon :ripple="false">
+      <kit-icon
+        :class="{ 'icon-disable': !offset }"
+        :ripple="false"
+        @click="offset && $emit('change', -1)"
+      >
         keyboard_arrow_left
       </kit-icon>
     </span>
-    <span class="pagination--number">3</span>
+    <span class="pagination--number">{{ Math.ceil(offset / limit) + 1 }}</span>
     <span class="pagination--control">
-      <kit-icon :ripple="false">
+      <kit-icon
+        :class="{ 'icon-disable': offset + limit >= count }"
+        :ripple="false"
+        @click="offset + limit < count && $emit('change', 1)"
+      >
         keyboard_arrow_right
       </kit-icon>
     </span>
@@ -18,6 +26,11 @@
 
 export default {
   name: 'KitPagination',
+  props: {
+    count: { type: Number, default: 0 },
+    offset: { type: Number, default: 0 },
+    limit: { type: Number, default: 0 }
+  },
   data: () => ({})
 };
 </script>
@@ -62,5 +75,9 @@ export default {
       margin-left: 10px;
     }
   }
+}
+
+.icon-disable {
+  opacity: 0.4
 }
 </style>

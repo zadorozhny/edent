@@ -46,7 +46,12 @@
         </template>
       </kit-table>
       <div class="orders--footer">
-        <kit-pagination/>
+        <kit-pagination
+          :count="count"
+          :limit="pagination.limit"
+          :offset="pagination.offset"
+          @change="paginate"
+        />
       </div>
     </div>
   </section>
@@ -57,6 +62,8 @@ import AppFilter from '@/components/orders/Filter';
 import { statuses } from '@/config';
 import utils from '@/utils';
 
+const LIMIT = 20;
+
 export default {
   layout: 'admin',
   components: {
@@ -66,10 +73,15 @@ export default {
     return {
       statuses,
       rows: [],
+      count: 0,
       filter: {
         search: '',
         status: '',
         shipping: ''
+      },
+      pagination: {
+        offset: 0,
+        limit: LIMIT
       }
     };
   },
@@ -82,9 +94,13 @@ export default {
     }
   },
   async asyncData({ app }) {
-    const { rows } = await app.$api.orders.getList();
+    const { rows, count } = await app.$api.orders.getList({
+      offset: 0,
+      limit: LIMIT
+    });
     return {
       rows,
+      count,
       filter: {
         search: '',
         status: '',
@@ -94,13 +110,20 @@ export default {
   },
   methods: {
     getList: utils.debounce(async function () {
-      const { rows } = await this.$api.orders.getList({
+      const { rows, count } = await this.$api.orders.getList({
         search: this.filter.search || undefined,
         status: this.filter.status || undefined,
         shipping: this.filter.shipping || undefined,
+        limit: this.pagination.limit,
+        offset: this.pagination.offset
       });
       this.rows = rows;
-    }, 500)
+      this.count = count;
+    }, 500),
+    paginate(value) {
+      this.pagination.offset = Math.min(this.count, this.pagination.offset + LIMIT * value);
+      this.getList();
+    }
   }
 };
 </script>

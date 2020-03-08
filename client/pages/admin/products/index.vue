@@ -45,7 +45,12 @@
         </template>
       </kit-table>
       <div class="products--footer">
-        <kit-pagination/>
+        <kit-pagination
+          :count="count"
+          :limit="pagination.limit"
+          :offset="pagination.offset"
+          @change="paginate"
+        />
       </div>
     </div>
   </section>
@@ -55,6 +60,8 @@
 import AppFilter from '@/components/products/Filter';
 import utils from '@/utils';
 
+const LIMIT = 20;
+
 export default {
   layout: 'admin',
   components: {
@@ -63,6 +70,7 @@ export default {
   data() {
     return {
       rows: [],
+      count: 0,
       interval: {
         min: 0,
         max: 0
@@ -73,6 +81,10 @@ export default {
         manufacturerId: null,
         categoryId: null,
         order: 'DESC'
+      },
+      pagination: {
+        offset: 0,
+        limit: LIMIT
       }
     };
   },
@@ -85,11 +97,14 @@ export default {
     }
   },
   async asyncData({ app }) {
-    const { rows, min, max } = await app.$api.products.getList({
-      order: 'price,DESC'
+    const { rows, count, min, max } = await app.$api.products.getList({
+      order: 'price,DESC',
+      offset: 0,
+      limit: LIMIT
     });
     return {
       rows,
+      count,
       interval: {
         min,
         max
@@ -105,14 +120,17 @@ export default {
   },
   methods: {
     getList: utils.debounce(async function () {
-      const { rows } = await this.$api.products.getList({
+      const { rows, count } = await this.$api.products.getList({
         search: this.filter.search || undefined,
         manufacturerId: this.filter.manufacturerId || undefined,
         categoryId: this.filter.categoryId || undefined,
         order: this.filter.order ? `price,${this.filter.order}` : undefined,
-        price: JSON.stringify(this.filter.price)
+        price: JSON.stringify(this.filter.price),
+        limit: this.pagination.limit,
+        offset: this.pagination.offset
       });
       this.rows = rows;
+      this.count = count;
     }, 500),
     hide(id) {
       const product = this.rows.find(product => product.id === id);
@@ -126,6 +144,10 @@ export default {
         product.isHidden = !product.isHidden;
         this.$alert.error(err.message);
       }
+    },
+    paginate(value) {
+      this.pagination.offset = Math.min(this.count, this.pagination.offset + LIMIT * value);
+      this.getList();
     }
   }
 };

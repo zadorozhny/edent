@@ -7,6 +7,9 @@
         <navbar class="layout--navbar" @close="modals.navigation = false"/>
       </kit-menu>
     </template>
+    <nuxt-link v-if="isAdmin" class="control control-left" to="/admin/products">
+      Админ панель
+    </nuxt-link>
     <kit-menu-target/>
     <kit-modal-target/>
     <kit-alert-target/>
@@ -28,13 +31,40 @@ export default {
         navigation: false
       }
     };
+  },
+  computed: {
+    isAdmin() {
+      return this.$store.getters['auth/isAdmin'];
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .layout {
+  position: relative;
   display: grid;
   grid-template-rows: auto 1fr;
+}
+
+.control {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 50px;
+  background-color: $light;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
+  }
+
+  &-left {
+    left: 10px;
+  }
 }
 </style>

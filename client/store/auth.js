@@ -12,7 +12,8 @@ export const state = () => ({
 });
 
 export const getters = {
-  authorized: state => Boolean(state.tokens.access)
+  authorized: state => Boolean(state.tokens.access),
+  isAdmin: state => state.profile.role === 'admin'
 };
 
 export const mutations = {

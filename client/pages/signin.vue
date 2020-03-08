@@ -28,7 +28,16 @@ export default {
   }),
   methods: {
     async signin() {
-      await this.$store.dispatch('auth/signin', this.credentials);
+      try {
+        this.$nuxt.$loading.start();
+        await this.$store.dispatch('auth/signin', this.credentials);
+        this.$router.push('/admin/products');
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };
