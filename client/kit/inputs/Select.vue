@@ -47,6 +47,7 @@ export default {
 .multiselect {
   height: 48px;
   font-size: 14px;
+  color: $text;
 
   &__input {
     font-size: 14px;

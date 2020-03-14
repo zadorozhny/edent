@@ -61,6 +61,10 @@ export default {
     }
   }
 
+  &__single-value {
+    color: $text;
+  }
+
   &__control {
     width: auto;
     height: 48px;

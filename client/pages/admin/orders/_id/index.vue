@@ -26,9 +26,18 @@
         </kit-choice>
       </kit-label-group>
       <div class="order--group">
-        <kit-input v-model="order.city" type="name" class="input" placeholder="Город"/>
         <kit-input
-          v-model="order.address" type="number" class="input" placeholder="Номер отделения"
+          v-model="order.city"
+          type="name"
+          class="input"
+          :disabled="order.shipping === 'courier'"
+          placeholder="Город"
+        />
+        <kit-input
+          v-model="order.address"
+          type="number"
+          class="input"
+          :placeholder="order.shipping === 'courier' ? 'Адресс' : 'Номер отделения'"
           :mask="Number"
         />
       </div>
@@ -46,7 +55,7 @@
             <span>Название</span>
           </div>
           <div class="table--section">
-            <span>Цена</span>
+            <span>Цена (один/сумма)</span>
           </div>
           <div class="table--section">
             <span>Количество</span>
@@ -71,12 +80,25 @@
       </template>
       <template #footer>
         <div class="table--footer">
-          <span class="table--title">
-            Сумма
-          </span>
-          <span class="table--total">
-            ₴{{ total }}
-          </span>
+          <div class="table--append">
+            <kit-input
+              v-model.number="productId"
+              type="number"
+              class="table--product_number"
+              placeholder="№ Товара"
+            />
+            <button class="table--add_product" @click="add">
+              Добавить товар
+            </button>
+          </div>
+          <div class="table--total">
+            <span class="table--title">
+              Сумма
+            </span>
+            <span class="table--total_price">
+              ₴{{ total }}
+            </span>
+          </div>
         </div>
       </template>
     </kit-table>
@@ -108,6 +130,7 @@ export default {
         { id: 'finished', name: 'Завершен' },
         { id: 'closed', name: 'Отменен' }
       ],
+      productId: null,
       order: {
         id: null,
         email: '',
@@ -128,6 +151,17 @@ export default {
         : 0;
     }
   },
+  watch: {
+    'order.shipping': function (value) {
+      if (value === 'courier') {
+        this.order.city = 'Харьков';
+        this.order.address = '';
+      } else {
+        this.order.city = '';
+        this.order.address = '';
+      }
+    }
+  },
   async asyncData({ app, params }) {
     const order = await app.$api.orders.get({ orderId: params.id });
     return {
@@ -135,6 +169,27 @@ export default {
     };
   },
   methods: {
+    async add() {
+      try {
+        this.$nuxt.$loading.start();
+        const existed = this.order.products.find(item => item.product.id === this.productId);
+        if (existed) {
+          existed.count += 1;
+          return;
+        }
+        const product = await this.$api.products.get({ productId: this.productId });
+        if (!product) {
+          this.$alert.error('Продукт не найден');
+          return;
+        }
+        this.order.products.push({ price: product.price, product, count: 1 });
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
+    },
     change(index, value) {
       const product = this.order.products[index];
       if (product.count || value > 0) {
@@ -247,9 +302,17 @@ export default {
 
   &--footer {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    justify-content: space-between;
     padding: 10px 10px;
+  }
+
+  &--append {
+    display: flex;
+    align-items: center;
+  }
+
+  &--product_number {
+    margin-right: 10px;
   }
 
   &--title {
@@ -260,6 +323,12 @@ export default {
   }
 
   &--total {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  &--total_price {
     font-size: 22px;
     font-weight: 600;
   }
@@ -289,6 +358,24 @@ export default {
     &:last-child {
       margin-left: 10px;
     }
+  }
+
+  &--add_product {
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    background-color: $light;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
+    }
+  }
+
+  &--product_number {
+    width: 110px;
   }
 }
 </style>

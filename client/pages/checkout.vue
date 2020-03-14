@@ -21,9 +21,18 @@
         </kit-choice>
       </kit-label-group>
       <div class="checkout--group">
-        <kit-input v-model="order.city" type="name" class="input" placeholder="Город"/>
         <kit-input
-          v-model="order.address" type="number" class="input" placeholder="Номер отделения"
+          v-model="order.city"
+          type="name"
+          class="input"
+          :disabled="order.shipping === 'courier'"
+          placeholder="Город"
+        />
+        <kit-input
+          v-model="order.address"
+          type="number"
+          class="input"
+          :placeholder="order.shipping === 'courier' ? 'Адресс' : 'Номер отделения'"
           :mask="Number"
         />
       </div>
@@ -58,6 +67,11 @@
           </div>
         </div>
       </template>
+      <template #placeholder>
+        <div class="table--placeholder">
+          Нет товара
+        </div>
+      </template>
       <template #footer>
         <div class="table--footer">
           <span class="table--title">
@@ -79,7 +93,7 @@ export default {
       email: '',
       phone: '',
       name: '',
-      shipping: '',
+      shipping: 'post',
       city: '',
       address: ''
     }
@@ -90,6 +104,17 @@ export default {
     },
     total() {
       return this.products.length ? this.products.reduce((sum, { count, price }) => sum + (price * count), 0) : 0;
+    }
+  },
+  watch: {
+    'order.shipping': function (value) {
+      if (value === 'courier') {
+        this.order.city = 'Харьков';
+        this.order.address = '';
+      } else {
+        this.order.city = '';
+        this.order.address = '';
+      }
     }
   },
   methods: {
@@ -105,6 +130,10 @@ export default {
     async create() {
       try {
         this.$nuxt.$loading.start();
+        if (!this.products.length) {
+          this.$alert.error('Нет добавленного товара');
+          return;
+        }
         await this.$api.orders.create({
           email: this.order.email,
           phone: this.order.phone,
@@ -217,6 +246,14 @@ export default {
       font-size: 14px;
       grid-template-columns: minmax(0, 1fr) 80px 110px;
     }
+  }
+
+  &--placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
   }
 
   &--footer {

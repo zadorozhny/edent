@@ -11,6 +11,7 @@ module.exports = {
   },
   srcDir: './client',
   router: {
+    middleware: 'redirect',
     linkActiveClass: 'active-link',
     linkExactActiveClass: 'exact-active-link'
   },
