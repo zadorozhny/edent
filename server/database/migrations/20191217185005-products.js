@@ -20,7 +20,8 @@ export const up = async (queryInterface, Sequelize) => {
         allowNull: false
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       isHidden: {
         type: Sequelize.BOOLEAN,

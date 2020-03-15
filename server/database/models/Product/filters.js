@@ -24,5 +24,10 @@ export default {
     where[Op.and].push({
       price: { [Op.between]: [from, to] }
     });
+  },
+  isHidden(where, { isHidden }) {
+    where[Op.and].push({
+      isHidden
+    });
   }
 };

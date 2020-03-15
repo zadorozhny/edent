@@ -5,7 +5,7 @@ export const Email = Joi.string().email();
 export const Password = Joi.string();
 
 export default Joi.object({
-  role: Joi.valid('user', 'admin'),
+  role: Joi.valid('user', 'admin').default('user'),
   name: Joi.string(),
   email: Email,
   phone: Joi.string(),

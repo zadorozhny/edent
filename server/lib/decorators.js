@@ -17,3 +17,12 @@ export const service = Service => class extends Service {
     });
   }
 };
+
+export const schema = (...schemas) => (target, key, descriptor) => ({
+  async value(...args) {
+    const data = await Promise.all(schemas.map((schema, index) => (
+      schema.validate(args[index], { context: { instance: this } })
+    )));
+    return descriptor.value.apply(this, data.map(({ value }) => value));
+  }
+});

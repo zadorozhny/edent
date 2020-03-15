@@ -1,9 +1,11 @@
 import Sequelize from 'sequelize';
 import { models } from '@/database';
-import { service } from '@/lib/decorators';
+import { service, schema } from '@/lib/decorators';
+import { product as schemas } from '@/services/products/schemas';
 
 @service
 export default class Utility {
+  @schema(schemas.identifier)
   async getOne(id) {
     const product = await models.Product.findByPk(id, {
       include: [
@@ -17,6 +19,7 @@ export default class Utility {
     return product;
   }
 
+  @schema(schemas.filters)
   async getList(filters) {
     const [{ count, rows }, { min, max }] = await Promise.all([
       models.Product

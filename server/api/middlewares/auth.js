@@ -19,6 +19,21 @@ const auth = async (req, _, next) => {
   }
 };
 
+auth.optional = async (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    if (authorization) {
+      await auth(req, res, next);
+    } else {
+      next();
+    }
+  } catch (err) {
+    err.status = 401;
+    err.message = ERRORS.WRONG_ACCESS_TOKEN;
+    next(err);
+  }
+};
+
 auth.expired = async (req, _, next) => {
   try {
     const { authorization } = req.headers;

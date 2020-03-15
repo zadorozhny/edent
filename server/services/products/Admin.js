@@ -1,11 +1,13 @@
 import { models, sequelize } from '@/database';
-import { service } from '@/lib/decorators';
+import { service, schema } from '@/lib/decorators';
 import * as ERRORS from '@/config/errors';
 import ServiceError from '@/lib/Errors';
 import Utility from '@/services/products/Utility';
+import { product as schemas } from '@/services/products/schemas';
 
 @service
 export default class Admin extends Utility {
+  @schema(schemas.create)
   async create(data) {
     const transaction = await sequelize.transaction();
     const { categoryId } = data;
@@ -30,6 +32,7 @@ export default class Admin extends Utility {
     }
   }
 
+  @schema(schemas.identifier, schemas.update)
   async update(id, data) {
     const transaction = await sequelize.transaction();
     const { categoryId } = data;
@@ -57,6 +60,7 @@ export default class Admin extends Utility {
     }
   }
 
+  @schema(schemas.identifier)
   async remove(id) {
     const count = await models.Product.destroy({
       where: { id }

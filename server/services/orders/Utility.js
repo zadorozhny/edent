@@ -20,46 +20,4 @@ export default class Utility {
       throw err;
     }
   }
-
-  async getOne(id) {
-    const order = await models.Order.findByPk(id, {
-      include: [
-        {
-          model: models.OrderToProducts,
-          as: 'products',
-          attributes: ['price', 'count'],
-          include: [{
-            model: models.Product,
-            as: 'product',
-            attributes: ['id', 'name'],
-          }]
-        }
-      ]
-    });
-    return order;
-  }
-
-  async getList(filters) {
-    const { rows, count } = await models.Order
-      .scope(
-        { method: ['filter', filters] },
-        { method: ['pagination', filters] }
-      )
-      .findAndCountAll({
-        include: [
-          {
-            model: models.OrderToProducts,
-            as: 'products',
-            attributes: ['price', 'count'],
-            include: [{
-              model: models.Product,
-              as: 'product',
-              attributes: ['id', 'name'],
-            }]
-          }
-        ],
-        distinct: true
-      });
-    return { rows, count };
-  }
 }
