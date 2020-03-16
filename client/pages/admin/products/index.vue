@@ -80,7 +80,7 @@ export default {
         price: [0, 0],
         manufacturerId: null,
         categoryId: null,
-        order: 'DESC'
+        order: 'price,DESC'
       },
       pagination: {
         offset: 0,
@@ -114,7 +114,7 @@ export default {
         price: [min, max],
         manufacturerId: null,
         categoryId: null,
-        order: 'DESC'
+        order: 'price,DESC'
       }
     };
   },
@@ -124,7 +124,7 @@ export default {
         search: this.filter.search || undefined,
         manufacturerId: this.filter.manufacturerId || undefined,
         categoryId: this.filter.categoryId || undefined,
-        order: this.filter.order ? `price,${this.filter.order}` : undefined,
+        order: this.filter.order || undefined,
         price: JSON.stringify(this.filter.price),
         limit: this.pagination.limit,
         offset: this.pagination.offset

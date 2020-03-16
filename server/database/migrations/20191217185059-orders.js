@@ -17,14 +17,11 @@ export const up = async (queryInterface, Sequelize) => {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
       phone: {
         type: Sequelize.STRING(32),
         allowNull: false
-      },
-      name: {
-        type: Sequelize.STRING
       },
       shipping: {
         type: Sequelize.ENUM(shipping),
@@ -37,6 +34,10 @@ export const up = async (queryInterface, Sequelize) => {
       address: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      fullName: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       discount: {
         type: Sequelize.INTEGER

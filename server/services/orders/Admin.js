@@ -1,11 +1,13 @@
 import { models, sequelize } from '@/database';
-import { service } from '@/lib/decorators';
+import { service, schema } from '@/lib/decorators';
 import * as ERRORS from '@/config/errors';
 import ServiceError from '@/lib/Errors';
 import Utility from '@/services/orders/Utility';
+import { order as schemas } from '@/services/orders/schemas';
 
 @service
 export default class Admin extends Utility {
+  @schema(schemas.identifier, schemas.update)
   async update(id, data) {
     const transaction = await sequelize.transaction();
     try {
@@ -50,6 +52,7 @@ export default class Admin extends Utility {
     }
   }
 
+  @schema(schemas.identifier)
   async getOne(id) {
     const order = await models.Order.findByPk(id, {
       include: [
@@ -68,6 +71,7 @@ export default class Admin extends Utility {
     return order;
   }
 
+  @schema(schemas.filters)
   async getList(filters) {
     const { rows, count } = await models.Order
       .scope(
@@ -92,6 +96,7 @@ export default class Admin extends Utility {
     return { rows, count };
   }
 
+  @schema(schemas.identifier)
   async remove(id) {
     const count = await models.Order.destroy({
       where: { id }

@@ -14,9 +14,9 @@ export default Joi.object({
   status: Joi.valid('pending', 'finished', 'closed'),
   email: Joi.string(),
   phone: Joi.string(),
-  name: Joi.string(),
   shipping: Joi.valid('post', 'courier'),
+  city: Joi.string(),
   address: Joi.string(),
   userId: UserId,
-  product: Joi.array().items(OrderProduct).min(1)
+  products: Joi.array().items(OrderProduct).min(1)
 });

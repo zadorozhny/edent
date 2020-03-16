@@ -2,7 +2,6 @@
   <div class="page container checkout">
     <div class="checkout--content">
       <div class="checkout--group">
-        <kit-input v-model="order.email" type="email" class="input" placeholder="Email"/>
         <kit-input
           v-model="order.phone"
           type="phone"
@@ -10,7 +9,7 @@
           placeholder="Телефон"
           mask="+{380} (00) 000-0000"
         />
-        <kit-input v-model="order.name" type="text" class="input" placeholder="Имя"/>
+        <kit-input v-model="order.email" type="email" class="input" placeholder="Email"/>
       </div>
       <kit-label-group class="checkout--shipping_option">
         <kit-choice v-model="order.shipping" value="post" related>
@@ -22,18 +21,22 @@
       </kit-label-group>
       <div class="checkout--group">
         <kit-input
+          v-if="order.shipping === 'post'"
+          v-model="order.fullName"
+          class="input"
+          placeholder="Ф.И.О"
+        />
+        <kit-input
           v-model="order.city"
-          type="name"
           class="input"
           :disabled="order.shipping === 'courier'"
           placeholder="Город"
         />
         <kit-input
           v-model="order.address"
-          type="number"
           class="input"
+          :type="order.shipping === 'courier' ? 'string' : 'number'"
           :placeholder="order.shipping === 'courier' ? 'Адресс' : 'Номер отделения'"
-          :mask="Number"
         />
       </div>
       <kit-button @click="create">Заказать</kit-button>
@@ -94,6 +97,7 @@ export default {
       phone: '',
       name: '',
       shipping: 'post',
+      fullName: '',
       city: '',
       address: ''
     }
@@ -139,6 +143,7 @@ export default {
           phone: this.order.phone,
           name: this.order.name,
           shipping: this.order.shipping,
+          fullName: this.order.fullName,
           city: this.order.city,
           address: this.order.address,
           products: this.products

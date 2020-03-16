@@ -12,10 +12,10 @@
       placeholder="Производители"
     />
     <kit-label-group>
-      <kit-choice v-model="proxy.order" value="DESC" related>
+      <kit-choice v-model="proxy.order" value="price,DESC" related>
         <kit-label type="outline" size="regular">Дорогие</kit-label>
       </kit-choice>
-      <kit-choice v-model="proxy.order" value="ASC" related>
+      <kit-choice v-model="proxy.order" value="price,ASC" related>
         <kit-label type="outline" size="regular">Дешевые</kit-label>
       </kit-choice>
     </kit-label-group>

@@ -12,14 +12,11 @@ export default class Order extends Model {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     phone: {
       type: DataTypes.STRING(32),
       allowNull: false
-    },
-    name: {
-      type: DataTypes.STRING
     },
     shipping: {
       type: DataTypes.ENUM(['post', 'courier']),
@@ -32,6 +29,10 @@ export default class Order extends Model {
     address: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    fullName: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     discount: {
       type: DataTypes.INTEGER

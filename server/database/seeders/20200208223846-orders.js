@@ -4,9 +4,9 @@ const orders = [
     status: 'pending',
     email: 'napster.pro.ua@gmail.com',
     phone: '+380982784979',
-    name: 'Artem',
     shipping: 'post',
     city: 'Karkiv',
+    fullName: 'Zadorozhnyi A. G.',
     address: '40',
     discount: null,
     userId: null
