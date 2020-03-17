@@ -1,7 +1,8 @@
 import { models } from '@/database';
 import ServiceError from '@/lib/Errors';
 import * as ERRORS from '@/config/errors';
-import { service } from '@/lib/decorators';
+import { service, schema } from '@/lib/decorators';
+import { category as schemas } from '@/services/profile/schemas';
 import { AccessToken, RefreshToken } from '@/lib/Tokens';
 
 @service
@@ -16,10 +17,13 @@ export default class Utility {
       refresh: RefreshToken.create(user.id)
     };
   }
+
   async get() {
     const user = await models.User.findByPk(this.user.id);
     return user;
   }
+
+  @schema(schemas.signin)
   async signin({ email, password }) {
     const user = await models.User.findOne({ where: { email } });
     if (!user) {
@@ -30,9 +34,12 @@ export default class Utility {
     }
     return user.tokens(this.constructor.createTokens(user));
   }
+
   async signout() {
     return RefreshToken.destroy(this.user.id);
   }
+
+  @schema(schemas.refresh)
   async refresh({ refreshToken }) {
     if (await RefreshToken.verify(this.user.id, refreshToken)) {
       return this.constructor.createTokens(this.user);
