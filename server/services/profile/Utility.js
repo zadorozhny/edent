@@ -20,20 +20,6 @@ export default class Utility {
     const user = await models.User.findByPk(this.user.id);
     return user;
   }
-  async update(data) {
-    const [count, [user]] = await models.User.update(data, {
-      where: { id: this.user.id },
-      returning: true
-    });
-    if (!count) {
-      throw new ServiceError('wrong', ERRORS.SOMETHING_WENT_WRONG);
-    }
-    return user;
-  }
-  async signup(data) {
-    const user = await models.User.create(data);
-    return user.tokens(this.constructor.createTokens(user));
-  }
   async signin({ email, password }) {
     const user = await models.User.findOne({ where: { email } });
     if (!user) {

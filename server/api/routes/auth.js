@@ -12,22 +12,6 @@ router.post('/signin', async (req, res, next) => {
   }
 });
 
-router.post('/signup', async (req, res, next) => {
-  try {
-    res.json(await Profile.init(req.user).signup(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.post('/forgot-password', async (req, res, next) => {
-  try {
-    res.json(await Profile.init(req.user).forgotPassword(req.body));
-  } catch (err) {
-    next(err);
-  }
-});
-
 router.patch('/refresh', auth.expired, async (req, res, next) => {
   try {
     res.json(await Profile.init(req.user).refresh(req.body));
