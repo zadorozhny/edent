@@ -23,7 +23,7 @@ export default class Admin extends Utility {
       await models.OrderToProducts.bulkCreate(
         products.reduce((acc, item) => {
           if (!item.deleted) {
-            acc.push({ ...item, productId: item.product.id, orderId: order.id });
+            acc.push({ ...item, productId: item.id, orderId: id });
           }
           return acc;
         }, []),
@@ -31,7 +31,7 @@ export default class Admin extends Utility {
       );
       const ids = products.reduce((ids, item) => {
         if (item.deleted) {
-          ids.push(item.product.id);
+          ids.push(item.id);
         }
         return ids;
       }, []);

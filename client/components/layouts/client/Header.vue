@@ -28,6 +28,7 @@
       </div>
       <div v-if="products" class="filters">
         <kit-input
+          class="filters--input"
           type="search"
           size="compact"
           placeholder="Поиск"
@@ -85,6 +86,10 @@ export default {
     display: none;
   }
 
+  &--input {
+    width: 100%;
+  }
+
   @media ($tablet) {
     order: 2;
     width: 100%;
@@ -95,20 +100,6 @@ export default {
       margin-left: 10px;
     }
   }
-}
-
-.input {
-  padding: 7px 15px;
-  width: 100%;
-  height: 100%;
-  font-size: 16px;
-  border: solid 1px #e6e6e6;
-  border-radius: 5px;
-  box-sizing: border-box;
-  outline: none;
-  border: solid 1px #dfe1e5;
-  transition: .25s ease-out;
-  cursor: pointer;
 }
 
 .navigation {

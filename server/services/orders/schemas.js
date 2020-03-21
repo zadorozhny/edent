@@ -1,14 +1,12 @@
 import Joi from '@hapi/joi';
 
 import Order, { Identifier } from '@/schemas/Order';
-import { Identifier as ProductId } from '@/schemas/Product';
-import { Identifier as UserId } from '@/schemas/User';
 
 export const order = {
   identifier: Identifier,
   create: Order.concat(Joi.object({
     status: Joi.forbidden(),
-    email: Joi.optional(),
+    email: Joi.optional().allow(''),
     phone: Joi.required(),
     shipping: Joi.required(),
     fullName: Joi
@@ -24,7 +22,7 @@ export const order = {
   })),
   update: Order.concat(Joi.object({
     status: Joi.optional(),
-    email: Joi.optional(),
+    email: Joi.optional().allow(''),
     phone: Joi.optional(),
     shipping: Joi.optional(),
     fullName: Joi
@@ -35,14 +33,15 @@ export const order = {
       ),
     city: Joi.optional(),
     address: Joi.optional(),
-    userId: Joi.optional(),
+    userId: Joi.optional().allow(null),
     products: Joi.optional()
   })),
   filters: Joi.object({
     search: Joi.string().empty(''),
     status: Joi.valid('pending', 'finished', 'closed'),
     shipping: Joi.valid('post', 'courier'),
-    productId: ProductId,
-    userId: UserId
+    productId: Joi.string(),
+    limit: Joi.string(),
+    offset: Joi.string()
   })
 };

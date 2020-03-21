@@ -23,6 +23,12 @@ export const schema = (...schemas) => (target, key, descriptor) => ({
     const data = await Promise.all(schemas.map((schema, index) => (
       schema.validate(args[index], { context: { instance: this } })
     )));
+    const schema = data.find(({ error }) => error);
+    if (schema) {
+      const { error } = schema;
+      error.isJoi = true;
+      throw error;
+    }
     return descriptor.value.apply(this, data.map(({ value }) => value));
   }
 });

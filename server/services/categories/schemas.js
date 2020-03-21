@@ -13,6 +13,7 @@ export const category = {
     parentId: Joi.optional()
   })),
   filters: Joi.object({
-    search: Joi.string().empty('')
+    search: Joi.string().empty(''),
+    hierarchy: Joi.string()
   })
 };

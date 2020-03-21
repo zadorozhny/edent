@@ -4,24 +4,40 @@
       <kit-image-uploader v-model="product.image"/>
     </div>
     <div class="product--content">
-      <kit-input v-model="product.name" placeholder="Название"/>
+      <kit-input
+        v-model="product.name"
+        :vuelidate="$v.product.name"
+        placeholder="Название"
+      />
       <kit-tree-select
         v-model="product.categoryId"
+        :vuelidate="$v.product.categoryId"
         :options="categories"
         placeholder="Категория"
       />
       <kit-select
         v-model="product.manufacturerId"
+        :vuelidate="$v.product.manufacturerId"
         :options="manufacturers"
         placeholder="Производитель"
       />
-      <kit-input v-model.number="product.price" :type="'number'" placeholder="Цена"/>
+      <kit-input
+        v-model.number="product.price"
+        :vuelidate="$v.product.price"
+        :type="'number'"
+        placeholder="Цена"
+      />
     </div>
     <div class="product--description">
-      <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
+      <kit-textarea
+        v-model="product.description"
+        :vuelidate="$v.product.description"
+        class="textarea"
+        placeholder="Описание"
+      />
     </div>
-    <div class="product--controls" @click="create">
-      <kit-button>
+    <div class="product--controls">
+      <kit-button :disabled="$v.product.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -29,6 +45,8 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/product';
+
 export default {
   layout: 'admin',
   data() {
@@ -44,6 +62,9 @@ export default {
       manufacturers: [],
       categories: []
     };
+  },
+  validations: {
+    product: schema
   },
   async asyncData({ app }) {
     const [manufacturers, categories] = await Promise.all([
@@ -109,17 +130,5 @@ export default {
     justify-content: center;
     grid-area: controls;
   }
-}
-
-.textarea {
-  padding: 14px 10px;
-  width: 100%;
-  height: 200px;
-  border: solid 1px #cfdbdf;
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box;
-  resize: none;
-  outline: none;
 }
 </style>

@@ -4,6 +4,7 @@ import Choice from '@/kit/inputs/Choice';
 import Input from '@/kit/inputs/Input';
 import ImageUploader from '@/kit/inputs/ImageUploader';
 import TreeSelect from '@/kit/inputs/TreeSelect';
+import Textarea from '@/kit/inputs/Textarea';
 
 import Button from '@/kit/controls/Button';
 import Tabs from '@/kit/controls/Tabs';
@@ -22,6 +23,7 @@ import Alert, { AlertWormhole } from '@/kit/portals/Alert';
 import AlertTarget from '@/kit/portals/AlertTarget';
 import Menu from '@/kit/portals/Menu';
 import MenuTarget from '@/kit/portals/MenuTarget';
+import Tooltip from '@/kit/portals/Tooltip';
 
 import TransitionModal from '@/kit/transitions/Modal';
 import TransitionAlert from '@/kit/transitions/Alert';
@@ -36,6 +38,7 @@ export default Vue => {
   Vue.component(Input.name, Input);
   Vue.component(ImageUploader.name, ImageUploader);
   Vue.component(TreeSelect.name, TreeSelect);
+  Vue.component(Textarea.name, Textarea);
 
   Vue.component(Button.name, Button);
   Vue.component(Tabs.name, Tabs);
@@ -54,6 +57,7 @@ export default Vue => {
   Vue.component(AlertTarget.name, AlertTarget);
   Vue.component(Menu.name, Menu);
   Vue.component(MenuTarget.name, MenuTarget);
+  Vue.component(Tooltip.name, Tooltip);
 
   Vue.component(TransitionModal.name, TransitionModal);
   Vue.component(TransitionAlert.name, TransitionAlert);

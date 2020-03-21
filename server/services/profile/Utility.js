@@ -2,7 +2,7 @@ import { models } from '@/database';
 import ServiceError from '@/lib/Errors';
 import * as ERRORS from '@/config/errors';
 import { service, schema } from '@/lib/decorators';
-import { category as schemas } from '@/services/profile/schemas';
+import { utility as schemas } from '@/services/profile/schemas';
 import { AccessToken, RefreshToken } from '@/lib/Tokens';
 
 @service

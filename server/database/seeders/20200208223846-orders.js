@@ -3,7 +3,7 @@ const orders = [
     id: 1,
     status: 'pending',
     email: 'napster.pro.ua@gmail.com',
-    phone: '+380982784979',
+    phone: '+380 (98) 278-4979',
     shipping: 'post',
     city: 'Karkiv',
     fullName: 'Zadorozhnyi A. G.',

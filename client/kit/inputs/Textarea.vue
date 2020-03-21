@@ -1,18 +1,18 @@
 <template>
-  <div class="input">
-    <input
+  <div class="textarea">
+    <textarea
       ref="input"
       v-model="proxy"
       v-bind="$attrs"
       :disabled="disabled"
       :type="$attrs.type"
-      :class="['input--item', size]"
+      class="textarea--item"
       @blur="touch"
       v-on="$listeners"
-    >
-    <div class="input--additional">
+    />
+    <div class="textarea--additional">
       <kit-tooltip v-if="invalid" :content="error" type="warning">
-        <kit-icon size="compact" class="input--alert">
+        <kit-icon size="compact" class="textarea--alert">
           error
         </kit-icon>
       </kit-tooltip>
@@ -21,10 +21,8 @@
 </template>
 
 <script>
-import IMask from 'imask';
-
 export default {
-  name: 'KitInput',
+  name: 'KitTextarea',
   inheritAttrs: false,
   model: {
     event: 'update'
@@ -32,17 +30,8 @@ export default {
   props: {
     value: { type: [String, Number], default: '' },
     vuelidate: { type: Object, default: null },
-    size: {
-      type: String,
-      default: 'regular',
-      validator: size => ['compact', 'regular', 'large'].includes(size)
-    },
-    disabled: { type: Boolean, default: false },
-    mask: { type: [String, Function], default: null }
+    disabled: { type: Boolean, default: false }
   },
-  data: () => ({
-    imask: null
-  }),
   computed: {
     invalid() {
       return Boolean(this.vuelidate && this.vuelidate.$error);
@@ -60,17 +49,8 @@ export default {
         return this.value;
       },
       set(value) {
-        this.$emit('update', this.imask ? this.imask.value : value);
+        this.$emit('update', value);
       }
-    }
-  },
-  mounted() {
-    if (this.mask) {
-      this.imask = new IMask(this.$refs.input, {
-        mask: this.mask
-      });
-      this.imask.on('accept', () => this.$emit('update', this.imask.value));
-      this.$watch('value', value => this.imask.updateValue(value));
     }
   },
   methods: {
@@ -91,21 +71,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input {
+.textarea {
   position: relative;
 
   &--item {
     padding: 14px 10px;
     width: 100%;
+    height: 200px;
     border: solid 1px #cfdbdf;
     border-radius: 5px;
     font-size: 14px;
     box-sizing: border-box;
+    resize: none;
     outline: none;
-
-    &.compact {
-      padding: 8px 10px;
-    }
   }
 
   &--additional {
@@ -115,7 +93,6 @@ export default {
     display: flex;
     align-items: center;
     padding: 5px;
-    height: 100%;
     box-sizing: border-box;
     z-index: 2;
   }

@@ -26,17 +26,17 @@ export const product = {
   })),
   filters: Joi.object({
     search: Joi.string().empty(''),
-    manufacturerId: ManufacturerId,
-    categoryId: CategoryId,
-    price: Joi.number(),
+    manufacturerId: Joi.string(),
+    categoryId: Joi.string(),
+    price: Joi.string(),
     isHidden: Joi
       .alternatives()
       .conditional(
         Joi.ref('$instance.user.role'),
-        { is: 'admin', then: Joi.boolean(), otherwise: Joi.valid(false).default(false) }
+        { is: 'admin', then: Joi.string(), otherwise: Joi.valid('false').default('false') }
       ),
     order: Joi.string().empty('').default('createdAt,DESC'),
-    limit: Joi.number().integer(),
-    offset: Joi.number().integer()
+    limit: Joi.string(),
+    offset: Joi.string()
   })
 };

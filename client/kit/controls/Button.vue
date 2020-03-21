@@ -43,5 +43,12 @@ export default {
   &-warning {
     background: $warning;
   }
+
+  &:disabled {
+    box-shadow: none;
+    background-color: $disabled;
+    pointer-events: none;
+    color: $info;
+  }
 }
 </style>

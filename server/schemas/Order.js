@@ -7,7 +7,8 @@ export const Identifier = Joi.number().integer().positive();
 export const OrderProduct = Joi.object({
   id: ProductId,
   price: Joi.number().integer().positive(),
-  count: Joi.number().integer().positive()
+  count: Joi.number().integer(),
+  deleted: Joi.boolean()
 });
 
 export default Joi.object({

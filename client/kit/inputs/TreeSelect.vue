@@ -1,16 +1,26 @@
 <template>
-  <treeselect
-    v-bind="$attrs"
-    :value="value"
-    :multiple="multiple"
-    :options="options"
-    :searchable="false"
-    :normalizer="normalizer"
-    :clearable="false"
-    :default-expand-level="3"
-    @input="input"
-    v-on="$listeners"
-  />
+  <div class="treeselect">
+    <treeselect
+      v-bind="$attrs"
+      :value="value"
+      :multiple="multiple"
+      :options="options"
+      :searchable="false"
+      :normalizer="normalizer"
+      :clearable="false"
+      :default-expand-level="3"
+      @input="input"
+      @close="touch"
+      v-on="$listeners"
+    />
+    <div class="treeselect--additional">
+      <kit-tooltip v-if="invalid" :content="error" type="warning">
+        <kit-icon size="compact" class="treeselect--alert">
+          error
+        </kit-icon>
+      </kit-tooltip>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,8 +34,22 @@ export default {
   inheritAttrs: false,
   props: {
     value: { type: [String, Number, Array], default: '' },
+    vuelidate: { type: Object, default: null },
     multiple: { type: Boolean, default: false },
     options: { type: Array, default: () => ([]) }
+  },
+  computed: {
+    invalid() {
+      return Boolean(this.vuelidate && this.vuelidate.$error);
+    },
+    error() {
+      if (this.invalid) {
+        const { params } = this.vuelidate.$flattenParams().find(({ name }) => !this.vuelidate[name]);
+        return params && params.message;
+      } else {
+        return '';
+      }
+    }
   },
   methods: {
     input(value) {
@@ -37,6 +61,11 @@ export default {
         label: node.name,
         children: node.children,
       };
+    },
+    touch() {
+      if (!this._isDestroyed && this.vuelidate) {
+        this.vuelidate.$touch();
+      }
     }
   }
 };
@@ -109,6 +138,28 @@ export default {
   &__option {
     padding-top: 7px;
     padding-bottom: 7px;
+  }
+}
+
+.treeselect {
+  position: relative;
+
+  &--additional {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    height: 100%;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  &--alert {
+    color: $warning;
+    cursor: pointer;
+    background: white;
   }
 }
 </style>

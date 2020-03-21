@@ -7,15 +7,21 @@
           :options="statuses"
           placeholder="Статус"
         />
-        <kit-input v-model="order.email" type="email" class="input" placeholder="Email"/>
+        <kit-input
+          v-model="order.email"
+          :vuelidate="$v.order.email"
+          type="email"
+          class="input"
+          placeholder="Email"
+        />
         <kit-input
           v-model="order.phone"
+          :vuelidate="$v.order.phone"
           type="phone"
           class="input"
           placeholder="Телефон"
           mask="+{380} (00) 000-0000"
         />
-        <kit-input v-model="order.name" type="text" class="input" placeholder="Имя"/>
       </div>
       <kit-label-group class="order--shipping_option">
         <kit-choice v-model="order.shipping" value="post" related>
@@ -27,22 +33,29 @@
       </kit-label-group>
       <div class="order--group">
         <kit-input
+          v-if="order.shipping === 'post'"
+          v-model="order.fullName"
+          :vuelidate="$v.order.fullName"
+          class="input"
+          placeholder="Ф.И.О"
+        />
+        <kit-input
           v-model="order.city"
-          type="name"
+          :vuelidate="$v.order.city"
           class="input"
           :disabled="order.shipping === 'courier'"
           placeholder="Город"
         />
         <kit-input
           v-model="order.address"
-          type="number"
+          :vuelidate="$v.order.address"
           class="input"
+          :type="order.shipping === 'courier' ? 'string' : 'number'"
           :placeholder="order.shipping === 'courier' ? 'Адресс' : 'Номер отделения'"
-          :mask="Number"
         />
       </div>
       <div class="order--controls">
-        <kit-button @click="update">Изменить</kit-button>
+        <kit-button :disabled="$v.order.$invalid" @click="update">Изменить</kit-button>
         <kit-button type="warning" @click="modals.sure = true">
           Удалить
         </kit-button>
@@ -113,6 +126,7 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/order';
 import AppSure from '@/components/common/Sure';
 
 export default {
@@ -135,7 +149,6 @@ export default {
         id: null,
         email: '',
         phone: '',
-        name: '',
         shipping: '',
         city: '',
         address: '',
@@ -143,6 +156,9 @@ export default {
         products: []
       }
     };
+  },
+  validations: {
+    order: schema
   },
   computed: {
     total() {
@@ -209,7 +225,19 @@ export default {
         this.$nuxt.$loading.start();
         await this.$api.orders.update({
           orderId: this.order.id,
-          ...this.order
+          status: this.order.status,
+          email: this.order.email,
+          phone: this.order.phone,
+          shipping: this.order.shipping,
+          fullName: this.order.fullName,
+          city: this.order.city,
+          address: this.order.address,
+          products: this.order.products.map(({ product, price, count, deleted }) => ({
+            id: product.id,
+            price,
+            count,
+            deleted
+          }))
         });
         this.$alert.success('Заказ изменен');
         this.$router.push('/admin/orders');
