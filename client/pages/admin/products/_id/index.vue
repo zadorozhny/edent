@@ -4,24 +4,40 @@
       <kit-image-uploader v-model="product.image"/>
     </div>
     <div class="product--content">
-      <kit-input v-model="product.name" placeholder="Название"/>
+      <kit-input
+        v-model="product.name"
+        :vuelidate="$v.product.name"
+        placeholder="Название"
+      />
       <kit-tree-select
         v-model="product.categoryId"
+        :vuelidate="$v.product.categoryId"
         :options="categories"
         placeholder="Категория"
       />
       <kit-select
         v-model="product.manufacturerId"
+        :vuelidate="$v.product.manufacturerId"
         :options="manufacturers"
         placeholder="Производитель"
       />
-      <kit-input v-model.number="product.price" :type="'number'" placeholder="Цена"/>
+      <kit-input
+        v-model.number="product.price"
+        :vuelidate="$v.product.price"
+        :type="'number'"
+        placeholder="Цена"
+      />
     </div>
     <div class="product--description">
-      <textarea v-model="product.description" class="textarea" placeholder="Описание"/>
+      <kit-textarea
+        v-model="product.description"
+        :vuelidate="$v.product.description"
+        class="textarea"
+        placeholder="Описание"
+      />
     </div>
     <div class="product--controls">
-      <kit-button @click="update">
+      <kit-button :disabled="$v.product.$invalid" @click="update">
         Изменить
       </kit-button>
       <kit-button type="warning" @click="modals.sure = true">
@@ -39,6 +55,7 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/product';
 import AppSure from '@/components/common/Sure';
 
 export default {
@@ -64,6 +81,9 @@ export default {
       categories: []
     };
   },
+  validations: {
+    product: schema
+  },
   async asyncData({ app, params }) {
     const [product, manufacturers, categories] = await Promise.all([
       app.$api.products.get({ productId: params.id }),
@@ -87,7 +107,12 @@ export default {
         this.$nuxt.$loading.start();
         await this.$api.products.update({
           productId: this.product.id,
-          ...this.product
+          image: this.product.image,
+          name: this.product.name,
+          price: this.product.price,
+          categoryId: this.product.categoryId,
+          manufacturerId: this.product.manufacturerId,
+          description: this.product.description
         });
         this.$alert.success('Товар обновлен');
         this.$router.push('/admin/products');
@@ -150,17 +175,5 @@ export default {
     justify-content: center;
     grid-area: controls;
   }
-}
-
-.textarea {
-  padding: 14px 10px;
-  width: 100%;
-  height: 200px;
-  border: solid 1px #cfdbdf;
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box;
-  resize: none;
-  outline: none;
 }
 </style>
