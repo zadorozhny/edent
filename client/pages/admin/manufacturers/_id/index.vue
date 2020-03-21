@@ -1,10 +1,14 @@
 <template>
   <section class="page container manufacturer">
     <div class="manufacturer--content">
-      <kit-input v-model="manufacturer.name" placeholder="Название"/>
+      <kit-input
+        v-model="manufacturer.name"
+        :vuelidate="$v.manufacturer.name"
+        placeholder="Название"
+      />
     </div>
     <div class="manufacturer--controls">
-      <kit-button @click="update">
+      <kit-button :disabled="$v.manufacturer.$invalid" @click="update">
         Изменить
       </kit-button>
       <kit-button type="warning" @click="modals.sure = true">
@@ -22,12 +26,16 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/manufacturer';
 import AppSure from '@/components/common/Sure';
 
 export default {
   layout: 'admin',
   components: {
     AppSure
+  },
+  validations: {
+    manufacturer: schema
   },
   data() {
     return {
@@ -53,7 +61,7 @@ export default {
         this.$nuxt.$loading.start();
         await this.$api.manufacturers.update({
           manufacturerId: this.manufacturer.id,
-          ...this.manufacturer
+          name: this.manufacturer.name
         });
         this.$alert.success('Производитель обновлен');
         this.$router.push('/admin/manufacturers');

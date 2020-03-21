@@ -1,15 +1,20 @@
 <template>
   <section class="page container category">
     <div class="category--content">
-      <kit-input v-model="category.name" placeholder="Название"/>
+      <kit-input
+        v-model="category.name"
+        :vuelidate="$v.category.name"
+        placeholder="Название"
+      />
       <kit-tree-select
         v-model="category.parentId"
+        :vuelidate="$v.category.parentId"
         :options="categories"
         placeholder="Категория"
       />
     </div>
     <div class="category--controls">
-      <kit-button @click="update">
+      <kit-button :disabled="$v.category.$invalid" @click="update">
         Изменить
       </kit-button>
       <kit-button type="warning" @click="modals.sure = true">
@@ -27,6 +32,7 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/category';
 import AppSure from '@/components/common/Sure';
 
 export default {
@@ -47,6 +53,9 @@ export default {
       categories: []
     };
   },
+  validations: {
+    category: schema
+  },
   async asyncData({ app, params }) {
     const [category, categories] = await Promise.all([
       app.$api.categories.get({ categoryId: params.id }),
@@ -65,7 +74,8 @@ export default {
         this.$nuxt.$loading.start();
         await this.$api.categories.update({
           categoryId: this.category.id,
-          ...this.category
+          name: this.category.name,
+          parentId: this.category.parentId
         });
         this.$alert.success('Категория обновлена');
         this.$router.push('/admin/categories');

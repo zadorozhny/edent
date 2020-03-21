@@ -1,15 +1,20 @@
 <template>
   <section class="page container category">
     <div class="category--content">
-      <kit-input v-model="category.name" placeholder="Название"/>
+      <kit-input
+        v-model="category.name"
+        :vuelidate="$v.category.name"
+        placeholder="Название"
+      />
       <kit-tree-select
         v-model="category.parentId"
+        :vuelidate="$v.category.parentId"
         :options="categories"
         placeholder="Категория"
       />
     </div>
-    <div class="category--controls" @click="create">
-      <kit-button>
+    <div class="category--controls">
+      <kit-button :disabled="$v.category.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -17,6 +22,8 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/category';
+
 export default {
   layout: 'admin',
   data() {
@@ -27,6 +34,9 @@ export default {
       },
       categories: []
     };
+  },
+  validations: {
+    category: schema
   },
   async asyncData({ app }) {
     const categories = await app.$api.categories.getList({

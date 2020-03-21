@@ -1,10 +1,14 @@
 <template>
   <section class="page container manufacturer">
     <div class="manufacturer--content">
-      <kit-input v-model="manufacturer.name" placeholder="Название"/>
+      <kit-input
+        v-model="manufacturer.name"
+        :vuelidate="$v.manufacturer.name"
+        placeholder="Название"
+      />
     </div>
-    <div class="manufacturer--controls" @click="create">
-      <kit-button>
+    <div class="manufacturer--controls">
+      <kit-button :disabled="$v.manufacturer.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -12,6 +16,8 @@
 </template>
 
 <script>
+import { details as schema } from '@/validations/manufacturer';
+
 export default {
   layout: 'admin',
   data() {
@@ -20,6 +26,9 @@ export default {
         name: ''
       }
     };
+  },
+  validations: {
+    manufacturer: schema
   },
   methods: {
     async create() {
