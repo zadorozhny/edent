@@ -6,13 +6,12 @@
   width: 100%;
   box-sizing: border-box;
 
-
   &:not(.admin) {
     @media ($phablet) {
       padding: 10px;
     }
-  
-    &-no_space {
+
+    &.container-no_space {
       @media ($phablet) {
         padding: 0;
       }
