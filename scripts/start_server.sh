@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/ubuntu
-pm2 start apps.json edent
+cd /var/www/edent
+npm run start
