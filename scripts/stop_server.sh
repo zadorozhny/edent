@@ -1,3 +1,3 @@
-#!/bin/bash
-# cd /home/ubuntu
-# pm2 kill
+!/bin/bash
+cd /home/ubuntu
+pm2 kill
