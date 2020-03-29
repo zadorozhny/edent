@@ -24,12 +24,15 @@ import AlertTarget from '@/kit/portals/AlertTarget';
 import Menu from '@/kit/portals/Menu';
 import MenuTarget from '@/kit/portals/MenuTarget';
 import Tooltip from '@/kit/portals/Tooltip';
+import Loader, { LoaderWormhole } from '@/kit/portals/Loader';
+import LoaderTarget from '@/kit/portals/LoaderTarget';
 
 import TransitionModal from '@/kit/transitions/Modal';
 import TransitionAlert from '@/kit/transitions/Alert';
 import TransitionMenu from '@/kit/transitions/Menu';
+import TransitionLoader from '@/kit/transitions/Loader';
 
-export { AlertWormhole };
+export { AlertWormhole, LoaderWormhole };
 
 export default Vue => {
   Vue.component(Slider.name, Slider);
@@ -58,8 +61,11 @@ export default Vue => {
   Vue.component(Menu.name, Menu);
   Vue.component(MenuTarget.name, MenuTarget);
   Vue.component(Tooltip.name, Tooltip);
+  Vue.component(Loader.name, Loader);
+  Vue.component(LoaderTarget.name, LoaderTarget);
 
   Vue.component(TransitionModal.name, TransitionModal);
   Vue.component(TransitionAlert.name, TransitionAlert);
   Vue.component(TransitionMenu.name, TransitionMenu);
+  Vue.component(TransitionLoader.name, TransitionLoader);
 };

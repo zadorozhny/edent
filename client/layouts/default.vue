@@ -13,6 +13,7 @@
     <kit-menu-target/>
     <kit-modal-target/>
     <kit-alert-target/>
+    <kit-loader-target/>
   </div>
 </template>
 

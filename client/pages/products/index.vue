@@ -174,7 +174,7 @@ export default {
     },
     async getList() {
       try {
-        this.$nuxt.$loading.start();
+        this.$loader.start();
         const { rows, count } = await this.$api.products.getList({
           search: this.filter.search || undefined,
           manufacturerId: this.filter.manufacturerId || undefined,
@@ -192,10 +192,10 @@ export default {
         this.count = count;
         this.pagination.offset = Math.min(this.count, this.pagination.offset + rows.length);
       } catch (err) {
-        this.$nuxt.$loading.finish();
+        this.$loader.finish();
         this.$alert.error(err.message);
       } finally {
-        this.$nuxt.$loading.finish();
+        this.$loader.finish();
       }
     }
   }

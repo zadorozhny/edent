@@ -104,7 +104,7 @@ export default {
     outline: none;
 
     &.compact {
-      padding: 8px 10px;
+      padding: 10px 10px;
     }
   }
 

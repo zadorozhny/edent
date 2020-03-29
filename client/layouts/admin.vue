@@ -4,6 +4,7 @@
     <nuxt class="admin"/>
     <kit-modal-target/>
     <kit-alert-target/>
+    <kit-loader-target/>
   </div>
 </template>
 

@@ -79,7 +79,7 @@ export default {
 <style lang="scss" scoped>
 .filters {
   display: flex;
-  height: 36px;
+  height: 40px;
   width: 340px;
 
   &--icon {
