@@ -81,9 +81,9 @@ export default {
       position: relative;
       margin-right: 0;
       padding: 25px 10px;
-      top: 45px;
+      top: 47px;
       width: 100%;
-      height: calc(100% - 90px);
+      height: calc(100% - 94px);
       border-radius: 0;
       box-shadow: none;
     }
