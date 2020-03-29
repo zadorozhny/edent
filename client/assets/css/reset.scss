@@ -84,6 +84,7 @@ body {
 
 input, textarea {
   color: $text;
+  -webkit-appearance: none;
 
   &::placeholder {
     color: $info;

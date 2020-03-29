@@ -52,7 +52,8 @@ export default {
   grid-row-gap: 40px;
   padding: 10px;
   margin-right: 30px;
-  min-width: 270px;
+  width: 100%;
+  max-width: 270px;
   border-radius: 3px;
   box-sizing: border-box;
   background: $light;
