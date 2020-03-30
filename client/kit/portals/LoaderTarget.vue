@@ -23,7 +23,7 @@ export default {
 
 <style lang="scss" scoped>
 .loader_target {
-  position: absolute;
+  position: fixed;
   top: 13px;
   left: 50%;
   transform: translate(-50%, 0);
