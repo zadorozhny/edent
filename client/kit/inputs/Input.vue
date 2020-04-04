@@ -93,6 +93,7 @@ export default {
 <style lang="scss" scoped>
 .input {
   position: relative;
+  text-align: left;
 
   &--item {
     padding: 14px 10px;
@@ -100,6 +101,7 @@ export default {
     border: solid 1px #cfdbdf;
     border-radius: 5px;
     font-size: 14px;
+    text-align: inherit;
     box-sizing: border-box;
     outline: none;
 

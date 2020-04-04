@@ -13,6 +13,22 @@
           <p class="text_medium">Производитель: {{ product.manufacturer.name }}</p>
           <p class="text_medium">Категория: {{ product.category.name }}</p>
         </div>
+        <div class="product--count">
+          <button class="product--count_control" @click="count > 1 && (count -= 1)">
+            -
+          </button>
+          <kit-input
+            v-model.number="count"
+            type="number"
+            size="compact"
+            class="product--count_input"
+            placeholder="Колл."
+            @blur="!count && (count = 1)"
+          />
+          <button class="product--count_control" @click="count += 1">
+            +
+          </button>
+        </div>
         <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
       </div>
       <div class="buttons">
@@ -29,7 +45,8 @@
 <script>
 export default {
   data: () => ({
-    product: {}
+    product: {},
+    count: 1
   }),
   async asyncData({ app, params }) {
     const product = await app.$api.products.get({ productId: params.id });
@@ -44,9 +61,9 @@ export default {
     save() {
       const products = { ...this.$storage.products };
       if (products[this.product.id]) {
-        products[this.product.id].count += 1;
+        products[this.product.id].count += this.count;
       } else {
-        products[this.product.id] = { ...this.product, count: 1 };
+        products[this.product.id] = { ...this.product, count: this.count };
       }
       this.$storage.products = products;
     },
@@ -70,13 +87,13 @@ export default {
     "picture content"
     "picture buttons"
     "description description";
-  grid-template-rows: auto 120px auto;
+  grid-template-rows: auto 70px auto;
   grid-column-gap: 40px;
   grid-row-gap: 30px;
 
   @media ($phablet) {
     grid-template-columns: 100%;
-    grid-template-rows: auto 200px auto;
+    grid-template-rows: auto 260px auto;
     grid-column-gap: unset;
     grid-row-gap: 10px;
     grid-template-areas:
@@ -119,6 +136,45 @@ export default {
 
     @media ($phablet) {
       padding: 10px;
+    }
+  }
+
+  &--count {
+    display: flex;
+    align-items: center;
+
+    &_control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+      background: #f7f9f8;
+      cursor: pointer;
+      transition: .25s ease-out;
+      user-select: none;
+      outline: none;
+
+      &:hover {
+        box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
+      }
+
+      &:first-child {
+        margin-right: 10px;
+      }
+
+      &:last-child {
+        margin-left: 10px;
+      }
+    }
+
+    &_input {
+      width: 60px;
+      text-align: center;
     }
   }
 

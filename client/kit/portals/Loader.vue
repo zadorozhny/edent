@@ -41,11 +41,13 @@ export default {
 export const LoaderWormhole = {
   data: () => ({
     wormhole: Wormhole,
-    timeout: null
+    timeout: null,
+    time: null
   }),
   methods: {
     start() {
       if (!this.timeout) {
+        this.time = Date.now();
         this.wormhole.open({
           to: 'loader',
           from: 'loader-portal',
@@ -53,15 +55,14 @@ export const LoaderWormhole = {
             on: { close: () => this.close() }
           })]
         });
-      } else {
-        this.finish();
       }
     },
     finish() {
+      const difference = Date.now() - this.time;
       this.timeout = setTimeout(() => {
         this.wormhole.close({ to: 'loader', from: 'loader-portal' });
         this.timeout = null;
-      }, 300);
+      }, difference > 300 ? 0 : 300 - difference);
     }
   }
 };
