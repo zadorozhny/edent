@@ -310,6 +310,7 @@ export default {
     justify-content: center;
     align-items: center;
     width: 36px;
+    max-width: 36px;
     height: 36px;
     font-size: 20px;
     border: none;
@@ -324,6 +325,7 @@ export default {
 
     @media ($mobile) {
       width: 30px;
+      max-width: 30px;
       height: 30px;
     }
 

@@ -224,7 +224,7 @@ export default {
     min-width: 16px;
     min-height: 16px;
     text-align: center;
-    font-size: 10px;
+    font-size: 11px;
     white-space: nowrap;
     color: $light;
     transform: translate(-8px, -50%);
