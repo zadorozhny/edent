@@ -97,6 +97,7 @@ export default {
 
   &--item {
     padding: 14px 10px;
+    max-height: 40px;
     width: 100%;
     border: solid 1px #cfdbdf;
     border-radius: 5px;

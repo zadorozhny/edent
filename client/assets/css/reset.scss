@@ -64,6 +64,10 @@ a {
   }
 }
 
+* {
+  touch-action: manipulation;
+}
+
 body {
   font: {
     family: 'Montserrat', Arial, sans-serif;

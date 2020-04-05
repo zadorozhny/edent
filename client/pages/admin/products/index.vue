@@ -1,6 +1,6 @@
 <template>
   <section class="page container products">
-    <app-filter v-model="filter" class="filter admin" :interval="interval"/>
+    <app-filter v-model="filter" class="filter products--filter" :interval="interval"/>
     <div class="cover">
       <div class="products--header">
         <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
@@ -159,6 +159,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  &--filter {
+    max-width: 270px;
+  }
 
   &--header {
     display: grid;

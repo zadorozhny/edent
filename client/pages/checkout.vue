@@ -314,6 +314,7 @@ export default {
     font-size: 20px;
     border: none;
     border-radius: 5px;
+    box-sizing: border-box;
     box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
     background: #f7f9f8;
     cursor: pointer;

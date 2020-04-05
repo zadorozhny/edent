@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     debounce() {
-      return this.$utils.debounce(this.getList, 200);
+      return this.$utils.debounce(this.getList, 500);
     },
     throttle() {
       return this.$utils.throttle(this.getList, 300);
@@ -212,6 +212,7 @@ export default {
   &--filter {
     position: sticky;
     top: 71px;
+    max-width: 270px;
 
     @media ($tablet) {
       display: none;
