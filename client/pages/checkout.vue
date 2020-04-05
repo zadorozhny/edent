@@ -74,9 +74,9 @@
             <span>{{ price * count }}</span>
           </div>
           <div class="table--section">
-            <button class="table--control" @click="change(id, -1)">-</button>
+            <span class="table--control" @click="change(id, -1)">-</span>
             <span>{{ count }}</span>
-            <button class="table--control" @click="change(id, 1)">+</button>
+            <span class="table--control" @click="change(id, 1)">+</span>
           </div>
         </div>
       </template>
@@ -310,22 +310,18 @@ export default {
     justify-content: center;
     align-items: center;
     width: 36px;
-    max-width: 36px;
     height: 36px;
     font-size: 20px;
     border: none;
     border-radius: 5px;
-    box-sizing: border-box;
     box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
     background: #f7f9f8;
     cursor: pointer;
     transition: .25s ease-out;
     user-select: none;
-    outline: none;
 
     @media ($mobile) {
       width: 30px;
-      max-width: 30px;
       height: 30px;
     }
 
