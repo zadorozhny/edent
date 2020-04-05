@@ -108,7 +108,7 @@ export default {
     margin-bottom: 40px;
     max-width: 460px;
     width: 100%;
-    border-radius: 5px;
+    border-radius: 3px;
     box-sizing: border-box;
     box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
   }

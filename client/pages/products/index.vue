@@ -48,7 +48,6 @@ export default {
       modals: {
         filter: false
       },
-      option: 'ex',
       rows: [],
       count: 0,
       interval: {

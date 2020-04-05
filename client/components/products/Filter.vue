@@ -19,6 +19,14 @@
         <kit-label type="outline" size="regular">Дешевые</kit-label>
       </kit-choice>
     </kit-label-group>
+    <kit-label-group>
+      <kit-choice v-model="proxy.order" value="createdAt,ASC" related>
+        <kit-label type="outline" size="regular">Новые</kit-label>
+      </kit-choice>
+      <kit-choice v-model="proxy.order" value="createdAt,DESC" related>
+        <kit-label type="outline" size="regular">Старые</kit-label>
+      </kit-choice>
+    </kit-label-group>
   </div>
 </template>
 
