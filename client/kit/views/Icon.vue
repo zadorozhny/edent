@@ -1,9 +1,9 @@
 <template>
-  <div :class="['icon', { ripple }, size, color]" v-on="$listeners">
+  <span :class="['icon', { ripple }, size, color]" v-on="$listeners">
     <i class="material-icons">
       <slot/>
     </i>
-  </div>
+  </span>
 </template>
 
 <script>

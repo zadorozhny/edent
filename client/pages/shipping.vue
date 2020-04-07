@@ -10,10 +10,10 @@
         <p class="shipping--option">
           <kit-icon :ripple="false" class="shipping--icon">account_balance_wallet</kit-icon>
           <span>
-            <p class="shipping--paragraph_space">Оплата осуществляется:</p>
-            <p>- наложенным платежём</p>
-            <p class="shipping--paragraph_space">- перечислением на карту</p>
-            <p>*Обязательная предоплата в размере двух доставок</p>
+            <span class="shipping--paragraph shipping--paragraph-space">Оплата осуществляется:</span>
+            <span class="shipping--paragraph">- наложенным платежём</span>
+            <span class="shipping--paragraph shipping--paragraph-space">- перечислением на карту</span>
+            <span class="shipping--paragraph">*Обязательная предоплата в размере двух доставок</span>
           </span>
         </p>
         <p class="shipping--option">
@@ -43,10 +43,10 @@
         <p class="shipping--option">
           <kit-icon :ripple="false" class="shipping--icon">account_balance_wallet</kit-icon>
           <span>
-            <p class="shipping--paragraph_space">Оплата осуществляется:</p>
-            <p>- наложенным платежём</p>
-            <p class="shipping--paragraph_space">- перечислением на карту</p>
-            <p>*Обязательная предоплата в размере двух доставок</p>
+            <span class="shipping--paragraph shipping--paragraph-space">Оплата осуществляется:</span>
+            <span class="shipping--paragraph">- наложенным платежём</span>
+            <span class="shipping--paragraph shipping--paragraph-space">- перечислением на карту</span>
+            <span class="shipping--paragraph">*Обязательная предоплата в размере двух доставок</span>
           </span>
         </p>
         <p class="shipping--option">
@@ -134,8 +134,12 @@ export default {
     }
   }
 
-  &--paragraph_space {
-    margin-bottom: 5px;
+  &--paragraph {
+    display: block;
+
+    &-space {
+      margin-bottom: 5px;
+    }
   }
 
   &--image_wrapper {
