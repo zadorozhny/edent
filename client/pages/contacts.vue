@@ -1,32 +1,164 @@
 <template>
-  <app-image-layout image="contact_us"/>
+  <div class="page container contacts">
+    <div class="contacts--content">
+      <div class="contacts--info">
+        <div class="contacts--info_wrapper">
+          <h2 class="contacts--title text_title">Контакты</h2>
+          <p class="contacts--phone">
+            <img src="~assets/images/kyivstar.png">
+            +380 (98) 27-84-979
+            <img :src="whatsapp">
+            <img :src="telegram">
+            <img :src="viber">
+          </p>
+          <p class="contacts--phone">
+            <img src="~assets/images/vodafone.png">
+            +380 (66) 27-84-979
+          </p>
+        </div>
+        <div class="contacts--info_wrapper">
+          <h3 class="contacts--title text_title">Время работы</h3>
+          <p class="contacts--work_time">
+            <kit-icon :ripple="false" class="contacts--icon">date_range</kit-icon>
+            понедельник - пятница
+          </p>
+          <p class="contacts--work_time">
+            <kit-icon :ripple="false" class="contacts--icon">query_builder</kit-icon>
+            08:00 - 18:00
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="contacts--content">
+      <div class="contacts--form">
+        <h3 class="contacts--form_title text_title">Обратный звонок</h3>
+        <kit-input
+          v-model="phone"
+          :vuelidate="$v.phone"
+          type="phone"
+          class="contacts--input"
+          placeholder="Укажите номер телефона"
+          mask="+{380} (00) 000-0000"
+        />
+        <kit-button :disabled="$v.phone.$invalid">Заказать бесплатно</kit-button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import AppImageLayout from '@/components/layouts/common/Image';
+import whatsapp from 'super-tiny-icons/images/svg/whatsapp.svg';
+import telegram from 'super-tiny-icons/images/svg/telegram.svg';
+import viber from 'super-tiny-icons/images/svg/viber.svg';
+import { create as schema } from '@/validations/call';
 
 export default {
-  layout: 'fullscreen',
-  components: {
-    AppImageLayout
+  data: () => ({
+    phone: ''
+  }),
+  validations: {
+    phone: schema.phone
   },
-  data: () => ({})
+  computed: {
+    whatsapp() {
+      return whatsapp;
+    },
+    telegram() {
+      return telegram;
+    },
+    viber() {
+      return viber;
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.contact {
+.contacts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100%;
-  margin-left: calc(50% - 1250px / 2);
+  column-gap: 60px;
+  padding: 30px 10px;
 
-  &--picture {
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: contain;
+  @media ($phablet) {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &--info_wrapper {
+    margin-bottom: 20px;
+  }
+
+  &--form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    max-width: 400px;
+    width: 100%;
+    border-radius: 3px;
+    box-sizing: border-box;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+
+    @media ($phablet) {
+      max-width: 320px;
     }
+  }
+
+  &--form_title {
+    margin-bottom: 20px;
+  }
+
+  &--title {
+    margin-bottom: 20px;
+
+    @media ($phablet) {
+      text-align: center;
+    }
+  }
+
+  &--phone {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+
+    img {
+      margin-left: 5px;
+      width: 22px;
+      height: 22px;
+      pointer-events: none;
+      user-select: none;
+
+      &:first-child {
+        margin-left: 0;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &--work_time {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+
+  &--icon {
+    margin-right: 7px;
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  &--input {
+    margin-bottom: 20px;
+    width: 100%;
   }
 }
 </style>

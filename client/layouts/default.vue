@@ -45,7 +45,8 @@ export default {
 .layout {
   position: relative;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 100%;
 }
 
 .control {

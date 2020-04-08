@@ -2,7 +2,7 @@
   <div class="page container shipping">
     <div class="shipping--content">
       <div class="shipping--information">
-        <h2 class="shipping--title">Украина</h2>
+        <h2 class="shipping--title text_title">Украина</h2>
         <p class="shipping--option">
           <kit-icon :ripple="false" class="shipping--icon">local_post_office</kit-icon>
           Доставка Новой Почтой
@@ -13,7 +13,7 @@
             <span class="shipping--paragraph shipping--paragraph-space">Оплата осуществляется:</span>
             <span class="shipping--paragraph">- наложенным платежём</span>
             <span class="shipping--paragraph shipping--paragraph-space">- перечислением на карту</span>
-            <span class="shipping--paragraph">*Обязательная предоплата в размере двух доставок</span>
+            <span class="shipping--paragraph">* обязательная предоплата в размере двух доставок</span>
           </span>
         </p>
         <p class="shipping--option">
@@ -31,7 +31,7 @@
     </div>
     <div class="shipping--content">
       <div class="shipping--information">
-        <h2 class="shipping--title">Харьков</h2>
+        <h2 class="shipping--title text_title">Харьков</h2>
         <p class="shipping--option">
           <kit-icon :ripple="false" class="shipping--icon">local_post_office</kit-icon>
           Доставка Новой Почтой
@@ -46,7 +46,7 @@
             <span class="shipping--paragraph shipping--paragraph-space">Оплата осуществляется:</span>
             <span class="shipping--paragraph">- наложенным платежём</span>
             <span class="shipping--paragraph shipping--paragraph-space">- перечислением на карту</span>
-            <span class="shipping--paragraph">*Обязательная предоплата в размере двух доставок</span>
+            <span class="shipping--paragraph">* обязательная предоплата в размере двух доставок</span>
           </span>
         </p>
         <p class="shipping--option">
