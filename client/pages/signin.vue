@@ -2,7 +2,7 @@
   <app-image-layout image="signin">
     <div class="signin">
       <div class="signin--content">
-        <kit-input v-model="credentials.email" placeholder="Email"/>
+        <kit-input v-model="credentials.email" type="email" placeholder="Email"/>
         <kit-input v-model="credentials.password" placeholder="Пароль" type="password"/>
         <kit-button @click="signin">
           Войти

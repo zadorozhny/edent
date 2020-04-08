@@ -5,7 +5,7 @@
         <kit-input
           v-model="order.phone"
           :vuelidate="$v.order.phone"
-          type="phone"
+          type="tel"
           class="input"
           placeholder="Телефон"
           mask="+{380} (00) 000-0000"

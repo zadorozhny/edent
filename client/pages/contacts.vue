@@ -6,14 +6,14 @@
           <h2 class="contacts--title text_title">Контакты</h2>
           <p class="contacts--phone">
             <img src="~assets/images/kyivstar.png">
-            +380 (98) 27-84-979
+            <a href="tel:+380 (98) 27-84-979">+380 (98) 27-84-979</a>
             <img :src="whatsapp">
             <img :src="telegram">
             <img :src="viber">
           </p>
           <p class="contacts--phone">
             <img src="~assets/images/vodafone.png">
-            +380 (66) 27-84-979
+            <a href="tel:+380 (66) 27-84-979">+380 (66) 27-84-979</a>
           </p>
         </div>
         <div class="contacts--info_wrapper">
@@ -35,7 +35,7 @@
         <kit-input
           v-model="phone"
           :vuelidate="$v.phone"
-          type="phone"
+          type="tel"
           class="contacts--input"
           placeholder="Укажите номер телефона"
           mask="+{380} (00) 000-0000"
