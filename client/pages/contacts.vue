@@ -90,6 +90,10 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media ($phablet) {
+      margin-bottom: 25px;
+    }
   }
 
   &--info_wrapper {
