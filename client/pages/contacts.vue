@@ -92,12 +92,20 @@ export default {
     align-items: center;
 
     @media ($phablet) {
-      margin-bottom: 25px;
+      margin-bottom: 40px;
     }
   }
 
   &--info_wrapper {
     margin-bottom: 20px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media ($phablet) {
+      margin-bottom: 40px;
+    }
   }
 
   &--form {
