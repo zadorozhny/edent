@@ -27,15 +27,32 @@
         </li>
       </ul>
     </nav>
-    <div class="navbar--footer" @click="$emit('close')">
-      <nuxt-link to="/">Правила пользования</nuxt-link>
-      <nuxt-link to="/">Гарантия</nuxt-link>
+    <div class="navbar--footer">
+      <p v-for="(phone, index) in contacts" :key="index" class="navbar--phone">
+        <img :src="icons[$utils.operator(phone)]">
+        <a :href="`tel:${phone}`">{{ phone }}</a>
+      </p>
     </div>
   </div>
 </template>
 
 <script>
+import { contacts } from '@/config';
+import kyivstar from '@/assets/images/kyivstar.png';
+import vodafone from '@/assets/images/vodafone.png';
+
 export default {
+  computed: {
+    contacts() {
+      return contacts;
+    },
+    icons() {
+      return {
+        kyivstar,
+        vodafone
+      };
+    }
+  }
 };
 </script>
 
@@ -136,6 +153,21 @@ export default {
 
     > *:not(:last-child) {
       margin-bottom: 10px;
+    }
+  }
+
+  &--phone {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 5px;
+
+    img {
+      margin-right: 5px;
+      width: 22px;
+      height: 22px;
+      pointer-events: none;
+      user-select: none;
     }
   }
 }

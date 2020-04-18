@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export default {
   throttle(fn, wait) {
     let last = -Infinity;
@@ -28,5 +29,25 @@ export default {
       clearTimeout(timeout);
       timeout = setTimeout(() => fn.apply(this, args), wait);
     };
+  },
+  operator(phone) {
+    const [number] = phone.match(new RegExp(/\(\d+\)/g));
+
+    switch (Number(number.replace(/[^0-9.]/g, ''))) {
+    case 39:
+    case 67:
+    case 68:
+    case 96:
+    case 97:
+    case 98:
+      return 'kyivstar';
+    case 50:
+    case 66:
+    case 95:
+    case 99:
+      return 'vodafone';
+    default:
+      return 'none';
+    }
   }
 };

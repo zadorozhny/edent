@@ -4,16 +4,9 @@
       <div class="contacts--info">
         <div class="contacts--info_wrapper">
           <h2 class="contacts--title text_title">Контакты</h2>
-          <p class="contacts--phone">
-            <img src="~assets/images/kyivstar.png">
-            <a href="tel:+380 (98) 27-84-979">+380 (98) 27-84-979</a>
-            <img :src="whatsapp">
-            <img :src="telegram">
-            <img :src="viber">
-          </p>
-          <p class="contacts--phone">
-            <img src="~assets/images/vodafone.png">
-            <a href="tel:+380 (66) 27-84-979">+380 (66) 27-84-979</a>
+          <p v-for="(phone, index) in contacts" :key="index" class="contacts--phone">
+            <img :src="icons[$utils.operator(phone)]">
+            <a :href="`tel:${phone}`">{{ phone }}</a>
           </p>
         </div>
         <div class="contacts--info_wrapper">
@@ -47,10 +40,10 @@
 </template>
 
 <script>
-import whatsapp from 'super-tiny-icons/images/svg/whatsapp.svg';
-import telegram from 'super-tiny-icons/images/svg/telegram.svg';
-import viber from 'super-tiny-icons/images/svg/viber.svg';
 import { create as schema } from '@/validations/call';
+import { contacts } from '@/config';
+import kyivstar from '@/assets/images/kyivstar.png';
+import vodafone from '@/assets/images/vodafone.png';
 
 export default {
   data: () => ({
@@ -60,14 +53,14 @@ export default {
     phone: schema.phone
   },
   computed: {
-    whatsapp() {
-      return whatsapp;
+    contacts() {
+      return contacts;
     },
-    telegram() {
-      return telegram;
-    },
-    viber() {
-      return viber;
+    icons() {
+      return {
+        kyivstar,
+        vodafone
+      };
     }
   }
 };
@@ -97,7 +90,7 @@ export default {
   }
 
   &--info_wrapper {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 
     &:last-child {
       margin-bottom: 0;
@@ -129,7 +122,7 @@ export default {
   }
 
   &--title {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 
     @media ($phablet) {
       text-align: center;
@@ -143,16 +136,11 @@ export default {
     margin-bottom: 5px;
 
     img {
-      margin-left: 5px;
+      margin-right: 5px;
       width: 22px;
       height: 22px;
       pointer-events: none;
       user-select: none;
-
-      &:first-child {
-        margin-left: 0;
-        margin-right: 5px;
-      }
     }
   }
 
