@@ -18,6 +18,9 @@
         <nuxt-link tag="li" to="/admin/manufacturers" class="navigation--item">
           <span>Производители</span>
         </nuxt-link>
+        <nuxt-link tag="li" to="/admin/warning" class="navigation--item">
+          <span>Баннер</span>
+        </nuxt-link>
       </ul>
       <div class="navigation--controls">
         <div class="navigation--avatar ripple">

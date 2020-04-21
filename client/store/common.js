@@ -1,6 +1,7 @@
 export const state = () => ({
   categories: [],
-  manufacturers: []
+  manufacturers: [],
+  warning: null
 });
 
 export const mutations = {
@@ -12,6 +13,9 @@ export const mutations = {
   },
   manufacturers(state, manufacturers) {
     state.manufacturers = manufacturers;
+  },
+  warning(state, warning) {
+    state.warning = warning;
   }
 };
 
@@ -25,5 +29,9 @@ export const actions = {
   async manufacturers({ commit }) {
     const manufacturers = await this.$api.manufacturers.getList();
     commit('manufacturers', manufacturers);
+  },
+  async warning({ commit }) {
+    const warning = await this.$api.warning.get();
+    commit('warning', warning);
   }
 };

@@ -1,5 +1,10 @@
 <template>
   <div class="layout">
+    <kit-transition-expand>
+      <div v-if="warning && warning.show" class="layout--warning">
+        <p>{{ warning.description }}</p>
+      </div>
+    </kit-transition-expand>
     <app-header @navigation="modals.navigation = true"/>
     <nuxt/>
     <template v-if="$mq !== 'desktop'">
@@ -11,9 +16,9 @@
       Админ панель
     </nuxt-link>
     <kit-menu-target/>
-    <kit-modal-target/>
     <kit-alert-target/>
     <kit-loader-target/>
+    <kit-modal-target/>
   </div>
 </template>
 
@@ -36,6 +41,9 @@ export default {
   computed: {
     isAdmin() {
       return this.$store.getters['auth/isAdmin'];
+    },
+    warning() {
+      return this.$store.state.common.warning;
     }
   }
 };
@@ -44,9 +52,18 @@ export default {
 <style lang="scss" scoped>
 .layout {
   position: relative;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  min-height: 100%;
+  height: 100%;
+  overflow: auto;
+
+  &--warning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $warning;
+    color: $light;
+    padding: 10px;
+    box-sizing: border-box;
+  }
 }
 
 .control {

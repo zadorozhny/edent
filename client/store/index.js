@@ -22,7 +22,8 @@ export const actions = {
       await Promise.all([
         dispatch('auth/init', this.$cookie.tokens),
         dispatch('common/manufacturers'),
-        dispatch('common/categories')
+        dispatch('common/categories'),
+        dispatch('common/warning')
       ]);
     } catch (err) {
       console.error(err);

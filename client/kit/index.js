@@ -11,6 +11,7 @@ import Tabs from '@/kit/controls/Tabs';
 import Label from '@/kit/controls/Label';
 import LabelGroup from '@/kit/controls/LabelGroup';
 import Pagination from '@/kit/controls/Pagination';
+import Switch from '@/kit/controls/Switch';
 
 import Card from '@/kit/views/Card';
 import Icon from '@/kit/views/Icon';
@@ -31,6 +32,7 @@ import TransitionModal from '@/kit/transitions/Modal';
 import TransitionAlert from '@/kit/transitions/Alert';
 import TransitionMenu from '@/kit/transitions/Menu';
 import TransitionLoader from '@/kit/transitions/Loader';
+import TransitionExpand from '@/kit/transitions/Expand';
 
 export { AlertWormhole, LoaderWormhole };
 
@@ -48,6 +50,7 @@ export default Vue => {
   Vue.component(Label.name, Label);
   Vue.component(LabelGroup.name, LabelGroup);
   Vue.component(Pagination.name, Pagination);
+  Vue.component(Switch.name, Switch);
 
   Vue.component(Card.name, Card);
   Vue.component(Icon.name, Icon);
@@ -68,4 +71,5 @@ export default Vue => {
   Vue.component(TransitionAlert.name, TransitionAlert);
   Vue.component(TransitionMenu.name, TransitionMenu);
   Vue.component(TransitionLoader.name, TransitionLoader);
+  Vue.component(TransitionExpand.name, TransitionExpand);
 };

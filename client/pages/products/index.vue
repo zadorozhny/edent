@@ -25,7 +25,7 @@
     </div>
     <kit-modal
       v-if="modals.filter && $mq !== 'desktop'"
-      name="notifications"
+      name="filter"
       @close="modals.filter = false"
     >
       <app-filter v-model="filter" :interval="interval"/>

@@ -85,6 +85,10 @@ export default ({ store }, inject) => {
       create: data => axios.post('/orders', data),
       update: ({ orderId, ...data }) => axios.patch(`/orders/${orderId}`, data),
       remove: ({ orderId }) => axios.delete(`/orders/${orderId}`)
+    },
+    warning: {
+      get: () => axios.get('/warning'),
+      update: data => axios.put('/warning', data),
     }
   });
 };
