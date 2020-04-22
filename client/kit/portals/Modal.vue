@@ -41,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -65,14 +65,12 @@ export default {
 }
 
 .modal {
-  &:not(.admin) {
-    @media ($tablet) {
-      background-color: unset;
-      backdrop-filter: unset;
-    }
+  @media ($tablet) {
+    background-color: unset;
+    backdrop-filter: unset;
   }
 
-  &:not(.admin) &--content {
+  &--content {
     @media ($tablet) {
       padding: 0;
     }

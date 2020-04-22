@@ -40,7 +40,7 @@
               <span>{{ statuses[status] }}</span>
             </div>
             <div class="table--section">
-              <span>{{ createdAt }}</span>
+              <span>{{ $luxon.DateTime.fromISO(createdAt).toLocaleString($luxon.DateTime.DATETIME_SHORT) }}</span>
             </div>
           </nuxt-link>
         </template>
@@ -157,7 +157,7 @@ export default {
 .table {
   &--header {
     display: grid;
-    grid-template-columns: 80px 145px minmax(0, 1fr) 110px 90px;
+    grid-template-columns: 80px 180px minmax(0, 1fr) 110px 170px;
   }
 
   &--section {
@@ -174,7 +174,7 @@ export default {
 
   &--item {
     display: grid;
-    grid-template-columns: 80px 145px minmax(0, 1fr) 110px 90px;
+    grid-template-columns: 80px 180px minmax(0, 1fr) 110px 170px;
   }
 }
 </style>

@@ -133,7 +133,7 @@ export default {
   },
   watch: {
     sendEmail(value) {
-      if (!value) {
+      if (!value && this.order.email) {
         this.order.email = '';
       }
     },

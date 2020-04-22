@@ -1,7 +1,7 @@
 <template>
   <section class="page container products">
     <app-filter v-model="filter" :interval="interval" class="products--filter"/>
-    <div class="cover">
+    <div class="products--cover">
       <nuxt-link
         v-for="(row, index) in rows"
         :key="index"
@@ -207,14 +207,36 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding-top: 0;
+  padding-bottom: 0;
 
   &--filter {
     position: sticky;
-    top: 71px;
+    top: 15px;
     max-width: 270px;
 
     @media ($tablet) {
       display: none;
+    }
+  }
+
+  &--cover {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    padding: 15px 0;
+    width: 100%;
+
+    @media ($tablet) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @media ($phablet) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media ($mobile) {
+      grid-template-columns: 1fr;
     }
   }
 }
@@ -241,25 +263,6 @@ export default {
 
   &-right {
     right: 10px;
-  }
-}
-
-.cover {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 20px;
-  width: 100%;
-
-  @media ($tablet) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  @media ($phablet) {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  @media ($mobile) {
-    grid-template-columns: 1fr;
   }
 }
 

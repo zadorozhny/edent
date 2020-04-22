@@ -1,12 +1,17 @@
 <template>
   <div class="layout">
-    <kit-transition-expand>
-      <div v-if="warning && warning.show" class="layout--warning">
-        <p>{{ warning.description }}</p>
-      </div>
-    </kit-transition-expand>
-    <app-header @navigation="modals.navigation = true"/>
-    <nuxt/>
+    <div class="layout--header">
+      <kit-transition-expand>
+        <div v-if="warning && warning.show" class="layout--warning">
+          <p>{{ warning.description }}</p>
+        </div>
+      </kit-transition-expand>
+      <app-header @navigation="modals.navigation = true"/>
+    </div>
+    <div class="layout--content">
+      <kit-modal-target/>
+      <nuxt/>
+    </div>
     <template v-if="$mq !== 'desktop'">
       <kit-menu v-if="modals.navigation" direction="left" name="menu" @close="modals.navigation = false">
         <navbar class="layout--navbar" @close="modals.navigation = false"/>
@@ -18,7 +23,6 @@
     <kit-menu-target/>
     <kit-alert-target/>
     <kit-loader-target/>
-    <kit-modal-target/>
   </div>
 </template>
 
@@ -52,8 +56,10 @@ export default {
 <style lang="scss" scoped>
 .layout {
   position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 
   &--warning {
     display: flex;
@@ -63,6 +69,12 @@ export default {
     color: $light;
     padding: 10px;
     box-sizing: border-box;
+  }
+
+  &--content {
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
   }
 }
 

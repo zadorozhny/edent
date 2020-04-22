@@ -1,8 +1,10 @@
 <template>
   <div class="layout">
     <app-header/>
-    <nuxt class="admin"/>
-    <kit-modal-target/>
+    <div class="layout--content">
+      <kit-modal-target/>
+      <nuxt class="admin"/>
+    </div>
     <kit-alert-target/>
     <kit-loader-target/>
   </div>
@@ -22,7 +24,13 @@ export default {
 .layout {
   display: grid;
   grid-template-rows: auto 1fr;
-  min-width: 960px;
-  overflow: auto;
+  height: 100%;
+  overflow: hidden;
+
+  &--content {
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+  }
 }
 </style>

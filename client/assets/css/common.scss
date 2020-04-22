@@ -7,15 +7,13 @@
   width: 100%;
   box-sizing: border-box;
 
-  &:not(.admin) {
-    @media ($phablet) {
-      padding: 10px;
-    }
+  @media ($phablet) {
+    padding: 10px;
+  }
 
-    &.container-no_space {
-      @media ($phablet) {
-        padding: 0;
-      }
+  &.container-no_space {
+    @media ($phablet) {
+      padding: 0;
     }
   }
 }
