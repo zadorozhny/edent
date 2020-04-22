@@ -10,7 +10,13 @@
           placeholder="Телефон"
           mask="+{380} (00) 000-0000"
         />
+        <div class="checkout--switch">
+          <kit-choice v-model="sendEmail">
+            <kit-switch>Отправить детали на email</kit-switch>
+          </kit-choice>
+        </div>
         <kit-input
+          v-if="sendEmail"
           v-model="order.email"
           :vuelidate="$v.order.email"
           type="email"
@@ -104,6 +110,7 @@ import { details as schema } from '@/validations/order';
 
 export default {
   data: () => ({
+    sendEmail: false,
     order: {
       email: '',
       phone: '',
@@ -125,6 +132,11 @@ export default {
     }
   },
   watch: {
+    sendEmail(value) {
+      if (!value) {
+        this.order.email = '';
+      }
+    },
     'order.shipping': function (value) {
       if (value === 'courier') {
         this.order.city = 'Харьков';
