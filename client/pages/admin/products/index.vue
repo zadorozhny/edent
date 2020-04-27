@@ -3,7 +3,14 @@
     <app-filter v-model="filter" class="filter products--filter" :interval="interval"/>
     <div class="cover">
       <div class="products--header">
-        <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
+        <div class="products--filters">
+          <kit-input v-model="filter.search" class="products--search" placeholder="Поиск" type="search"/>
+          <div class="products--filters_icon" @click="showFilter">
+            <kit-icon>
+              filter_list
+            </kit-icon>
+          </div>
+        </div>
         <nuxt-link tag="a" to="/admin/products/create">
           <kit-button>Создать</kit-button>
         </nuxt-link>
@@ -162,14 +169,37 @@ export default {
 
   &--filter {
     max-width: 270px;
+
+    @media ($tablet) {
+      display: none;
+    }
   }
 
   &--header {
     display: grid;
-    grid-template-columns: 360px 200px;
+    grid-template-columns: minmax(0, 360px) minmax(0, 200px);
+    column-gap: 20px;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
+
+  &--filters {
+    display: flex;
+    align-items: center;
+  }
+
+  &--search {
+    width: 100%;
+  }
+
+  &--filters_icon {
+    margin-left: 10px;
   }
 
   &--footer {

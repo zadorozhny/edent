@@ -55,14 +55,15 @@
 export default {
   data() {
     return {
-      products: this.$router.currentRoute.name === 'products'
+      products: null
     };
   },
   watch: {
     '$route.path': {
       handler() {
         this.products = this.$router.currentRoute.name === 'products';
-      }
+      },
+      immediate: true
     }
   },
   methods: {
