@@ -1,13 +1,15 @@
 <template>
   <div class="table">
-    <div class="table--header">
-      <slot name="header"/>
+    <div class="table--wrapper" :style="{ 'min-width': width }">
+      <div class="table--header">
+        <slot name="header"/>
+      </div>
+      <div v-for="(item, index) in items" :key="index" class="table--item">
+        <slot v-bind="{ ...item, index }"/>
+      </div>
+      <slot name="placeholder"/>
+      <slot name="footer"/>
     </div>
-    <div v-for="(item, index) in items" :key="index" class="table--item">
-      <slot v-bind="{ ...item, index }"/>
-    </div>
-    <slot name="placeholder"/>
-    <slot name="footer"/>
   </div>
 </template>
 
@@ -15,6 +17,10 @@
 export default {
   name: 'KitTable',
   props: {
+    width: {
+      type: String,
+      default: 'auto'
+    },
     items: {
       type: Array,
       default: () => ([
@@ -38,7 +44,8 @@ export default {
   box-sizing: border-box;
   background: $light;
   box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
-  overflow: hidden;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 
   &--header {
     color: #94979a;

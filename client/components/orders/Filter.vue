@@ -47,7 +47,7 @@ export default {
 <style lang="scss" scoped>
 .filter {
   position: sticky;
-  top: 71px;
+  top: 0;
   display: grid;
   grid-row-gap: 40px;
   padding: 10px;

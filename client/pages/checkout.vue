@@ -205,6 +205,7 @@ export default {
 
   @media ($phablet) {
     grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
     column-gap: unset;
   }
 

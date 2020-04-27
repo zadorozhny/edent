@@ -71,7 +71,10 @@ export default {
     box-sizing: border-box;
 
     @media ($tablet) {
+      align-items: unset;
+      flex-wrap: wrap;
       padding: 0 10px;
+      height: $mobile-navigation;
     }
   }
 
@@ -155,6 +158,11 @@ export default {
     box-sizing: border-box;
     user-select: none;
 
+    @media ($tablet) {
+      width: 36px;
+      height: 36px;
+    }
+
     &:hover {
       &::after {
         display: block;
@@ -173,6 +181,11 @@ export default {
 
   &--letters {
     font-size: 18px;
+  }
+
+  &--controls {
+    display: flex;
+    align-items: center;
   }
 }
 </style>

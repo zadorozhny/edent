@@ -5,7 +5,7 @@
       <div class="products--header">
         <div class="products--filters">
           <kit-input v-model="filter.search" class="products--search" placeholder="Поиск" type="search"/>
-          <div class="products--filters_icon" @click="showFilter">
+          <div class="products--filters_icon" @click="modals.filter = !modals.filter">
             <kit-icon>
               filter_list
             </kit-icon>
@@ -15,7 +15,7 @@
           <kit-button>Создать</kit-button>
         </nuxt-link>
       </div>
-      <kit-table class="table" :items="rows">
+      <kit-table class="table" width="700px" :items="rows">
         <template #header>
           <div class="table--header">
             <div class="table--section">
@@ -60,6 +60,13 @@
         />
       </div>
     </div>
+    <kit-modal
+      v-if="modals.filter && $mq !== 'desktop'"
+      name="filter"
+      @close="modals.filter = false"
+    >
+      <app-filter v-model="filter" :interval="interval"/>
+    </kit-modal>
   </section>
 </template>
 
@@ -76,6 +83,9 @@ export default {
   },
   data() {
     return {
+      modals: {
+        filter: false
+      },
       rows: [],
       count: 0,
       interval: {
@@ -199,7 +209,12 @@ export default {
   }
 
   &--filters_icon {
+    display: none;
     margin-left: 10px;
+
+    @media ($tablet) {
+      display: block;
+    }
   }
 
   &--footer {

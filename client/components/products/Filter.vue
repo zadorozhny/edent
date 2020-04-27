@@ -74,6 +74,7 @@ export default {
 .filter {
   display: grid;
   grid-row-gap: 40px;
+  grid-auto-rows: max-content;
   align-items: flex-start;
   padding: 10px;
   margin-right: 30px;
