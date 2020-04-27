@@ -15,14 +15,16 @@
             <kit-switch>Отправить детали на email</kit-switch>
           </kit-choice>
         </div>
-        <kit-input
-          v-if="sendEmail"
-          v-model="order.email"
-          :vuelidate="$v.order.email"
-          type="email"
-          class="input"
-          placeholder="Email"
-        />
+        <kit-transition-expand>
+          <kit-input
+            v-if="sendEmail"
+            v-model="order.email"
+            :vuelidate="$v.order.email"
+            type="email"
+            class="input"
+            placeholder="Email"
+          />
+        </kit-transition-expand>
       </div>
       <kit-label-group class="checkout--shipping_option">
         <kit-choice v-model="order.shipping" value="post" related>
