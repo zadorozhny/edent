@@ -36,8 +36,8 @@
 <script>
 import AppFilter from '@/components/products/Filter';
 
-const LIMIT = 20;
-const TOLERANCE = 50;
+const LIMIT = 3;
+const TOLERANCE = 100;
 
 export default {
   components: {
@@ -45,6 +45,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       modals: {
         filter: false
       },
@@ -92,7 +93,7 @@ export default {
       handler() {
         this.$nextTick(() => {
           if (
-            document.body.scrollHeight === window.innerHeight
+            this.element.scrollTop + this.element.clientHeight === this.element.scrollHeight
             && this.rows.length < this.count
             && this.rows.length
           ) {
@@ -130,8 +131,8 @@ export default {
     };
   },
   mounted() {
-    const element = document.getElementById('scroll');
-    element.addEventListener('scroll', this.scroll.bind(this));
+    this.element = document.getElementById('scroll');
+    this.element.addEventListener('scroll', this.scroll.bind(this));
     this.$event.$on('search', value => {
       this.filter = {
         ...this.filter,
@@ -145,21 +146,18 @@ export default {
     });
   },
   destroyed() {
-    const element = document.getElementById('scroll');
-    element.removeEventListener('scroll', this.scroll.bind(this));
+    this.element.removeEventListener('scroll', this.scroll.bind(this));
     this.$event.$off('search');
     this.$event.$off('show_filter');
   },
   methods: {
     scroll() {
-      let disabled = false;
-      if (!disabled && window.pageYOffset + TOLERANCE > document.body.scrollHeight - window.innerHeight) {
-        disabled = true;
+      if (
+        !this.loading
+        && this.element.scrollTop + this.element.clientHeight + TOLERANCE > this.element.scrollHeight
+      ) {
         if (this.count > this.pagination.offset) {
           this.throttle();
-          this.$nextTick(() => {
-            disabled = false;
-          });
         }
       }
     },
@@ -176,6 +174,7 @@ export default {
     async getList() {
       try {
         this.$loader.start();
+        this.loading = true;
         const { rows, count } = await this.$api.products.getList({
           search: this.filter.search || undefined,
           manufacturerId: this.filter.manufacturerId || undefined,
@@ -197,6 +196,9 @@ export default {
         this.$alert.error(err.message);
       } finally {
         this.$loader.finish();
+        this.$nextTick(() => {
+          this.loading = false;
+        });
       }
     }
   }
@@ -226,6 +228,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 20px;
+    grid-row-gap: 20px;
     padding: 15px 0;
     width: 100%;
 
