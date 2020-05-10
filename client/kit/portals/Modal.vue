@@ -2,6 +2,14 @@
   <portal v-bind="$attrs" :name="name" :order="order" to="modals">
     <div :key="name" class="modal" @keyup.esc="$emit('close')">
       <div class="modal--content" @mousedown.self="$emit('close')">
+        <kit-icon
+          v-if="$mq !== 'desktop'"
+          class="modal--close"
+          size="compact"
+          @click="$emit('close')"
+        >
+          clear
+        </kit-icon>
         <slot/>
       </div>
     </div>
@@ -29,11 +37,11 @@ export default {
     }
   },
   mounted() {
-    const [element] = document.getElementsByTagName('body');
+    const element = document.getElementById('scroll');
     element.classList.add('stop_scrolling');
   },
   destroyed() {
-    const [element] = document.getElementsByTagName('body');
+    const element = document.getElementById('scroll');
     element.classList.remove('stop_scrolling');
   }
 };
@@ -51,7 +59,13 @@ export default {
   overflow: hidden;
   z-index: 5;
 
+  @media ($tablet) {
+    background-color: unset;
+    backdrop-filter: unset;
+  }
+
   &--content {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,19 +75,22 @@ export default {
     margin: 0 auto;
     box-sizing: border-box;
     cursor: pointer;
-  }
-}
 
-.modal {
-  @media ($tablet) {
-    background-color: unset;
-    backdrop-filter: unset;
-  }
-
-  &--content {
     @media ($tablet) {
       padding: 0;
     }
+  }
+
+  &--wrapper {
+    position: relative;
+  }
+
+  &--close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: $fill;
+    z-index: 2;
   }
 }
 </style>

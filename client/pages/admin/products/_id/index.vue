@@ -37,10 +37,10 @@
       />
     </div>
     <div class="product--controls">
-      <kit-button :disabled="$v.product.$invalid" @click="update">
+      <kit-button class="product--button" :disabled="$v.product.$invalid" @click="update">
         Изменить
       </kit-button>
-      <kit-button type="warning" @click="modals.sure = true">
+      <kit-button class="product--button" type="warning" @click="modals.sure = true">
         Удалить
       </kit-button>
     </div>
@@ -143,14 +143,25 @@ export default {
 <style lang="scss" scoped>
 .product {
   display: grid;
-  grid-template-columns: 50% calc(50% - 20px);
+  grid-template-columns: 1fr 1fr;
   grid-template-areas:
     "image content"
     "description description"
     "controls controls";
-  grid-template-rows: 360px auto;
+  grid-template-rows: 360px auto auto;
   grid-column-gap: 20px;
   grid-row-gap: 40px;
+
+  @media ($phablet) {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    grid-row-gap: 20px;
+    grid-template-areas:
+      "image"
+      "content"
+      "description"
+      "controls";
+  }
 
   &--image {
     grid-area: image;
@@ -162,6 +173,16 @@ export default {
     justify-content: space-between;
     width: 100%;
     grid-area: content;
+
+    @media ($phablet) {
+      & > * {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 
   &--description {
@@ -174,6 +195,17 @@ export default {
     grid-column-gap: 30px;
     justify-content: center;
     grid-area: controls;
+
+    @media ($phablet) {
+      grid-column-gap: 0;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

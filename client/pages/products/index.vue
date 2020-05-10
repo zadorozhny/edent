@@ -130,7 +130,8 @@ export default {
     };
   },
   mounted() {
-    document.addEventListener('scroll', this.scroll.bind(this));
+    const element = document.getElementById('scroll');
+    element.addEventListener('scroll', this.scroll.bind(this));
     this.$event.$on('search', value => {
       this.filter = {
         ...this.filter,
@@ -144,7 +145,8 @@ export default {
     });
   },
   destroyed() {
-    document.removeEventListener('scroll', this.scroll.bind(this));
+    const element = document.getElementById('scroll');
+    element.removeEventListener('scroll', this.scroll.bind(this));
     this.$event.$off('search');
     this.$event.$off('show_filter');
   },

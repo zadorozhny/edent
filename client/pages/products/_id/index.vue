@@ -31,9 +31,9 @@
         </div>
         <p class="product--price text_title">Цена: <span class="text_large">₴{{ product.price }}</span></p>
       </div>
-      <div class="buttons">
-        <kit-button type="success" class="button" @click="buy">Купить</kit-button>
-        <kit-button class="button" @click="add">В корзину</kit-button>
+      <div class="product--buttons">
+        <kit-button type="success" class="product--button" @click="buy">Купить</kit-button>
+        <kit-button class="product--button" @click="add">В корзину</kit-button>
       </div>
       <p class="product--description text_medium">
         <span class="text_bold">Описание:</span> {{ product.description }}
@@ -93,14 +93,14 @@ export default {
 
   @media ($phablet) {
     grid-template-columns: 100%;
-    grid-template-rows: auto 260px auto;
+    grid-template-rows: auto 260px auto auto;
     grid-column-gap: unset;
     grid-row-gap: 10px;
     grid-template-areas:
-      "picture picture"
-      "content content"
-      "description description"
-      "buttons buttons";
+      "picture"
+      "content"
+      "description"
+      "buttons";
   }
 
   &--picture {
@@ -195,25 +195,25 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-}
 
-.buttons {
-  display: flex;
-  grid-area: buttons;
-  align-items: flex-end;
-  width: 100%;
-}
-
-.button {
-  &:first-child {
-    margin-right: 20px;
+  &--buttons {
+    display: flex;
+    grid-area: buttons;
+    align-items: flex-end;
+    width: 100%;
   }
 
-  @media ($phablet) {
-    border-radius: 0;
-
+  &--button {
     &:first-child {
-      margin-right: 0;
+      margin-right: 20px;
+    }
+
+    @media ($phablet) {
+      border-radius: 0;
+
+      &:first-child {
+        margin-right: 0;
+      }
     }
   }
 }

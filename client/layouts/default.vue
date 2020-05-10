@@ -8,7 +8,7 @@
       </kit-transition-expand>
       <app-header @navigation="modals.navigation = true"/>
     </div>
-    <div class="layout--content">
+    <div id="scroll" class="layout--content">
       <kit-modal-target/>
       <nuxt/>
     </div>

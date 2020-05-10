@@ -86,10 +86,8 @@ export default {
   overflow: auto;
 
   @media ($tablet) {
-    position: absolute;
     margin-right: 0;
-    padding: 25px 10px;
-    top: 0;
+    padding: 45px 10px;
     width: 100%;
     height: 100%;
     border-radius: 0;

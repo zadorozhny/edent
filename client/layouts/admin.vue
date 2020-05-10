@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <app-header @navigation="modals.navigation = true"/>
-    <div class="layout--content">
+    <div id="scroll" class="layout--content">
       <kit-modal-target/>
       <nuxt class="admin"/>
     </div>

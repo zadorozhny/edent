@@ -3,7 +3,7 @@
     <p class="sure--description">
       {{ title }}
     </p>
-    <kit-button @click="$emit('submit')">
+    <kit-button class="sure--button" @click="$emit('submit')">
       Уверен
     </kit-button>
   </div>
@@ -21,6 +21,7 @@ export default {
 .sure {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   padding: 20px;
   width: 100%;
@@ -31,6 +32,20 @@ export default {
   &--description {
     margin-bottom: 30px;
     text-align: center;
+  }
+
+  &--button {
+    max-width: 250px;
+  }
+
+  @media ($tablet) {
+    margin-right: 0;
+    padding: 45px 10px;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 </style>
