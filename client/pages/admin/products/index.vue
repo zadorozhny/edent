@@ -1,11 +1,11 @@
 <template>
-  <section class="page container products">
-    <app-filter v-model="filter" class="filter products--filter" :interval="interval"/>
-    <div class="cover">
-      <div class="products--header">
-        <div class="products--filters">
-          <kit-input v-model="filter.search" class="products--search" placeholder="Поиск" type="search"/>
-          <div class="products--filters_icon" @click="modals.filter = !modals.filter">
+  <section class="page container admin_page">
+    <app-filter v-model="filter" class="filter admin_page--filter" :interval="interval"/>
+    <div class="admin_page--cover">
+      <div class="admin_page--header">
+        <div class="admin_page--filters">
+          <kit-input v-model="filter.search" class="admin_page--search" placeholder="Поиск" type="search"/>
+          <div class="admin_page--filters_icon" @click="modals.filter = !modals.filter">
             <kit-icon>
               filter_list
             </kit-icon>
@@ -17,33 +17,33 @@
       </div>
       <kit-table class="table" width="700px" :items="rows">
         <template #header>
-          <div class="table--header">
-            <div class="table--section">
-              <span>Номер</span>
-            </div>
-            <div class="table--section">
-              <span>Название</span>
-            </div>
-            <div class="table--section">
-              <span>Цена</span>
-            </div>
-            <div class="table--section">
-              <span>Скрыт</span>
-            </div>
+          <div class="table--header table--row">
+            <app-table-section>
+              Номер
+            </app-table-section>
+            <app-table-section>
+              Название
+            </app-table-section>
+            <app-table-section>
+              Цена
+            </app-table-section>
+            <app-table-section>
+              Скрыт
+            </app-table-section>
           </div>
         </template>
         <template #default="{ id, name, price, isHidden }">
-          <nuxt-link class="table--item" :to="`products/${id}`">
-            <div class="table--section">
-              <span>{{ id }}</span>
-            </div>
-            <div class="table--section">
-              <span>{{ name }}</span>
-            </div>
-            <div class="table--section">
-              <span>{{ price }}</span>
-            </div>
-            <div class="table--section">
+          <nuxt-link class="table--item table--row" :to="`products/${id}`">
+            <app-table-section>
+              {{ id }}
+            </app-table-section>
+            <app-table-section>
+              {{ name }}
+            </app-table-section>
+            <app-table-section>
+              {{ price }}
+            </app-table-section>
+            <div>
               <kit-icon :class="{ 'icon-hidden': isHidden }" @click.prevent="hide(id)">
                 remove_red_eye
               </kit-icon>
@@ -51,7 +51,7 @@
           </nuxt-link>
         </template>
       </kit-table>
-      <div class="products--footer">
+      <div class="admin_page--footer">
         <kit-pagination
           :count="count"
           :limit="pagination.limit"
@@ -72,6 +72,7 @@
 
 <script>
 import AppFilter from '@/components/products/Filter';
+import AppTableSection from '@/components/common/TableSection';
 import utils from '@/utils';
 
 const LIMIT = 20;
@@ -79,7 +80,8 @@ const LIMIT = 20;
 export default {
   layout: 'admin',
   components: {
-    AppFilter
+    AppFilter,
+    AppTableSection
   },
   data() {
     return {
@@ -171,11 +173,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.products {
+.admin_page {
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: max(270px) 1fr;
   align-items: flex-start;
+  column-gap: 30px;
+
+  @media ($tablet) {
+    grid-template-columns: 100%;
+    column-gap: 0;
+  }
+
+  &--cover {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
   &--filter {
     max-width: 270px;
@@ -224,31 +237,15 @@ export default {
   }
 }
 
-.cover {
-  width: 100%;
-}
-
 .table {
-  &--header {
+  &--row {
     display: grid;
     grid-template-columns: 140px minmax(0, 1fr) 140px 140px;
-  }
 
-  &--section {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    @media ($mobile) {
+      padding: 6px 0;
+      font-size: 14px;
     }
-  }
-
-  &--item {
-    display: grid;
-    grid-template-columns: 140px minmax(0, 1fr) 140px 140px;
   }
 }
 

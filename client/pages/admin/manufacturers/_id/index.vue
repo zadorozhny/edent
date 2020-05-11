@@ -8,10 +8,10 @@
       />
     </div>
     <div class="manufacturer--controls">
-      <kit-button :disabled="$v.manufacturer.$invalid" @click="update">
+      <kit-button class="manufacturer--button" :disabled="$v.manufacturer.$invalid" @click="update">
         Изменить
       </kit-button>
-      <kit-button type="warning" @click="modals.sure = true">
+      <kit-button class="manufacturer--button" type="warning" @click="modals.sure = true">
         Удалить
       </kit-button>
     </div>
@@ -92,21 +92,31 @@ export default {
 <style lang="scss" scoped>
 .manufacturer {
   &--content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     margin-bottom: 40px;
+    grid-template-columns: 45%;
 
-    > * {
-      width: 45%;
+    @media ($phablet) {
+      grid-template-columns: 1fr;
     }
   }
 
   &--controls {
     display: grid;
-    grid-template-columns: 200px 200px;
+    grid-template-columns: 300px 300px;
     grid-column-gap: 30px;
     justify-content: center;
-    grid-area: controls;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 0;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

@@ -36,7 +36,7 @@
 <script>
 import AppFilter from '@/components/products/Filter';
 
-const LIMIT = 3;
+const LIMIT = 20;
 const TOLERANCE = 100;
 
 export default {
@@ -208,16 +208,21 @@ export default {
 <style lang="scss" scoped>
 .products {
   position: relative;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: max(270px) 1fr;
   align-items: flex-start;
+  column-gap: 30px;
   padding-top: 0;
   padding-bottom: 0;
+
+  @media ($tablet) {
+    grid-template-columns: 100%;
+    column-gap: 0;
+  }
 
   &--filter {
     position: sticky;
     top: 15px;
-    max-width: 270px;
 
     @media ($tablet) {
       display: none;

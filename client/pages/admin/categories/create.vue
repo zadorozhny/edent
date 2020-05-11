@@ -14,7 +14,7 @@
       />
     </div>
     <div class="category--controls">
-      <kit-button :disabled="$v.category.$invalid" @click="create">
+      <kit-button class="category--button" :disabled="$v.category.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -67,12 +67,14 @@ export default {
 <style lang="scss" scoped>
 .category {
   &--content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     margin-bottom: 40px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10%;
 
-    > * {
-      width: 45%;
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
     }
   }
 
@@ -80,7 +82,16 @@ export default {
     display: grid;
     grid-template-columns: 300px;
     justify-content: center;
-    grid-area: controls;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

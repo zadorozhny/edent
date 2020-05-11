@@ -61,25 +61,25 @@
         </kit-button>
       </div>
     </div>
-    <kit-table class="table" :items="order.products">
+    <kit-table class="table" width="540px" :items="order.products">
       <template #header>
-        <div class="table--header">
-          <div class="table--section">
-            <span>Название</span>
-          </div>
-          <div class="table--section">
-            <span>Цена (один/сумма)</span>
-          </div>
-          <div class="table--section">
-            <span>Количество</span>
-          </div>
+        <div class="table--row table--header">
+          <app-table-section>
+            Название
+          </app-table-section>
+          <app-table-section>
+            Цена (один/сумма)
+          </app-table-section>
+          <app-table-section>
+            Количество
+          </app-table-section>
         </div>
       </template>
       <template #default="{ index, id, product, price, count, deleted }">
-        <div :class="['table--item', { 'table--item-deleted': deleted }]">
-          <div class="table--section">
-            <span>{{ product.name }}</span>
-          </div>
+        <div :class="['table--row', 'table--item', { 'table--item-deleted': deleted }]">
+          <app-table-section>
+            {{ product.name }}
+          </app-table-section>
           <div class="table--section">
             <kit-input v-model.number="order.products[index].price" type="number" class="order--product_price"/>
             <span>{{ price * count }}</span>
@@ -128,11 +128,13 @@
 <script>
 import { details as schema } from '@/validations/order';
 import AppSure from '@/components/common/Sure';
+import AppTableSection from '@/components/common/TableSection';
 
 export default {
   layout: 'admin',
   components: {
-    AppSure
+    AppSure,
+    AppTableSection
   },
   data() {
     return {
@@ -272,9 +274,19 @@ export default {
   align-items: flex-start;
   column-gap: 60px;
 
+  @media ($phablet) {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 40px;
+  }
+
   &--content {
     display: grid;
     row-gap: 35px;
+
+    @media ($phablet) {
+      order: 2;
+    }
   }
 
   &--group {
@@ -292,17 +304,25 @@ export default {
   }
 
   &--controls {
-    display: flex;
+    display: grid;
+    grid-template-columns: 170px 170px;
     justify-content: space-between;
 
-    & > * {
-      width: 170px;
+    @media ($phablet) {
+      grid-template-columns: 1fr 1fr;
+
+      & > * {
+        border-radius: 0;
+      }
     }
   }
 }
 
 .table {
-  &--header {
+  @media ($phablet) {
+    order: 1;
+  }
+  &--row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1fr 140px;
   }
@@ -311,18 +331,9 @@ export default {
     display: flex;
     align-items: center;
     padding: 15px 10px;
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
   }
 
   &--item {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
-
     &-deleted {
       opacity: 0.4;
     }

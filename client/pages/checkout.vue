@@ -61,26 +61,26 @@
     </div>
     <kit-table class="table" :items="products">
       <template #header>
-        <div class="table--header">
-          <div class="table--section">
-            <span>Название</span>
-          </div>
-          <div class="table--section">
-            <span>Цена</span>
-          </div>
-          <div class="table--section">
-            <span>Количество</span>
-          </div>
+        <div class="table--row table--header">
+          <app-table-section>
+            Название
+          </app-table-section>
+          <app-table-section>
+            Цена
+          </app-table-section>
+          <app-table-section>
+            Количество
+          </app-table-section>
         </div>
       </template>
       <template #default="{ id, name, price, count }">
-        <div class="table--item">
-          <div class="table--section">
-            <span>{{ name }}</span>
-          </div>
-          <div class="table--section">
-            <span>{{ price * count }}</span>
-          </div>
+        <div class="table--row table--item">
+          <app-table-section>
+            {{ name }}
+          </app-table-section>
+          <app-table-section>
+            {{ price * count }}
+          </app-table-section>
           <div class="table--section">
             <span class="table--control" @click="change(id, -1)">-</span>
             <span>{{ count }}</span>
@@ -108,9 +108,13 @@
 </template>
 
 <script>
+import AppTableSection from '@/components/common/TableSection';
 import { details as schema } from '@/validations/order';
 
 export default {
+  components: {
+    AppTableSection
+  },
   data: () => ({
     sendEmail: false,
     order: {
@@ -240,7 +244,7 @@ export default {
     padding: 0;
   }
 
-  &--header {
+  &--row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 1fr 140px;
 
@@ -259,30 +263,6 @@ export default {
     display: flex;
     align-items: center;
     padding: 15px 10px;
-
-    @media ($mobile) {
-      padding: 10px 5px;
-    }
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-
-  &--item {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 1fr 140px;
-
-    @media ($tablet) {
-      grid-template-columns: minmax(0, 1fr) 100px 135px;
-    }
-
-    @media ($mobile) {
-      font-size: 14px;
-      grid-template-columns: minmax(0, 1fr) 80px 110px;
-    }
   }
 
   &--placeholder {

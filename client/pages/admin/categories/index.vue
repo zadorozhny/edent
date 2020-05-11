@@ -1,7 +1,7 @@
 <template>
-  <section class="page container categories">
-    <div class="cover">
-      <div class="categories--header">
+  <section class="page container admin_page">
+    <div class="admin_page--cover">
+      <div class="admin_page--header">
         <kit-input v-model="filter.search" placeholder="Поиск" type="search"/>
         <nuxt-link tag="a" to="/admin/categories/create">
           <kit-button>Создать</kit-button>
@@ -10,16 +10,16 @@
       <kit-table class="table" :items="rows">
         <template #header>
           <div class="table--header">
-            <div class="table--section">
-              <span>Название</span>
-            </div>
+            <app-table-section>
+              Название
+            </app-table-section>
           </div>
         </template>
         <template #default="{ id, name }">
           <nuxt-link class="table--item" :to="`categories/${id}`">
-            <div class="table--section">
-              <span>{{ name }}</span>
-            </div>
+            <app-table-section>
+              {{ name }}
+            </app-table-section>
           </nuxt-link>
         </template>
       </kit-table>
@@ -28,10 +28,14 @@
 </template>
 
 <script>
+import AppTableSection from '@/components/common/TableSection';
 import utils from '@/utils';
 
 export default {
   layout: 'admin',
+  components: {
+    AppTableSection
+  },
   data() {
     return {
       rows: [],
@@ -65,41 +69,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.categories {
+.admin_page {
+  &--cover {
+    width: 100%;
+  }
+
   &--header {
     display: grid;
-    grid-template-columns: 360px 200px;
+    grid-template-columns: minmax(0, 360px) minmax(0, 200px);
+    column-gap: 20px;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
-  }
-}
 
-.cover {
-  width: 100%;
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
+  }
 }
 
 .table {
-  &--header {
+  &--row {
     display: grid;
     grid-template-columns: 1fr;
-  }
 
-  &--section {
-    display: flex;
-    align-items: center;
-    padding: 15px 10px;
-
-    span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    @media ($mobile) {
+      padding: 6px 0;
+      font-size: 14px;
     }
-  }
-
-  &--item {
-    display: grid;
-    grid-template-columns: 1fr;
   }
 }
 </style>

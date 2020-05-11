@@ -37,7 +37,7 @@
       />
     </div>
     <div class="product--controls">
-      <kit-button :disabled="$v.product.$invalid" @click="create">
+      <kit-button class="product--button" :disabled="$v.product.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -108,6 +108,17 @@ export default {
   grid-column-gap: 20px;
   grid-row-gap: 40px;
 
+  @media ($phablet) {
+    grid-template-columns: 100%;
+    grid-template-rows: minmax(auto, 320px) auto auto auto;
+    grid-row-gap: 20px;
+    grid-template-areas:
+      "image"
+      "content"
+      "description"
+      "controls";
+  }
+
   &--image {
     grid-area: image;
   }
@@ -118,6 +129,16 @@ export default {
     justify-content: space-between;
     width: 100%;
     grid-area: content;
+
+    @media ($phablet) {
+      & > * {
+        margin-bottom: 20px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
 
   &--description {
@@ -129,6 +150,16 @@ export default {
     grid-template-columns: 300px;
     justify-content: center;
     grid-area: controls;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

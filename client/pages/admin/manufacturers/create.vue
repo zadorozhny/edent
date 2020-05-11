@@ -8,7 +8,7 @@
       />
     </div>
     <div class="manufacturer--controls">
-      <kit-button :disabled="$v.manufacturer.$invalid" @click="create">
+      <kit-button class="manufacturer--button" :disabled="$v.manufacturer.$invalid" @click="create">
         Создать
       </kit-button>
     </div>
@@ -51,12 +51,12 @@ export default {
 <style lang="scss" scoped>
 .manufacturer {
   &--content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     margin-bottom: 40px;
+    grid-template-columns: 45%;
 
-    > * {
-      width: 45%;
+    @media ($phablet) {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -65,6 +65,17 @@ export default {
     grid-template-columns: 300px;
     justify-content: center;
     grid-area: controls;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      grid-column-gap: 0;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

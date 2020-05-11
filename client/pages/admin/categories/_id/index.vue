@@ -14,10 +14,10 @@
       />
     </div>
     <div class="category--controls">
-      <kit-button :disabled="$v.category.$invalid" @click="update">
+      <kit-button class="category--button" :disabled="$v.category.$invalid" @click="update">
         Изменить
       </kit-button>
-      <kit-button type="warning" @click="modals.sure = true">
+      <kit-button class="category--button" type="warning" @click="modals.sure = true">
         Удалить
       </kit-button>
     </div>
@@ -106,21 +106,33 @@ export default {
 <style lang="scss" scoped>
 .category {
   &--content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     margin-bottom: 40px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10%;
 
-    > * {
-      width: 45%;
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
     }
   }
 
   &--controls {
     display: grid;
-    grid-template-columns: 200px 200px;
+    grid-template-columns: 300px 300px;
     grid-column-gap: 30px;
     justify-content: center;
-    grid-area: controls;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr 1fr;
+      grid-column-gap: 0;
+    }
+  }
+
+  &--button {
+    @media ($phablet) {
+      border-radius: 0;
+    }
   }
 }
 </style>

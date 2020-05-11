@@ -77,7 +77,6 @@ export default {
   grid-auto-rows: max-content;
   align-items: flex-start;
   padding: 10px;
-  margin-right: 30px;
   min-width: 270px;
   border-radius: 3px;
   box-sizing: border-box;
