@@ -14,8 +14,8 @@
           :price="row.price"
         >
           <template #controls>
-            <div class="card_controls">
-              <kit-icon class="card_controls--cart" size="regular" @click.prevent="add(row)">
+            <div class="products--controls">
+              <kit-icon size="regular" @click.prevent="add(row)">
                 add_shopping_cart
               </kit-icon>
             </div>
@@ -244,36 +244,11 @@ export default {
       grid-template-columns: 1fr;
     }
   }
-}
 
-.control {
-  position: fixed;
-  bottom: 10px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: $light;
-  box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
-
-  @media ($tablet) {
+  &--controls {
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
   }
-
-  &-left {
-    left: 10px;
-  }
-
-  &-right {
-    right: 10px;
-  }
-}
-
-.card_controls {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 }
 </style>

@@ -154,7 +154,7 @@ export default {
 
   @media ($phablet) {
     grid-template-columns: 100%;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: minmax(auto, 320px) auto auto auto;
     grid-row-gap: 20px;
     grid-template-areas:
       "image"

@@ -11,7 +11,7 @@
           </kit-icon>
           <nuxt-link tag="div" to="/products" class="navigation--logo">
             <img v-if="$mq === 'desktop'" class="navigation--image" src="~assets/images/logo.svg">
-            <h1 class="navigation--title">edent</h1>
+            <h1 class="navigation--title text_title">edent</h1>
           </nuxt-link>
         </div>
         <ul class="navigation--list">
@@ -172,7 +172,6 @@ export default {
 
   &--title {
     margin-left: 7px;
-    font-size: 18px;
     font-weight: 600;
     line-height: 0.8;
     text-transform: uppercase;
@@ -251,14 +250,6 @@ export default {
         background: #f0f0f0;
         z-index: -1;
       }
-    }
-  }
-
-  &--letters {
-    font-size: 18px;
-
-    @media ($tablet) {
-      font-size: 16px;
     }
   }
 

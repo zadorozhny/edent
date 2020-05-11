@@ -9,8 +9,8 @@
         keyboard_arrow_left
       </kit-icon>
     </span>
-    <span class="pagination--number">{{ Math.ceil(offset / limit) + 1 }}</span>
-    <span class="pagination--control">
+    <span class="pagination--number text_medium">{{ Math.ceil(offset / limit) + 1 }}</span>
+    <span class="pagination--control text_large">
       <kit-icon
         :class="{ 'icon-disable': offset + limit >= count }"
         :ripple="false"
@@ -40,17 +40,12 @@ export default {
   display: flex;
   align-items: center;
 
-  &--number {
-    font-size: 16px;
-  }
-
   &--control {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 36px;
     height: 36px;
-    font-size: 20px;
     border-radius: 5px;
     box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
     background: #f7f9f8;

@@ -1,7 +1,7 @@
 <template>
   <div class="tabs">
     <template v-for="tab in tabs">
-      <div ref="tabs" :key="tab.key" class="tabs--tab" @click="proxy = tab.key">
+      <div ref="tabs" :key="tab.key" class="tabs--tab text_medium" @click="proxy = tab.key">
         <slot v-bind="tab" name="tab"/>
       </div>
     </template>
@@ -51,7 +51,6 @@ export default {
   &--tab {
     flex-grow: 1;
     padding: 15px 0;
-    font-size: 16px;
     text-align: center;
     cursor: pointer;
     user-select: none;

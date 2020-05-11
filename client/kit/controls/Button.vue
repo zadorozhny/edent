@@ -1,5 +1,5 @@
 <template>
-  <button :class="['button', 'ripple', `button-${type}`]" v-on="$listeners">
+  <button :class="['button', 'ripple', 'text_medium', `button-${type}`]" v-on="$listeners">
     <slot/>
   </button>
 </template>
@@ -23,7 +23,6 @@ export default {
   border: none;
   width: 100%;
   height: 44px;
-  font-size: 16px;
   font-weight: 500;
   color: white;
   border-radius: 50px;

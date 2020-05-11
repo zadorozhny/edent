@@ -1,25 +1,17 @@
 <template>
-  <app-image-layout image="signin">
-    <div class="signin">
-      <div class="signin--content">
-        <kit-input v-model="credentials.email" type="email" placeholder="Email"/>
-        <kit-input v-model="credentials.password" placeholder="Пароль" type="password"/>
-        <kit-button @click="signin">
-          Войти
-        </kit-button>
-      </div>
+  <div class="page container signin">
+    <div class="signin--content">
+      <kit-input v-model="credentials.email" type="email" placeholder="Email"/>
+      <kit-input v-model="credentials.password" placeholder="Пароль" type="password"/>
+      <kit-button @click="signin">
+        Войти
+      </kit-button>
     </div>
-  </app-image-layout>
+  </div>
 </template>
 
 <script>
-import AppImageLayout from '@/components/layouts/common/Image';
-
 export default {
-  layout: 'fullscreen',
-  components: {
-    AppImageLayout
-  },
   data: () => ({
     credentials: {
       email: '',
@@ -52,7 +44,7 @@ export default {
 
   &--content {
     display: grid;
-    grid-template-columns: 320px;
+    grid-template-columns: minmax(auto, 320px);
     grid-row-gap: 30px;
     text-align: center;
   }

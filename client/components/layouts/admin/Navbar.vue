@@ -9,7 +9,7 @@
       </kit-icon>
     </div>
     <nav class="navbar--navigation navigation">
-      <ul class="navigation--list">
+      <ul class="navigation--list text_medium">
         <li class="navigation--item">
           <nuxt-link to="/admin/products" class="navigation--link">
             <span>Товары</span>
@@ -101,7 +101,6 @@ export default {
     .navigation {
       &--item {
         width: 100%;
-        font-size: 16px;
         color: #9399a7;
       }
 

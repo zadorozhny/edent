@@ -75,6 +75,7 @@ export default {
 
 <style lang="scss">
 .vue-treeselect {
+  height: 44px;
   outline: none;
 
   &--single {
@@ -96,7 +97,7 @@ export default {
 
   &__control {
     width: auto;
-    height: 48px;
+    height: 100%;
     padding: 0 8px;
     border-color: #cfdbdf !important;
     box-shadow: none !important;
@@ -117,13 +118,13 @@ export default {
 
   &__placeholder {
     padding: 0;
-    line-height: 46px;
+    line-height: 42px;
     color: #9399A7;
   }
 
   &__single-value {
     padding: 0;
-    line-height: 46px;
+    line-height: 42px;
   }
 
   &__menu {

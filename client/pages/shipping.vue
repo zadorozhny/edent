@@ -91,26 +91,6 @@ export default {
       "kharkiv_image";
   }
 
-  /* &--content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    @media ($tablet) {
-      margin-bottom: 40px;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-
-    &:hover {
-      .shipping--information {
-        box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);
-      }
-    }
-  } */
-
   &--content {
     padding: 10px;
     max-width: 460px;
@@ -118,6 +98,7 @@ export default {
     border-radius: 3px;
     box-sizing: border-box;
     box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+    background: $light;
 
     &:hover {
       box-shadow: 0 0 4px 2px rgba(0, 0, 255, 0.15);

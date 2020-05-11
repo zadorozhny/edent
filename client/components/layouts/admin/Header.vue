@@ -10,7 +10,7 @@
         </kit-icon>
         <nuxt-link tag="div" to="/products" class="navigation--logo">
           <img class="navigation--image" src="~assets/images/logo.svg">
-          <h1 class="navigation--title">edent</h1>
+          <h1 class="navigation--title text_title">edent</h1>
         </nuxt-link>
       </div>
       <ul class="navigation--list">
@@ -32,7 +32,7 @@
       </ul>
       <div class="navigation--controls">
         <div class="navigation--avatar ripple">
-          <span class="navigation--letters">{{ name || '-' }}</span>
+          <span class="navigation--letters text_title">{{ name || '-' }}</span>
         </div>
       </div>
     </div>
@@ -100,7 +100,6 @@ export default {
 
   &--title {
     margin-left: 7px;
-    font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
   }
@@ -180,7 +179,9 @@ export default {
   }
 
   &--letters {
-    font-size: 18px;
+    @media ($tablet) {
+      font-size: 16px;
+    }
   }
 
   &--controls {

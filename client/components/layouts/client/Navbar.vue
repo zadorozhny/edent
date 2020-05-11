@@ -9,7 +9,7 @@
       </kit-icon>
     </div>
     <nav class="navbar--navigation navigation">
-      <ul class="navigation--list">
+      <ul class="navigation--list text_medium">
         <li class="navigation--item">
           <nuxt-link to="/products" class="navigation--link">
             <span>Товары</span>
@@ -28,7 +28,7 @@
       </ul>
     </nav>
     <div class="navbar--footer">
-      <p v-for="(phone, index) in contacts" :key="index" class="navbar--phone">
+      <p v-for="(phone, index) in contacts" :key="index" class="navbar--phone text_medium">
         <img :src="icons[$utils.operator(phone)]">
         <a :href="`tel:${phone}`">{{ phone }}</a>
       </p>
@@ -97,7 +97,6 @@ export default {
     .navigation {
       &--item {
         width: 100%;
-        font-size: 16px;
         color: #9399a7;
       }
 
@@ -159,7 +158,6 @@ export default {
   &--phone {
     display: flex;
     align-items: center;
-    font-size: 16px;
     margin-bottom: 5px;
 
     img {

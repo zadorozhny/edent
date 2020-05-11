@@ -74,7 +74,7 @@ export default {
 
 <style lang="scss">
 .multiselect {
-  height: 48px;
+  height: 44px;
   font-size: 14px;
   color: $text;
 
@@ -88,7 +88,7 @@ export default {
   }
 
   &__select {
-    height: 48px;
+    height: 100%;
 
     &:before {
       top: 58%;
@@ -96,8 +96,8 @@ export default {
   }
 
   &__tags {
-    height: 48px;
-    padding-top: 13px;
+    height: 100%;
+    padding-top: 11px;
     border-color: #cfdbdf;
   }
 

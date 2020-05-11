@@ -23,14 +23,7 @@ export default {
     },
     items: {
       type: Array,
-      default: () => ([
-        { name: 'Даймондбрайт', price: 1299, count: 2 },
-        { name: 'Даймондбрайт', price: 1299, count: 2 },
-        { name: 'Даймондбрайт', price: 1299, count: 2 },
-        { name: 'Даймондбрайт', price: 1299, count: 2 },
-        { name: 'Даймондбрайт', price: 1299, count: 2 },
-        { name: 'Даймондбрайт', price: 1299, count: 2 }
-      ])
+      default: () => ([])
     }
   }
 };
