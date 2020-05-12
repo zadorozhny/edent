@@ -32,7 +32,6 @@ export default {
 <style lang="scss" scoped>
 .table {
   padding: 5px;
-  width: 100%;
   border-radius: 5px;
   box-sizing: border-box;
   background: $light;

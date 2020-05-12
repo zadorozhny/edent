@@ -80,6 +80,11 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
+
+    @media ($phablet) {
+      grid-template-columns: 1fr;
+      row-gap: 20px;
+    }
   }
 }
 
