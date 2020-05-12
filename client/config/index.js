@@ -8,3 +8,5 @@ export const contacts = [
   '+380 (98) 27-84-979',
   '+380 (66) 27-84-979'
 ];
+
+export const FREE_SHIPPING_PRICE = 1000;

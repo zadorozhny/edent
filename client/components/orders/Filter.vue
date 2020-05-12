@@ -46,15 +46,25 @@ export default {
 
 <style lang="scss" scoped>
 .filter {
-  position: sticky;
-  top: 0;
   display: grid;
   grid-row-gap: 40px;
+  grid-auto-rows: max-content;
+  align-items: flex-start;
   padding: 10px;
   min-width: 270px;
   border-radius: 3px;
   box-sizing: border-box;
   background: $light;
   box-shadow: 0 0 4px 1px rgba(0, 0, 255, 0.1);
+  overflow: auto;
+
+  @media ($tablet) {
+    margin-right: 0;
+    padding: 45px 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 </style>

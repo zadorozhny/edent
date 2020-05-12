@@ -17,11 +17,11 @@
       </p>
       <p class="shipping--option">
         <kit-icon :ripple="false" class="shipping--icon">warning</kit-icon>
-        За заказ меньше 1000 грн к сумме заказа добавляется стоимость доставки (от 50 грн)
+        За заказ меньше {{ price }} грн к сумме заказа добавляется стоимость доставки (от 50 грн)
       </p>
       <p class="shipping--option">
         <kit-icon :ripple="false" class="shipping--icon">announcement</kit-icon>
-        За заказ свыше 1000 грн доставка БЕСПЛАТНО
+        За заказ свыше {{ price }} грн доставка БЕСПЛАТНО
       </p>
     </div>
     <div class="shipping--image_wrapper shipping--ukraine_image">
@@ -48,11 +48,11 @@
       </p>
       <p class="shipping--option">
         <kit-icon :ripple="false" class="shipping--icon">warning</kit-icon>
-        За заказ меньше 1000 грн к сумме заказа добавляется стоимость доставки (от 50 грн)
+        За заказ меньше {{ price }} грн к сумме заказа добавляется стоимость доставки (от 50 грн)
       </p>
       <p class="shipping--option">
         <kit-icon :ripple="false" class="shipping--icon">announcement</kit-icon>
-        За заказ свыше 1000 грн доставка БЕСПЛАТНО
+        За заказ свыше {{ price }} грн доставка БЕСПЛАТНО
       </p>
     </div>
     <div class="shipping--image_wrapper shipping--kharkiv_image">
@@ -62,8 +62,12 @@
 </template>
 
 <script>
+import { FREE_SHIPPING_PRICE } from '@/config/index';
+
 export default {
-  data: () => ({})
+  data: () => ({
+    price: FREE_SHIPPING_PRICE
+  })
 };
 </script>
 

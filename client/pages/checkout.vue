@@ -99,7 +99,7 @@
             Сумма
           </span>
           <span class="table--total">
-            ₴{{ total }}
+            ₴{{ `${total} ` }} <span class="text_medium">{{ shipping ? '&nbsp;+ Доставка' : '' }}</span>
           </span>
         </div>
       </template>
@@ -108,6 +108,7 @@
 </template>
 
 <script>
+import { FREE_SHIPPING_PRICE } from '@/config/index';
 import AppTableSection from '@/components/common/TableSection';
 import { details as schema } from '@/validations/order';
 
@@ -135,6 +136,9 @@ export default {
     },
     total() {
       return this.products.length ? this.products.reduce((sum, { count, price }) => sum + (price * count), 0) : 0;
+    },
+    shipping() {
+      return this.total < FREE_SHIPPING_PRICE;
     }
   },
   watch: {
@@ -292,6 +296,8 @@ export default {
   }
 
   &--total {
+    display: flex;
+    align-items: center;
     font-size: 22px;
     font-weight: 600;
 
