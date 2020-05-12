@@ -138,7 +138,7 @@ export default {
       return this.products.length ? this.products.reduce((sum, { count, price }) => sum + (price * count), 0) : 0;
     },
     shipping() {
-      return this.total < FREE_SHIPPING_PRICE;
+      return this.products.length && this.total < FREE_SHIPPING_PRICE;
     }
   },
   watch: {
