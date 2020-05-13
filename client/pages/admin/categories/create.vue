@@ -31,20 +31,16 @@ export default {
       category: {
         name: '',
         parentId: null
-      },
-      categories: []
+      }
     };
   },
   validations: {
     category: schema
   },
-  async asyncData({ app }) {
-    const categories = await app.$api.categories.getList({
-      hierarchy: true
-    });
-    return {
-      categories
-    };
+  computed: {
+    categories() {
+      return this.$store.state.common.categories;
+    }
   },
   methods: {
     async create() {
