@@ -50,10 +50,11 @@ export default {
   }),
   async asyncData({ app, params }) {
     const product = params.product || await app.$api.products.get({ productId: params.id });
+    const category = product.categories.reduce((prev, cur) => (prev.parentId > cur.parentId) ? prev : cur);
     return {
       product: {
         ...product,
-        category: product.categories.pop()
+        category
       }
     };
   },

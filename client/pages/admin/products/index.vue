@@ -46,7 +46,7 @@
             <app-table-section>
               {{ product.price }}
             </app-table-section>
-            <div>
+            <div class="table--section">
               <kit-icon :class="{ 'icon-hidden': product.isHidden }" @click.prevent="hide(product.id)">
                 remove_red_eye
               </kit-icon>
@@ -249,6 +249,11 @@ export default {
       padding: 6px 0;
       font-size: 14px;
     }
+  }
+
+  &--section {
+    display: flex;
+    align-items: center;
   }
 }
 

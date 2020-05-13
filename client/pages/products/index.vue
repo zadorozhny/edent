@@ -181,6 +181,7 @@ export default {
           categoryId: this.filter.categoryId || undefined,
           order: this.filter.order || undefined,
           price: JSON.stringify(this.filter.price),
+          isHidden: false,
           limit: this.pagination.limit,
           offset: this.pagination.offset
         });
