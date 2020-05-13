@@ -49,23 +49,21 @@ export default {
         id: null,
         name: '',
         parentId: null
-      },
-      categories: []
+      }
     };
   },
   validations: {
     category: schema
   },
+  computed: {
+    categories() {
+      return this.$store.state.common.categories;
+    }
+  },
   async asyncData({ app, params }) {
-    const [category, categories] = await Promise.all([
-      app.$api.categories.get({ categoryId: params.id }),
-      app.$api.categories.getList({
-        hierarchy: true
-      })
-    ]);
+    const category = params.category || await app.$api.categories.get({ categoryId: params.id });
     return {
-      category,
-      categories
+      category
     };
   },
   methods: {

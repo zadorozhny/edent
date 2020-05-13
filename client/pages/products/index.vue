@@ -5,7 +5,7 @@
       <nuxt-link
         v-for="(row, index) in rows"
         :key="index"
-        :to="`/products/${row.id}`"
+        :to="{ name: 'products-id', params: { id: row.id, product: row } }"
         tag="a"
       >
         <kit-card

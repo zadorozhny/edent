@@ -181,7 +181,7 @@ export default {
     }
   },
   async asyncData({ app, params }) {
-    const order = await app.$api.orders.get({ orderId: params.id });
+    const order = params.order || await app.$api.orders.get({ orderId: params.id });
     return {
       order
     };

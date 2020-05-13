@@ -1,8 +1,6 @@
 import Joi from '@hapi/joi';
 
 import Product, { Identifier } from '@/schemas/Product';
-import { Identifier as ManufacturerId } from '@/schemas/Manufacturer';
-import { Identifier as CategoryId } from '@/schemas/Category';
 
 export const product = {
   identifier: Identifier,
@@ -33,7 +31,11 @@ export const product = {
       .alternatives()
       .conditional(
         Joi.ref('$instance.user.role'),
-        { is: 'admin', then: Joi.string(), otherwise: Joi.valid('false').default('false') }
+        {
+          is: 'admin',
+          then: Joi.valid('false', 'true').empty(''),
+          otherwise: Joi.valid('false').default('false')
+        }
       ),
     order: Joi.string().empty('').default('createdAt,DESC'),
     limit: Joi.string(),

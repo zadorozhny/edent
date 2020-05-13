@@ -32,19 +32,22 @@
             </app-table-section>
           </div>
         </template>
-        <template #default="{ id, name, price, isHidden }">
-          <nuxt-link class="table--item table--row" :to="`products/${id}`">
+        <template #default="product">
+          <nuxt-link
+            class="table--item table--row"
+            :to="{ name: 'admin-products-id', params: { id: product.id, product } }"
+          >
             <app-table-section>
-              {{ id }}
+              {{ product.id }}
             </app-table-section>
             <app-table-section>
-              {{ name }}
+              {{ product.name }}
             </app-table-section>
             <app-table-section>
-              {{ price }}
+              {{ product.price }}
             </app-table-section>
             <div>
-              <kit-icon :class="{ 'icon-hidden': isHidden }" @click.prevent="hide(id)">
+              <kit-icon :class="{ 'icon-hidden': product.isHidden }" @click.prevent="hide(product.id)">
                 remove_red_eye
               </kit-icon>
             </div>

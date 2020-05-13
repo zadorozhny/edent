@@ -58,25 +58,19 @@ export default {
         categoryId: null,
         manufacturerId: null,
         description: ''
-      },
-      manufacturers: [],
-      categories: []
+      }
     };
   },
   validations: {
     product: schema
   },
-  async asyncData({ app }) {
-    const [manufacturers, categories] = await Promise.all([
-      app.$api.manufacturers.getList(),
-      app.$api.categories.getList({
-        hierarchy: true
-      })
-    ]);
-    return {
-      manufacturers,
-      categories
-    };
+  computed: {
+    manufacturers() {
+      return this.$store.state.common.manufacturers;
+    },
+    categories() {
+      return this.$store.state.common.categories;
+    }
   },
   methods: {
     async create() {

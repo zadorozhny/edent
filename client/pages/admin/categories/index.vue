@@ -15,10 +15,13 @@
             </app-table-section>
           </div>
         </template>
-        <template #default="{ id, name }">
-          <nuxt-link class="table--item" :to="`categories/${id}`">
+        <template #default="category">
+          <nuxt-link
+            class="table--item"
+            :to="{ name: 'admin-categories-id', params: { id: category.id, category } }"
+          >
             <app-table-section>
-              {{ name }}
+              {{ category.name }}
             </app-table-section>
           </nuxt-link>
         </template>

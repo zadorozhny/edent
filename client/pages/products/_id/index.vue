@@ -49,7 +49,7 @@ export default {
     count: 1
   }),
   async asyncData({ app, params }) {
-    const product = await app.$api.products.get({ productId: params.id });
+    const product = params.product || await app.$api.products.get({ productId: params.id });
     return {
       product: {
         ...product,

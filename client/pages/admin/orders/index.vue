@@ -32,22 +32,25 @@
             </app-table-section>
           </div>
         </template>
-        <template #default="{ id, phone, address, status, createdAt }">
-          <nuxt-link class="table--row table--item" :to="`orders/${id}`">
+        <template #default="order">
+          <nuxt-link
+            class="table--row table--item"
+            :to="{ name: 'admin-orders-id', params: { id: order.id, order } }"
+          >
             <app-table-section>
-              {{ id }}
+              {{ order.id }}
             </app-table-section>
             <app-table-section>
-              {{ phone }}
+              {{ order.phone }}
             </app-table-section>
             <app-table-section>
-              {{ address }}
+              {{ order.address }}
             </app-table-section>
             <app-table-section>
-              {{ statuses[status] }}
+              {{ statuses[order.status] }}
             </app-table-section>
             <app-table-section>
-              {{ $luxon.DateTime.fromISO(createdAt).toLocaleString($luxon.DateTime.DATETIME_SHORT) }}
+              {{ $luxon.DateTime.fromISO(order.createdAt).toLocaleString($luxon.DateTime.DATETIME_SHORT) }}
             </app-table-section>
           </nuxt-link>
         </template>

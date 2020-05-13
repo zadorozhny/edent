@@ -50,7 +50,7 @@ export default {
     };
   },
   async asyncData({ app, params }) {
-    const manufacturer = await app.$api.manufacturers.get({ manufacturerId: params.id });
+    const manufacturer = params.manufacturer || await app.$api.manufacturers.get({ manufacturerId: params.id });
     return {
       manufacturer
     };

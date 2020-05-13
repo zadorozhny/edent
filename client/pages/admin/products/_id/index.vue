@@ -76,29 +76,27 @@ export default {
         categoryId: null,
         manufacturerId: null,
         description: ''
-      },
-      manufacturers: [],
-      categories: []
+      }
     };
   },
   validations: {
     product: schema
   },
+  computed: {
+    manufacturers() {
+      return this.$store.state.common.manufacturers;
+    },
+    categories() {
+      return this.$store.state.common.categories;
+    }
+  },
   async asyncData({ app, params }) {
-    const [product, manufacturers, categories] = await Promise.all([
-      app.$api.products.get({ productId: params.id }),
-      app.$api.manufacturers.getList(),
-      app.$api.categories.getList({
-        hierarchy: true
-      })
-    ]);
+    const product = params.product || await app.$api.products.get({ productId: params.id });
     return {
       product: {
         ...product,
         categoryId: product.categories.pop().id
-      },
-      manufacturers,
-      categories
+      }
     };
   },
   methods: {
