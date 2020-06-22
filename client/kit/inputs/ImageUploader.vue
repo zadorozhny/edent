@@ -48,17 +48,17 @@ export default {
         this.$emit('input', '');
         const [file] = target.files;
         if (!this.valid(file)) {
-          console.log('Extension error');
+          console.error('Extension error');
         } else if (file.size > this.size) {
-          console.log('Size error');
+          console.error('Size error');
         } else {
           this.loading = true;
           const { key, url, bucket } = await this.$api.upload.image();
           await axios.put(url, file, { headers: { 'Content-Type': file.type } });
-          this.$emit('input', `${bucket}${key}`);
+          this.$emit('input', `${bucket}/${key}`);
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       } finally {
         target.value = '';
       }

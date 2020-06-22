@@ -5,7 +5,6 @@ import {
 
 SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = MAILER.KEY;
 
-
 const SibApi = new SibApiV3Sdk.SMTPApi();
 
 export default {

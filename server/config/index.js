@@ -9,7 +9,7 @@ export const S3 = {
   SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   BUCKET_NAME: process.env.S3_BUCKET_NAME,
   REGION: process.env.S3_REGION,
-  URL: 'https://edent-bucket.s3.eu-central-1.amazonaws.com/'
+  URL: process.env.S3_URL
 };
 
 export const MAILER = {
