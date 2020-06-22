@@ -33,7 +33,7 @@
           placeholder="Укажите номер телефона"
           mask="+{380} (00) 000-0000"
         />
-        <kit-button :disabled="$v.phone.$invalid">Заказать бесплатно</kit-button>
+        <kit-button :disabled="$v.phone.$invalid" @click="send">Заказать бесплатно</kit-button>
       </div>
     </div>
   </div>
@@ -61,6 +61,22 @@ export default {
         kyivstar,
         vodafone
       };
+    }
+  },
+  methods: {
+    async send() {
+      try {
+        this.$nuxt.$loading.start();
+        await this.$api.emails.callback({ phone: this.phone });
+        this.$alert.success('Мы вам перезвоним!');
+        this.phone = '';
+        this.$v.$reset();
+      } catch (err) {
+        this.$nuxt.$loading.finish();
+        this.$alert.error(err.message);
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     }
   }
 };

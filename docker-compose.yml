@@ -7,7 +7,7 @@ services:
     ports:
       - 127.0.0.1:5432:5432
     volumes:
-      - /var/lib/docker/containers/edent/postgres:/var/lib/postgresql/data:z
+      - ./.docker/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: edent
       POSTGRES_PASSWORD: edent
@@ -20,14 +20,4 @@ services:
     sysctls:
       net.core.somaxconn: 1024
     volumes:
-      - /var/lib/docker/containers/edent/redis:/data:z
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    ports:
-      - 5050:80
-    depends_on:
-      - postgres
-    environment:
-      PGADMIN_DEFAULT_EMAIL: root
-      PGADMIN_DEFAULT_PASSWORD: root
+      - ./.docker/redis:/data

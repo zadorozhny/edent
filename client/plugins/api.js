@@ -89,6 +89,9 @@ export default ({ store }, inject) => {
     warning: {
       get: () => axios.get('/warning'),
       update: data => axios.put('/warning', data),
+    },
+    emails: {
+      callback: data => axios.post('/emails/callback', data),
     }
   });
 };

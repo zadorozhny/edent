@@ -12,6 +12,11 @@ export const S3 = {
   URL: 'https://edent-bucket.s3.eu-central-1.amazonaws.com/'
 };
 
+export const MAILER = {
+  KEY: process.env.SIB_KEY,
+  EMAIL: process.env.SIB_EMAIL
+};
+
 export const ACCESS_TOKENS = {
   TYPE: 'access',
   EXPIRATION: '2h'
