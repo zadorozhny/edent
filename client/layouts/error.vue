@@ -26,6 +26,8 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
 
   &--title {
     margin-bottom: 40px;
