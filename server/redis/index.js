@@ -1,5 +1,6 @@
 import Redis from 'ioredis';
+import { REDIS } from '@/config';
 
-const redis = new Redis(process.env.REDIS_HOSTNAME);
+const redis = new Redis(REDIS.HOSTNAME);
 
 export default redis;

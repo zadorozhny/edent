@@ -1,13 +1,13 @@
-<template>
+<template functional>
   <div class="card">
     <div class="card--header">
-      <img class="card--image" :src="image">
+      <img class="card--image" :src="props.image">
     </div>
     <div class="card--content">
-      <span class="card--title">{{ title }}</span>
+      <span class="card--title">{{ props.title }}</span>
     </div>
     <div class="card--bottom">
-      <span class="card--price">{{ price }} грн</span>
+      <span class="card--price">{{ props.price }} грн</span>
       <slot name="controls"/>
     </div>
   </div>

@@ -4,6 +4,15 @@ export const JWT = {
   ALGORITHM: 'RS256'
 };
 
+export const APP = {
+  HOSTNAME: process.env.APP_HOSTNAME,
+  PORT: process.env.APP_PORT
+};
+
+export const REDIS = {
+  HOSTNAME: process.env.REDIS_HOSTNAME
+};
+
 export const S3 = {
   ACCESS_KEY: process.env.S3_ACCESS_KEY,
   SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,

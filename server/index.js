@@ -1,9 +1,9 @@
 import application from '@/app';
+import { APP } from '@/config';
 
-const host = process.env.APP_HOSTNAME;
-const port = process.env.APP_PORT;
+const host = APP.HOSTNAME;
+const port = APP.PORT;
 
 application(port, host)
   .then(() => console.log(`Server listening on http://${host}:${port}`))
   .catch(console.error);
-

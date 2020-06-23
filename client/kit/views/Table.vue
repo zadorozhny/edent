@@ -1,10 +1,10 @@
-<template>
+<template functional>
   <div class="table">
     <div class="table--wrapper" :style="{ 'min-width': width }">
       <div class="table--header">
         <slot name="header"/>
       </div>
-      <div v-for="(item, index) in items" :key="index" class="table--item">
+      <div v-for="(item, index) in props.items" :key="index" class="table--item">
         <slot v-bind="{ ...item, index }"/>
       </div>
       <slot name="placeholder"/>

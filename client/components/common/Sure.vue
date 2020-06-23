@@ -1,9 +1,9 @@
-<template>
+<template functional>
   <div class="sure">
     <p class="sure--description">
-      {{ title }}
+      {{ props.title }}
     </p>
-    <kit-button class="sure--button" @click="$emit('submit')">
+    <kit-button class="sure--button" @click="listeners.submit">
       Уверен
     </kit-button>
   </div>
