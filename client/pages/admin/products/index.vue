@@ -102,7 +102,7 @@ export default {
         price: [0, 0],
         manufacturerId: null,
         categoryId: null,
-        order: 'price,DESC'
+        order: 'price,ASC'
       },
       pagination: {
         offset: 0,
@@ -120,7 +120,7 @@ export default {
   },
   async asyncData({ app }) {
     const { rows, count, min, max } = await app.$api.products.getList({
-      order: 'price,DESC',
+      order: 'price,ASC',
       offset: 0,
       limit: LIMIT
     });
@@ -136,7 +136,7 @@ export default {
         price: [min, max],
         manufacturerId: null,
         categoryId: null,
-        order: 'price,DESC'
+        order: 'price,ASC'
       }
     };
   },
