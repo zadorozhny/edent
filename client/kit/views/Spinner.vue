@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <svg :class="['spinner', size]" viewBox="0 0 66 66">
     <circle
       class="path"
