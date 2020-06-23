@@ -1,5 +1,5 @@
-<template>
-  <div :class="['label', 'ripple', type, size, shape, { inverted }]" v-on="$listeners">
+<template functional>
+  <div :class="['label', 'ripple', props.type, props.size, props.shape, { inverted: props.inverted }]" v-on="listeners">
     <div class="label--content">
       <slot/>
     </div>

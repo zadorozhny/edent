@@ -1,5 +1,5 @@
-<template>
-  <button :class="['button', 'ripple', 'text_medium', `button-${type}`]" v-on="$listeners">
+<template functional>
+  <button :class="['button', 'ripple', 'text_medium', `button-${props.type}`]" v-on="listeners">
     <slot/>
   </button>
 </template>

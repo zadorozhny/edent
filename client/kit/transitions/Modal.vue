@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <transition-group name="modal">
     <slot/>
   </transition-group>

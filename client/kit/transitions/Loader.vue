@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <transition name="loader">
     <slot/>
   </transition>

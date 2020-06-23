@@ -1,6 +1,6 @@
-<template>
+<template functional>
   <div class="page error">
-    <div v-if="error.statusCode === 404">
+    <div v-if="props.error.statusCode === 404">
       <h1 class="error--title text_large">Страница не найдена 😔</h1>
       <img class="error--image" src="~/assets/images/no_found.svg">
     </div>

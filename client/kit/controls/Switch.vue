@@ -1,5 +1,5 @@
-<template>
-  <div :class="['switch', position, { inverted }]">
+<template functional>
+  <div :class="['switch', props.position, { inverted: props.inverted }]">
     <div class="switch--label">
       <slot/>
     </div>

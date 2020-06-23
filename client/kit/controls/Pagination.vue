@@ -1,20 +1,20 @@
-<template>
+<template functional>
   <div class="pagination">
     <span class="pagination--control">
       <kit-icon
-        :class="{ 'icon-disable': !offset }"
+        :class="{ 'icon-disable': !props.offset }"
         :ripple="false"
-        @click="offset && $emit('change', -1)"
+        @click="props.offset && listeners.change(-1)"
       >
         keyboard_arrow_left
       </kit-icon>
     </span>
-    <span class="pagination--number text_medium">{{ Math.ceil(offset / limit) + 1 }}</span>
+    <span class="pagination--number text_medium">{{ Math.ceil(props.offset / props.limit) + 1 }}</span>
     <span class="pagination--control text_large">
       <kit-icon
-        :class="{ 'icon-disable': offset + limit >= count }"
+        :class="{ 'icon-disable': props.offset + props.limit >= props.count }"
         :ripple="false"
-        @click="offset + limit < count && $emit('change', 1)"
+        @click="props.offset + props.limit < props.count && listeners.change(1)"
       >
         keyboard_arrow_right
       </kit-icon>
@@ -30,8 +30,7 @@ export default {
     count: { type: Number, default: 0 },
     offset: { type: Number, default: 0 },
     limit: { type: Number, default: 0 }
-  },
-  data: () => ({})
+  }
 };
 </script>
 

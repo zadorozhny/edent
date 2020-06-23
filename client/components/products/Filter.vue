@@ -13,18 +13,10 @@
     />
     <kit-label-group>
       <kit-choice v-model="proxy.order" value="price,DESC" related>
-        <kit-label type="outline" size="regular">Дорогие</kit-label>
+        <kit-label type="outline" size="regular">От Дорогих</kit-label>
       </kit-choice>
       <kit-choice v-model="proxy.order" value="price,ASC" related>
-        <kit-label type="outline" size="regular">Дешевые</kit-label>
-      </kit-choice>
-    </kit-label-group>
-    <kit-label-group>
-      <kit-choice v-model="proxy.order" value="createdAt,ASC" related>
-        <kit-label type="outline" size="regular">Новые</kit-label>
-      </kit-choice>
-      <kit-choice v-model="proxy.order" value="createdAt,DESC" related>
-        <kit-label type="outline" size="regular">Старые</kit-label>
+        <kit-label type="outline" size="regular">От Дешевых</kit-label>
       </kit-choice>
     </kit-label-group>
   </div>
